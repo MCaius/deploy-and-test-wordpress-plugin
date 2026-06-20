@@ -41,7 +41,33 @@ function deploy_and_test_handle_deploy_action() {
 	}
 
 	deploy_and_test_add_audit_log( $deploy_action, 'success', $result );
-	deploy_and_test_redirect( 'success', $result, 'general', strpos( $deploy_action, 'test_' ) === 0 ? 'test' : 'deploy' );
+	deploy_and_test_redirect( 'success', deploy_and_test_action_success_message( $deploy_action ), 'general', strpos( $deploy_action, 'test_' ) === 0 ? 'test' : 'deploy', true );
+}
+
+function deploy_and_test_action_success_message( $deploy_action ) {
+	if ( $deploy_action === 'deploy_preview' ) {
+		return __( 'Preview deploy started.', 'deploy-and-test' );
+	}
+
+	if ( $deploy_action === 'deploy_production' ) {
+		return __( 'Production deploy started.', 'deploy-and-test' );
+	}
+
+	if ( strpos( $deploy_action, 'test_' ) === 0 ) {
+		$test_action = deploy_and_test_get_test_action( substr( $deploy_action, 5 ) );
+
+		if ( $test_action && ! empty( $test_action['label'] ) ) {
+			return sprintf(
+				/* translators: %s: configured test action label. */
+				__( 'Test started: %s.', 'deploy-and-test' ),
+				$test_action['label']
+			);
+		}
+
+		return __( 'Test workflow started.', 'deploy-and-test' );
+	}
+
+	return __( 'Workflow started.', 'deploy-and-test' );
 }
 
 function deploy_and_test_dispatch_test_action( $test_action_id ) {

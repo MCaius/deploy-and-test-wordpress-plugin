@@ -15,7 +15,7 @@
     let hasSeenActiveTestRun = statusTabs && statusTabs.dataset.hasActiveTestRun === '1';
     const params = new URLSearchParams(window.location.search);
     const deployMessage = params.get('deploy_and_test_message') || '';
-    const shouldPollForNewRun = deployMessage.indexOf('workflow dispatch started') !== -1;
+    const shouldPollForNewRun = params.get('deploy_and_test_workflow_started') === '1' || deployMessage.indexOf('workflow dispatch started') !== -1;
     const shouldOpenTestStatus = params.get('deploy_and_test_status_tab') === 'test';
     let testSummaryIsOpen = false;
 
@@ -195,7 +195,7 @@
         const cleanParams = new URLSearchParams(window.location.search);
         let changed = false;
 
-        ['deploy_and_test_status', 'deploy_and_test_message', 'deploy_and_test_status_tab'].forEach((key) => {
+        ['deploy_and_test_status', 'deploy_and_test_message', 'deploy_and_test_status_tab', 'deploy_and_test_workflow_started'].forEach((key) => {
             if (cleanParams.has(key)) {
                 cleanParams.delete(key);
                 changed = true;
@@ -224,6 +224,14 @@
     }
 
     function bindLoadSummaryButtons(scope) {
+        function renderSummaryMessage(output, message) {
+            const paragraph = document.createElement('p');
+
+            paragraph.className = 'deploy-and-test-muted';
+            paragraph.textContent = message;
+            output.replaceChildren(paragraph);
+        }
+
         scope.querySelectorAll('.deploy-and-test-load-test-summary').forEach((button) => {
             if (button.dataset.bound === '1') {
                 return;
@@ -246,7 +254,7 @@
                 cleanWorkflowQueryParams();
                 button.disabled = true;
                 button.textContent = config.loadingSummaryText || 'Loading summary...';
-                output.innerHTML = `<p class="deploy-and-test-muted">${config.loadingSummaryHint || 'Downloading test summary from GitHub. This can take a minute.'}</p>`;
+                renderSummaryMessage(output, config.loadingSummaryHint || 'Downloading test summary from GitHub. This can take a minute.');
 
                 const body = new URLSearchParams({
                     action: 'deploy_and_test_test_summary',
@@ -265,14 +273,14 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (!data || !data.success || !data.data || !data.data.html) {
-                            output.innerHTML = `<p class="deploy-and-test-muted">${data && data.data && data.data.message ? data.data.message : 'Could not load summary.'}</p>`;
+                            renderSummaryMessage(output, data && data.data && data.data.message ? data.data.message : 'Could not load summary.');
                             return;
                         }
 
                         output.innerHTML = data.data.html;
                     })
                     .catch(() => {
-                        output.innerHTML = '<p class="deploy-and-test-muted">Could not load summary.</p>';
+                        renderSummaryMessage(output, 'Could not load summary.');
                     })
                     .finally(() => {
                         button.textContent = config.loadSummaryText || 'Load test summary';

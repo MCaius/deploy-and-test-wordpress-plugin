@@ -24,7 +24,20 @@ add_action(
 
 add_action(
 	'admin_enqueue_scripts',
-	function () {
+	function ( $hook_suffix ) {
+		$menu_css_path = DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/deploy-and-test-admin-menu.css';
+
+		wp_enqueue_style(
+			'deploy-and-test-admin-menu',
+			DEPLOY_AND_TEST_PLUGIN_URL . 'includes/deploy-and-test-admin-menu.css',
+			array(),
+			file_exists( $menu_css_path ) ? filemtime( $menu_css_path ) : null
+		);
+
+		if ( 'toplevel_page_deploy-and-test' !== $hook_suffix ) {
+			return;
+		}
+
 		$css_path            = DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/deploy-and-test-admin.css';
 		$js_path             = DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/deploy-and-test-admin.js';
 		$how_to_use_css_path = DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/how-to-use-page/how-to-use-page.css';

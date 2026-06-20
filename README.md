@@ -4,6 +4,12 @@ Deploy & Test is a WordPress admin plugin for developers and small teams that de
 
 This is a public portfolio/reference project. It is not currently managed as an open contribution project, but forks are welcome under the license.
 
+## Why
+
+Small WordPress teams often use GitHub Actions for deploys and automated testing, but those workflows usually stay hidden in GitHub or the terminal.
+
+Deploy & Test brings controlled deploy buttons, test suite triggers, status checks, and audit logs into the WordPress admin, without exposing personal access tokens or requiring non-technical users to work inside GitHub.
+
 ## Use Case
 
 - Give editors or site managers a controlled deploy button in WordPress.
@@ -24,6 +30,21 @@ This is a public portfolio/reference project. It is not currently managed as an 
 - Audit log stored in WordPress options and limited to the latest 100 entries.
 - Optional uninstall cleanup for settings, audit logs, locks, and cached test summaries.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A["WordPress admin"] --> B["Deploy & Test plugin"]
+    B --> C["GitHub App JWT"]
+    C --> D["GitHub installation token"]
+    D --> E["workflow_dispatch"]
+    E --> F["Deploy workflow"]
+    E --> G["Test workflow"]
+    G --> H["Summary artifact"]
+    H --> B
+    B --> I["Status cards and audit log"]
+```
+
 ## Requirements
 
 - WordPress 6.0 or newer.
@@ -39,6 +60,8 @@ This is a public portfolio/reference project. It is not currently managed as an 
 3. Create and install a GitHub App with `Actions: Read and write`.
 4. Add the GitHub App constants to `wp-config.php`.
 5. Configure repository and workflow settings in `Deploy & Test -> Connection`.
+
+For detailed setup instructions, GitHub App settings, workflow examples, and test summary format, see [HOW-TO-USE.md](HOW-TO-USE.md).
 
 ## Build Upload Zip
 
@@ -82,64 +105,14 @@ Build the upload zip:
 npm run build:zip
 ```
 
-The CI workflow runs the same lint/build steps. PHPCS issues may still need cleanup before the public workflow is expected to pass.
-
-## wp-config.php Constants
-
-Recommended private key file path setup:
-
-```php
-define('DEPLOY_AND_TEST_GITHUB_APP_ID', 'your-app-id');
-define('DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID', 'your-installation-id');
-define('DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH', '/secure/path/github-app-private-key.pem');
-```
-
-Fallback direct private key setup:
-
-```php
-define('DEPLOY_AND_TEST_GITHUB_APP_ID', 'your-app-id');
-define('DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID', 'your-installation-id');
-define('DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY', "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----");
-```
-
-Private key file permissions:
-
-```text
-Recommended:
-Folder: 700
-File:   600
-
-Fallback:
-Folder: 750
-File:   640
-```
-
-## GitHub App Permissions
-
-Use repository permissions:
-
-```text
-Metadata: Read-only
-Actions: Read and write
-```
-
-Leave OAuth, device flow, setup URL, and webhooks disabled unless you intentionally extend the plugin later.
-
-## Workflow Expectations
-
-The deploy repository should include manually dispatched workflow files, for example:
-
-```text
-.github/workflows/deploy-preview.yml
-.github/workflows/deploy-production.yml
-```
-
-The testing repository can expose separate manually dispatched workflows, or one workflow with inputs used by the configured test buttons.
+The CI workflow runs the same lint/build steps.
 
 ## Security Model
 
 - The plugin does not push code.
 - The plugin triggers GitHub Actions workflow dispatches on configured refs.
+- WordPress Editors are allowed to trigger configured deploy and test actions. This is intentional for teams that want non-technical WordPress users to run approved workflows without granting WordPress administrator access or GitHub access.
+- Only WordPress Administrators can change plugin configuration, GitHub repository settings, workflow filenames, test actions, cleanup settings, or view the audit log.
 - GitHub App private keys are read from `wp-config.php` constants, not stored in the database.
 - WordPress generates short-lived GitHub installation tokens server-side when actions run.
 - Admin POST/AJAX handlers use capability checks and nonces.

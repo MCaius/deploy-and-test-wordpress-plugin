@@ -572,8 +572,21 @@ function deploy_and_test_get_cached_test_summary( $run_id ) {
 		return new WP_Error( 'ziparchive_missing', __( 'Server cannot read GitHub artifact archives because ZipArchive is not available. Open the GitHub run to view results.', 'deploy-and-test' ) );
 	}
 
-	$run      = deploy_and_test_get_test_run_by_id( $run_id );
-	$artifact = deploy_and_test_find_test_summary_artifact( $run_id, is_wp_error( $run ) ? array() : $run );
+	$run = deploy_and_test_get_test_run_by_id( $run_id );
+
+	if ( is_wp_error( $run ) ) {
+		return $run;
+	}
+
+	if ( ! $run ) {
+		return new WP_Error( 'test_run_not_found', __( 'The requested test run was not found in the configured testing repository.', 'deploy-and-test' ) );
+	}
+
+	if ( ! deploy_and_test_test_run_uses_configured_workflow( $run ) ) {
+		return new WP_Error( 'test_run_not_configured', __( 'The requested test run does not belong to one of the configured test workflows.', 'deploy-and-test' ) );
+	}
+
+	$artifact = deploy_and_test_find_test_summary_artifact( $run_id, $run );
 
 	if ( is_wp_error( $artifact ) ) {
 		return $artifact;
@@ -609,11 +622,40 @@ function deploy_and_test_get_test_run_by_id( $run_id ) {
 
 	foreach ( $runs as $run ) {
 		if ( (int) ( $run['id'] ?? 0 ) === (int) $run_id ) {
-			return $run;
+			return ! empty( $run['path'] ) ? $run : deploy_and_test_github_get_run( deploy_and_test_get_setting( 'test_repo' ), $run_id );
 		}
 	}
 
-	return array();
+	return deploy_and_test_github_get_run( deploy_and_test_get_setting( 'test_repo' ), $run_id );
+}
+
+function deploy_and_test_test_run_uses_configured_workflow( $run ) {
+	$configured_workflows = deploy_and_test_get_configured_test_workflow_files();
+	$run_workflow_file    = deploy_and_test_get_run_workflow_file( $run );
+
+	return $run_workflow_file && in_array( $run_workflow_file, $configured_workflows, true );
+}
+
+function deploy_and_test_get_configured_test_workflow_files() {
+	$workflow_files = array();
+
+	foreach ( deploy_and_test_get_enabled_test_actions() as $test_action ) {
+		if ( ! empty( $test_action['workflow'] ) ) {
+			$workflow_files[] = basename( (string) $test_action['workflow'] );
+		}
+	}
+
+	return array_values( array_unique( array_filter( $workflow_files ) ) );
+}
+
+function deploy_and_test_get_run_workflow_file( $run ) {
+	$path = $run['path'] ?? '';
+
+	if ( ! $path ) {
+		return '';
+	}
+
+	return basename( (string) $path );
 }
 
 function deploy_and_test_find_test_summary_artifact( $run_id, $run = array() ) {
@@ -689,11 +731,33 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 	$summary_json = '';
 
 	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- ZipArchive exposes the public numFiles property.
+	if ( $zip->numFiles > DEPLOY_AND_TEST_ARTIFACT_FILE_LIMIT ) {
+		$zip->close();
+		@unlink( $tmp );
+		return new WP_Error( 'zip_too_many_files', __( 'The test summary artifact contains too many files to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
+	}
+
+	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- ZipArchive exposes the public numFiles property.
 	for ( $index = 0; $index < $zip->numFiles; ++$index ) {
 		$name = $zip->getNameIndex( $index );
 
 		if ( $name && basename( $name ) === 'deploy-update-summary.json' ) {
+			$file_stat = $zip->statIndex( $index );
+
+			if ( is_array( $file_stat ) && isset( $file_stat['size'] ) && (int) $file_stat['size'] > DEPLOY_AND_TEST_TEST_SUMMARY_LIMIT ) {
+				$zip->close();
+				@unlink( $tmp );
+				return new WP_Error( 'summary_json_too_large', __( 'The deploy-update-summary.json file is too large to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
+			}
+
 			$summary_json = $zip->getFromIndex( $index );
+
+			if ( is_string( $summary_json ) && strlen( $summary_json ) > DEPLOY_AND_TEST_TEST_SUMMARY_LIMIT ) {
+				$zip->close();
+				@unlink( $tmp );
+				return new WP_Error( 'summary_json_too_large', __( 'The deploy-update-summary.json file is too large to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
+			}
+
 			break;
 		}
 	}

@@ -115,6 +115,19 @@ function deploy_and_test_github_get_run_jobs( $repo, $run_id ) {
 	return $response['jobs'] ?? array();
 }
 
+function deploy_and_test_github_get_run( $repo, $run_id ) {
+	$response = deploy_and_test_github_request(
+		'repos/' . deploy_and_test_get_setting( 'owner' ) . '/' . $repo . '/actions/runs/' . rawurlencode( (string) $run_id ),
+		'GET'
+	);
+
+	if ( is_wp_error( $response ) ) {
+		return $response;
+	}
+
+	return $response;
+}
+
 function deploy_and_test_github_get_run_artifacts( $repo, $run_id ) {
 	$response = deploy_and_test_github_request(
 		'repos/' . deploy_and_test_get_setting( 'owner' ) . '/' . $repo . '/actions/runs/' . rawurlencode( (string) $run_id ) . '/artifacts?per_page=100',
@@ -144,16 +157,21 @@ function deploy_and_test_github_download_artifact_archive( $artifact ) {
 		return new WP_Error( 'github_artifact_missing_url', __( 'GitHub artifact archive download URL is missing.', 'deploy-and-test' ) );
 	}
 
+	if ( ! empty( $artifact['size_in_bytes'] ) && (int) $artifact['size_in_bytes'] > DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT ) {
+		return deploy_and_test_artifact_archive_too_large_error();
+	}
+
 	$response = wp_remote_get(
 		$archive_download_url,
 		array(
-			'headers'     => array(
+			'headers'             => array(
 				'Accept'               => 'application/vnd.github+json',
 				'Authorization'        => 'Bearer ' . $token,
 				'X-GitHub-Api-Version' => '2022-11-28',
 			),
-			'redirection' => 0,
-			'timeout'     => 30,
+			'limit_response_size' => DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT + 1,
+			'redirection'         => 0,
+			'timeout'             => 30,
 		)
 	);
 
@@ -190,15 +208,16 @@ function deploy_and_test_github_download_artifact_archive( $artifact ) {
 		);
 	}
 
-	return wp_remote_retrieve_body( $response );
+	return deploy_and_test_get_limited_artifact_response_body( $response );
 }
 
 function deploy_and_test_download_temporary_artifact_url( $url ) {
 	$response = wp_remote_get(
 		$url,
 		array(
-			'redirection' => 5,
-			'timeout'     => 30,
+			'limit_response_size' => DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT + 1,
+			'redirection'         => 5,
+			'timeout'             => 30,
 		)
 	);
 
@@ -212,7 +231,34 @@ function deploy_and_test_download_temporary_artifact_url( $url ) {
 		return new WP_Error( 'github_artifact_storage_error', __( 'Could not download GitHub artifact archive from the temporary storage URL.', 'deploy-and-test' ) . ' HTTP ' . $code . '.' );
 	}
 
-	return wp_remote_retrieve_body( $response );
+	return deploy_and_test_get_limited_artifact_response_body( $response );
+}
+
+function deploy_and_test_get_limited_artifact_response_body( $response ) {
+	$content_length = wp_remote_retrieve_header( $response, 'content-length' );
+
+	if ( $content_length && (int) $content_length > DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT ) {
+		return deploy_and_test_artifact_archive_too_large_error();
+	}
+
+	$body = wp_remote_retrieve_body( $response );
+
+	if ( strlen( $body ) > DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT ) {
+		return deploy_and_test_artifact_archive_too_large_error();
+	}
+
+	return $body;
+}
+
+function deploy_and_test_artifact_archive_too_large_error() {
+	return new WP_Error(
+		'github_artifact_archive_too_large',
+		sprintf(
+			/* translators: %s: maximum artifact archive size. */
+			__( 'The GitHub artifact archive is too large to load in WordPress. Limit: %s. Open the GitHub run to view the full report.', 'deploy-and-test' ),
+			size_format( DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT )
+		)
+	);
 }
 
 function deploy_and_test_github_request( $endpoint, $method = 'GET', $body = null ) {

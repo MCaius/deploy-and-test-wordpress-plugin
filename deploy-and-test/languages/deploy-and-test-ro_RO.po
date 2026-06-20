@@ -1347,6 +1347,101 @@ msgstr "Deploy & Test cauta un fisier numit deploy-update-summary.json in arhiva
 msgid "If Delete plugin data on uninstall is enabled, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries."
 msgstr "Daca Delete plugin data on uninstall este activ, uninstall-ul pluginului sterge si setarile salvate, audit log-ul, lock-urile temporare si summary-urile de test din cache."
 
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:581
+msgid "The requested test run was not found in the configured testing repository."
+msgstr ""
+"Rularea de test solicitata nu a fost gasita in repository-ul de testare "
+"configurat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:585
+msgid "The requested test run does not belong to one of the configured test workflows."
+msgstr ""
+"Rularea de test solicitata nu apartine unuia dintre workflow-urile de test "
+"configurate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:736
+msgid "The test summary artifact contains too many files to load in WordPress. Open the GitHub run to view the full report."
+msgstr ""
+"Artifactul cu sumarul de test contine prea multe fisiere pentru a fi "
+"incarcat in WordPress. Deschide rularea GitHub pentru raportul complet."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:749
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:758
+msgid "The deploy-update-summary.json file is too large to load in WordPress. Open the GitHub run to view the full report."
+msgstr ""
+"Fisierul deploy-update-summary.json este prea mare pentru a fi incarcat in "
+"WordPress. Deschide rularea GitHub pentru raportul complet."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:255
+#, php-format
+msgid "The GitHub artifact archive is too large to load in WordPress. Limit: %s. Open the GitHub run to view the full report."
+msgstr ""
+"Arhiva artifactului GitHub este prea mare pentru a fi incarcata in "
+"WordPress. Limita: %s. Deschide rularea GitHub pentru raportul complet."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:35
+msgid "WordPress Editors can trigger the configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access."
+msgstr ""
+"Editorii WordPress pot declansa actiunile de deploy si test configurate, dar "
+"doar Administratorii pot modifica configuratia pluginului, setarile "
+"workflow-urilor, setarile de cleanup sau accesul la audit log. Aceasta "
+"impartire este intentionata pentru echipe care vor ca utilizatori WordPress "
+"non-tehnici si de incredere sa ruleze workflow-uri aprobate fara acces de "
+"administrator sau acces GitHub."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:197
+msgid "GitHub owner must contain only letters, numbers, and single hyphens, and cannot start or end with a hyphen."
+msgstr ""
+"Owner-ul GitHub trebuie sa contina doar litere, numere si cratime simple si "
+"nu poate incepe sau termina cu o cratima."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:202
+msgid "Repository names must contain only letters, numbers, dots, underscores, and hyphens."
+msgstr ""
+"Numele repository-urilor trebuie sa contina doar litere, numere, puncte, "
+"underscore-uri si cratime."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:208
+msgid "Source refs cannot contain spaces, control characters, or Git ref special characters."
+msgstr ""
+"Ref-urile sursa nu pot contine spatii, caractere de control sau caractere "
+"speciale pentru Git ref."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:214
+msgid "Workflow files must be YAML filenames such as deploy-preview.yml or tests.yaml."
+msgstr ""
+"Fisierele workflow trebuie sa fie fisiere YAML, de exemplu deploy-preview.yml "
+"sau tests.yaml."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:47
+msgid "Preview deploy started."
+msgstr "Deploy-ul de preview a fost pornit."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:51
+msgid "Production deploy started."
+msgstr "Deploy-ul de productie a fost pornit."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:60
+#, php-format
+msgid "Test started: %s."
+msgstr "Test pornit: %s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:66
+msgid "Test workflow started."
+msgstr "Workflow-ul de test a fost pornit."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:69
+msgid "Workflow started."
+msgstr "Workflow pornit."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:146
+msgid "Settings saved."
+msgstr "Setarile au fost salvate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:162
+msgid "Cleanup setting saved."
+msgstr "Setarea de cleanup a fost salvata."
+
 #~ msgid "Buttons are prepared for a future test workflow implementation."
 #~ msgstr ""
 #~ "Butoanele sunt pregatite pentru o implementare viitoare a workflow-urilor "

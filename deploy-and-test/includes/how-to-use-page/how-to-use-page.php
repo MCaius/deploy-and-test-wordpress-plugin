@@ -30,6 +30,10 @@ $deploy_and_test_can_manage_settings = current_user_can( deploy_and_test_setting
 			<p>
 				<?php echo esc_html__( 'Use Deploy status for preview and production deploy results. Use Test status for recent test runs, summary artifacts, and individual passed or failed tests. For full logs and large reports, open the GitHub run.', 'deploy-and-test' ); ?>
 			</p>
+
+			<p>
+				<?php echo esc_html__( 'WordPress Editors can trigger the configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access.', 'deploy-and-test' ); ?>
+			</p>
 		</div>
 	</details>
 

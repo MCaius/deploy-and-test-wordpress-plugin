@@ -1,0 +1,20 @@
+/* WordPress admin menu style */
+#adminmenu .toplevel_page_deploy-and-test > a {
+    margin: 5px 5px;
+    background: #2271b1;
+    border: 2px solid #00d336;
+    border-radius: 15px;
+    color: #ffffff;
+}
+
+#adminmenu .toplevel_page_deploy-and-test > a:hover,
+#adminmenu .toplevel_page_deploy-and-test.wp-has-current-submenu > a,
+#adminmenu .toplevel_page_deploy-and-test.current > a {
+    background: #2271b1;
+    border-color: #00d336;
+    color: #ffffff;
+}
+
+#adminmenu .toplevel_page_deploy-and-test .wp-menu-image::before {
+    color: #ffffff;
+}
