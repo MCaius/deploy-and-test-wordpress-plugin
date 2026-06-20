@@ -1,0 +1,53 @@
+.deploy-and-test-how-to-use-page {
+    margin-top: 12px;
+    color: #1d2327;
+}
+
+.deploy-and-test-how-to-use-toggle {
+    margin-top: 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.deploy-and-test-how-to-use-toggle summary {
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.deploy-and-test-how-to-use-content {
+    padding: 0 14px 14px;
+}
+
+.deploy-and-test-how-to-use-page p {
+    margin: 0 0 10px;
+}
+
+.deploy-and-test-how-to-use-page ul,
+.deploy-and-test-how-to-use-page ol {
+    margin: 0 0 10px 20px;
+}
+
+.deploy-and-test-how-to-use-page ul {
+    list-style: disc;
+}
+
+.deploy-and-test-how-to-use-page ol {
+    list-style: decimal;
+}
+
+.deploy-and-test-how-to-use-page pre {
+    margin: 10px 0 14px;
+    padding: 12px;
+    overflow: auto;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+}
+
+.deploy-and-test-how-to-use-notice {
+    padding: 10px 12px;
+    background: #fcf9e8;
+    border-left: 4px solid #dba617;
+}

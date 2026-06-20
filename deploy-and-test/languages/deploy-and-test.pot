@@ -1,0 +1,1190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the deploy-and-test package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deploy-and-test\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-18 15:23+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:12
+msgid "You do not have permission to run deploy actions."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:18
+msgid "Unknown deploy action."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:49
+msgid "Testing repository and test action settings are not fully configured."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:55
+msgid "Unknown test action."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:69
+msgid "Unknown test environment."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:100
+msgid "A workflow was started recently. Wait a moment, then try again."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:114
+msgid ""
+"A deploy workflow is already queued or running. Wait for it to finish before "
+"starting another action."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:129
+msgid ""
+"A test workflow is already queued or running. Wait for it to finish before "
+"starting another action."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:138
+msgid ""
+"A deploy for this environment was started recently. Wait 2-3 minutes, then "
+"try again."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:152
+msgid "A deploy for this environment is already queued or running."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:184
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:202
+msgid "You do not have permission to test the GitHub connection."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:221
+msgid "You do not have permission to view deploy status."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:228
+msgid "Deploy & Test is not fully configured."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:244
+msgid "You do not have permission to view test status."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:251
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:14
+msgid "Testing repository is not fully configured."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:267
+msgid "You do not have permission to view test summary."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:277
+msgid "Missing test run ID."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:97
+msgid "You do not have permission to update deploy settings."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:120
+msgid "Deploy & Test settings were updated."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:121
+msgid "Deploy & Test settings saved."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:15
+msgid "General usage"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:19
+msgid ""
+"Use <strong>Deploy Preview</strong> and <strong>Deploy Production</strong> "
+"to trigger the configured deploy workflows from WordPress. Use the "
+"<strong>Tests</strong> box to run the configured test actions against the "
+"selected test environment."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:23
+msgid ""
+"The selected Tests on value is sent to GitHub Actions using the input "
+"configured in Connection > Test repository. Test buttons can point to the "
+"same workflow file with different input values, such as suite=api, suite=ui, "
+"or suite=seo."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:27
+msgid ""
+"Deploy and test buttons are locked while any workflow is queued or running, "
+"so only one action can run at a time. After starting a test, the page opens "
+"Test status automatically and refreshes while the run is active."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:31
+msgid ""
+"Use Deploy status for preview and production deploy results. Use Test status "
+"for recent test runs, summary artifacts, and individual passed or failed "
+"tests. For full logs and large reports, open the GitHub run."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:38
+msgid "Creating and Configuring the GitHub App"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:42
+msgid ""
+"Log in to GitHub with an account that owns or can administer the "
+"organization/repository used for deploys."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:43
+msgid "Open GitHub, then go to <strong>Settings</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:44
+msgid ""
+"Go to <strong>Developer settings</strong>, then <strong>GitHub Apps</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:45
+msgid "Click <strong>New GitHub App</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:46
+msgid "Use a clear app name that explains the deploy purpose."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:47
+msgid "Set the <strong>Homepage URL</strong> to the WordPress site URL."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:48
+msgid ""
+"Leave <strong>Callback URL</strong> empty. This deploy flow does not use "
+"GitHub OAuth login."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:49
+msgid ""
+"Leave <strong>Request user authorization (OAuth) during installation</"
+"strong> unchecked."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:50
+msgid "Leave <strong>Enable Device Flow</strong> unchecked."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:51
+msgid ""
+"Leave <strong>Setup URL</strong> empty and leave <strong>Redirect on update</"
+"strong> unchecked."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:52
+msgid ""
+"Leave <strong>Webhook Active</strong> unchecked. Webhooks are not needed for "
+"the current deploy status flow."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:53
+msgid ""
+"Under <strong>Repository permissions</strong>, set <strong>Actions</strong> "
+"to <strong>Read and write</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:54
+msgid ""
+"Leave all other permissions disabled unless they are explicitly required "
+"later."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:56
+msgid ""
+"Under <strong>Where can this GitHub App be installed?</strong>, choose "
+"<strong>Any account</strong> if the app is created under a personal account "
+"but needs to be installed on an organization."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:58
+msgid "Create the GitHub App."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:59
+msgid "After the app is created, copy the <strong>App ID</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:60
+msgid "Generate a private key and download the <code>.pem</code> file."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:61
+msgid ""
+"Install the app on the organization or account that owns the repository."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:62
+msgid ""
+"Choose <strong>Only select repositories</strong> and select only the "
+"repository or repositories connected to this deploy flow."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:63
+msgid ""
+"If the repository belongs to an organization, an organization owner may need "
+"to approve or complete the installation."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:64
+msgid ""
+"After installation, open the installation page URL and copy the numeric "
+"installation ID from the URL."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:68
+msgid ""
+"Deploy & Test reads deploy status by calling the GitHub API when the admin "
+"page loads or refreshes. Webhooks can be added later for real-time status "
+"updates, but they require a secure WordPress REST endpoint and webhook "
+"secret validation."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:72
+msgid "The installation URL usually looks similar to this:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:78
+msgid "In this example, <code>12345678</code> is the installation ID."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:82
+msgid ""
+"<strong>Security notice:</strong> The GitHub App private key must never be "
+"committed to a repository, shown in browser JavaScript, or saved in a public "
+"folder."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:88
+msgid "Adding GitHub App Settings to wp-config.php"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:92
+msgid ""
+"Connect to the server where WordPress is installed and open the <code>wp-"
+"config.php</code> file, typically located in the root directory of the "
+"WordPress installation."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:95
+msgid "Add the GitHub App constants before the comment:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:100
+msgid ""
+"<strong>Recommended option:</strong> store the private key in a separate "
+"<code>.pem</code> file and keep only the file path in <code>wp-config.php</"
+"code>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:111
+msgid ""
+"The <code>.pem</code> file should ideally live outside the public WordPress "
+"web root. If that is not possible on the hosting environment, keep it in a "
+"protected server folder and make sure it is not committed to Git."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:114
+msgid "Recommended permissions for the private key folder and file:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:119
+msgid ""
+"If WordPress cannot read the private key with those permissions, use this "
+"fallback:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:125
+msgid ""
+"Avoid using public read permissions for the private key file unless the "
+"hosting environment gives no other option."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:129
+msgid ""
+"<strong>Fallback option:</strong> place the private key directly in <code>wp-"
+"config.php</code>. This works, but it is easier to break because the newline "
+"characters must stay correct."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:140
+msgid ""
+"<strong>Important:</strong> The private key is a production secret. Anyone "
+"who has this key and the app IDs can generate temporary GitHub tokens for "
+"the repositories where the app is installed."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:146
+msgid "Configuring Workflows"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:150
+msgid ""
+"In the <strong>Connection</strong> tab, set the GitHub owner, deploy "
+"repository, testing repository, source refs, target labels, and workflow "
+"filenames used by the buttons."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:161
+msgid ""
+"The workflow filenames must match files in each repository's <code>.github/"
+"workflows</code> directory. Enabled test actions automatically appear as "
+"buttons in the General tab."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:167
+msgid "Structuring the Deploy Workflow to Work with the Plugin"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:171
+msgid ""
+"The deploy repository should contain one GitHub Actions workflow for preview "
+"and one for production, or equivalent workflow files configured in "
+"<strong>Connection > Deploy repository</strong>. The plugin triggers these "
+"workflows with <code>workflow_dispatch</code>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:178
+msgid ""
+"Each deploy workflow should support manual dispatch and deploy the ref "
+"configured in the plugin."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:203
+msgid "For production, use a separate workflow file and a clear workflow name:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:228
+msgid ""
+"Recommended plugin settings: <code>Preview workflow file</code> should point "
+"to <code>deploy-preview.yml</code>, and <code>Production workflow file</"
+"code> should point to <code>deploy-production.yml</code>. Use names like "
+"<code>Deploy Preview</code> and <code>Deploy Production</code> so the status "
+"cards can classify recent runs correctly."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:232
+msgid ""
+"Keep deploy workflows idempotent and safe to re-run. The plugin locks deploy "
+"and test buttons while any workflow is queued or running, but the workflow "
+"itself should still handle retries safely."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:238
+msgid "Structuring the Test Framework to Work with the Plugin"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:242
+msgid ""
+"The testing repository should expose a manually dispatched GitHub Actions "
+"workflow with inputs that match the buttons configured in <strong>Connection "
+"> Test repository</strong>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:259
+msgid "Recommended Deploy & Test settings for that workflow:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:268
+msgid ""
+"Every test run should upload a small JSON summary artifact with this "
+"predictable name:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:274
+msgid "The artifact must contain this file:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:280
+msgid ""
+"Deploy & Test reads that JSON and displays the test stats and individual "
+"test results in WordPress. Keep the JSON stable and small; use GitHub for "
+"full logs and large reports."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:311
+msgid ""
+"The workflow should generate and upload this summary with if: always(), so "
+"WordPress can show results even when tests fail."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:317
+msgid "Audit Log"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:321
+msgid ""
+"The audit log is stored in the WordPress database within the "
+"<code>wp_options</code> table under:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:326
+msgid "The data is stored as a WordPress serialized array containing:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:329
+msgid "Timestamp"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:330
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:26
+msgid "User"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:331
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:27
+msgid "Action"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:332
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:28
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:246
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:764
+msgid "Status"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:333
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:29
+msgid "Details"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:337
+msgid ""
+"The system keeps the most recent 100 entries. When a new entry exceeds this "
+"limit, the oldest record is automatically removed."
+msgstr ""
+
+#. translators: %d: number of GitHub workflows found.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:19
+#, php-format
+msgid "GitHub connection works. Found %d workflow."
+msgid_plural "GitHub connection works. Found %d workflows."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of GitHub workflows found.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:33
+#, php-format
+msgid "Testing repository connection works. Found %d workflow."
+msgid_plural "Testing repository connection works. Found %d workflows."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: GitHub Actions workflow file.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:74
+#, php-format
+msgid "GitHub workflow dispatch started for %s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:144
+msgid "GitHub artifact archive download URL is missing."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:170
+msgid "GitHub artifact download redirect did not include a Location header."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:179
+msgid "Could not download GitHub artifact archive."
+msgstr ""
+
+#. translators: 1: GitHub error message, 2: HTTP status code, 3: artifact name.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:185
+#, php-format
+msgid "%1$s HTTP %2$d. Artifact: %3$s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:212
+msgid ""
+"Could not download GitHub artifact archive from the temporary storage URL."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:251
+msgid "GitHub API request failed."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:271
+msgid ""
+"Check that the GitHub owner and repository are correct, the GitHub App is "
+"installed on that repository, and the app has Actions read/write permission."
+msgstr ""
+
+#. translators: %s: repository field value.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:276
+#, php-format
+msgid ""
+"The Repository field should contain only the repo name, for example "
+"\"my-wordpress-site\", not \"%s\"."
+msgstr ""
+
+#. translators: %s: GitHub owner/repository target.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:284
+#, php-format
+msgid "Current repository target: %s."
+msgstr ""
+
+#. translators: %s: GitHub API endpoint.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:291
+#, php-format
+msgid "GitHub endpoint: %s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:340
+msgid "Could not create GitHub App installation token."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:345
+msgid "GitHub did not return an installation token."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:353
+msgid "Missing DEPLOY_AND_TEST_GITHUB_APP_ID in wp-config.php."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:357
+msgid "OpenSSL is required to sign GitHub App JWTs."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:381
+msgid "Could not sign the GitHub App JWT."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:392
+msgid "GitHub App private key file is not readable."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:398
+msgid "GitHub App private key file is empty."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:408
+msgid ""
+"Missing DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH or "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY in wp-config.php."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:17
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:31
+msgid "GitHub App constants"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:21
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:35
+msgid "owner"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:25
+msgid "repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:39
+msgid "testing repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:44
+msgid "GitHub connection"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:46
+msgid ""
+"Deploy & Test uses a GitHub App. WordPress generates a short-lived "
+"installation token server-side when an action runs."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:51
+msgid "GitHub App ID"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:56
+msgid "Missing DEPLOY_AND_TEST_GITHUB_APP_ID."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:61
+msgid "Installation ID"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:66
+msgid "Missing DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:71
+msgid "Private key"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:74
+msgid "Configured:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:76
+msgid ""
+"Missing DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH or "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:83
+msgid "Only administrators can update connection settings."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:89
+msgid "GitHub owner"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:91
+msgid ""
+"Use one GitHub owner or organization for the deploy and testing "
+"repositories. Repository fields below should contain only the repo name, not "
+"<code>owner/repo</code>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:96
+msgid "Owner or organization"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:102
+msgid "Repository settings"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:104
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:112
+msgid "Deploy repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:107
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:154
+msgid "Test repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:114
+msgid ""
+"Add the deploy repository, source ref, target labels, and workflow filenames "
+"used by the deploy buttons. Example workflow filenames: <code>deploy-"
+"preview.yml</code> and <code>deploy-production.yml</code>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:119
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:161
+msgid "Repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:124
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:166
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:208
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:248
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:326
+msgid "Source ref"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:129
+msgid "Workflow buttons"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:132
+msgid "Preview workflow file"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:137
+msgid "Production workflow file"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:142
+msgid "Preview target label"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:147
+msgid "Production target label"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:156
+msgid ""
+"Configure the separate repository that contains automation tests, then add "
+"the buttons that should appear in the General tab."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:176
+msgid "Save settings"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:185
+msgid "Test deploy repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:190
+#, php-format
+msgid "Save the missing connection details first: %s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:200
+msgid "Test testing repository"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:205
+#, php-format
+msgid "Save the missing testing details first: %s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:223
+msgid "Test environments"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:224
+msgid "Add test environment"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:228
+msgid ""
+"These options appear in the General tab next to Tests. The selected value is "
+"sent to GitHub Actions using the input name below."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:233
+msgid "GitHub Actions input name"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:241
+msgid "Label name"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:242
+msgid "Env variable"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:243
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:280
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:311
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:369
+msgid "Remove"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:274
+msgid "Preview"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:294
+msgid "Test actions"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:295
+msgid "Add test action"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:299
+msgid ""
+"Each enabled row becomes a button in General. Input name and value are "
+"optional; use them for workflows that dispatch one file with different "
+"suites."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:305
+msgid "Enabled"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:306
+msgid "Button label"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:307
+msgid "Workflow file"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:308
+msgid "Input name"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:309
+msgid "Input value"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:310
+msgid "Order"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:354
+msgid "Run smoke tests"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:12
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:44
+msgid ""
+"Configure GitHub App constants in wp-config.php and repository/workflow "
+"settings in Connection before using deploy actions."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:49
+msgid "How to use"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:53
+msgid "Deploy tabs"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:54
+msgid "General"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:56
+msgid "Connection"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:57
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:15
+msgid "Audit log"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:80
+msgid "Instructions will be added here."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:18
+msgid "No deploy actions logged yet."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:25
+msgid "Time"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:26
+msgid "Deploy"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:27
+msgid ""
+"Trigger configured GitHub Actions deploy workflows without pushing code."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:30
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:398
+msgid "Deploy Preview"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:31
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:403
+msgid "Deploy Production"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:31
+msgid "Are you sure you want to deploy production?"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:34
+msgid "Actions are locked while a deploy or test workflow is running."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:40
+msgid "Tests"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:43
+msgid "Run configured test workflows from the testing repository."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:65
+msgid "No test actions configured yet."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:69
+msgid "Test buttons are locked until the active workflow finishes."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:82
+msgid "Status panels"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:84
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:164
+msgid "Deploy status"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:87
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:282
+msgid "Test status"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:113
+msgid "Tests on:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:161
+msgid "If deploy fails, wait 2-3 minutes and re-try."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:168
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:286
+msgid "Auto-refreshing every 5 seconds"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:184
+msgid "Recent GitHub runs"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:193
+msgid "No recent deploy found."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:212
+msgid "Target"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:216
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:249
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:330
+msgid "Updated"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:223
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:337
+msgid "Open GitHub run"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:237
+msgid "No workflow runs found."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:245
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:322
+msgid "Workflow"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:247
+msgid "Conclusion"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:250
+msgid "GitHub"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:263
+msgid "Open"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:279
+msgid ""
+"Test results can take a few minutes to appear after a workflow starts. The "
+"summary is loaded from the deploy-update-summary artifact and cached "
+"temporarily."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:294
+msgid "No recent test run found."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:301
+msgid "Recent test runs"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:314
+msgid "Latest test run"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:346
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:57
+msgid "Load test summary"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:373
+msgid "Test job"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:514
+msgid "Queued"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:515
+msgid "Running"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:516
+msgid "Success"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:517
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:720
+msgid "Failed"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:518
+msgid "Idle"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:521
+msgid "Unknown"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:542
+msgid "GitHub accepted the deploy and is waiting for a runner."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:546
+msgid "Build and deploy are currently running."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:550
+msgid "Deploy completed successfully."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:554
+msgid ""
+"Deploy failed. Open GitHub logs, wait 2-3 minutes, then run deploy again."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:557
+msgid "No active deploy is running."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:569
+msgid ""
+"Server cannot read GitHub artifact archives because ZipArchive is not "
+"available. Open the GitHub run to view results."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:646
+msgid "No deploy-update-summary artifact found for this test run yet."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:674
+msgid "Could not create a temporary file for the test summary artifact."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:683
+msgid "Could not open the test summary artifact."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:701
+msgid ""
+"The deploy-update-summary artifact does not contain deploy-update-"
+"summary.json."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:707
+msgid "The deploy-update-summary.json file is not valid JSON."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:718
+msgid "Total"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:719
+msgid "Passed"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:721
+msgid "Skipped"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:722
+msgid "Timed out"
+msgstr ""
+
+#. translators: 1: suite, 2: target environment, 3: browser.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:729
+#, php-format
+msgid "Suite %1$s on %2$s using %3$s."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:756
+msgid "No individual test results were included in the summary."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:765
+msgid "Project"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:766
+msgid "Test"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:767
+msgid "Duration"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:768
+msgid "Error"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:12
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:13
+msgid "Deploy & Test"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:56
+msgid "Starting..."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:58
+msgid "Loading summary..."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:59
+msgid "Downloading test summary from GitHub. This can take a minute."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:60
+msgid "Test summary is available after the GitHub Actions run finishes."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:100
+msgid "Delete plugin data on uninstall"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:102
+msgid "When enabled, uninstalling the plugin removes Deploy & Test settings, audit logs, temporary locks, and cached test summaries from the database."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:138
+msgid "Uninstall cleanup setting was updated."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:139
+msgid "Uninstall cleanup setting saved."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:165
+msgid "For test actions, each enabled row becomes one button. Use the label for the button text, the workflow file for the GitHub Actions file, and the input name/value pair for the suite or mode you want that button to run."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:188
+msgid "Each deploy workflow should support manual dispatch. Deploy & Test sends the source ref configured in the Connection tab when it dispatches the workflow."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:256
+msgid "Use a stable <code>run-name</code> pattern so Deploy & Test can match a run to the expected summary artifact. The recommended pattern is <code>Run ${{ inputs.suite }} tests on ${{ inputs.target_env }}</code>."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:288
+msgid "A minimal workflow should run the selected suite, write a compact JSON summary, and upload that summary even when tests fail."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:328
+msgid "The recommended file path inside the artifact is:"
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:334
+msgid "Deploy & Test looks for a file named deploy-update-summary.json inside the artifact archive, so the parent folder can be different if your test framework needs another layout."
+msgstr ""
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:399
+msgid "If Delete plugin data on uninstall is enabled, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries."
+msgstr ""

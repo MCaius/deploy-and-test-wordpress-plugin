@@ -1,0 +1,8 @@
+{
+  "name": "deploy-and-test-wordpress-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:zip": "node scripts/build-zip.mjs"
+  }
+}

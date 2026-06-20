@@ -1,0 +1,1389 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: deploy-and-test\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-18 15:23+0300\n"
+"PO-Revision-Date: 2026-06-17 16:45+0300\n"
+"Last-Translator: Codex <codex@openai.com>\n"
+"Language-Team: Romanian\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:12
+msgid "You do not have permission to run deploy actions."
+msgstr "Nu ai permisiunea de a rula actiuni de deploy."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:18
+msgid "Unknown deploy action."
+msgstr "Actiune de deploy necunoscuta."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:49
+msgid "Testing repository and test action settings are not fully configured."
+msgstr ""
+"Repository-ul de testare si setarile actiunilor de test nu sunt complet "
+"configurate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:55
+msgid "Unknown test action."
+msgstr "Actiune de test necunoscuta."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:69
+msgid "Unknown test environment."
+msgstr "Environment de test necunoscut."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:100
+msgid "A workflow was started recently. Wait a moment, then try again."
+msgstr ""
+"Un workflow a fost pornit recent. Asteapta putin, apoi incearca din nou."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:114
+msgid ""
+"A deploy workflow is already queued or running. Wait for it to finish before "
+"starting another action."
+msgstr ""
+"Un workflow de deploy este deja in coada sau ruleaza. Asteapta sa se termine "
+"inainte sa pornesti alta actiune."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:129
+msgid ""
+"A test workflow is already queued or running. Wait for it to finish before "
+"starting another action."
+msgstr ""
+"Un workflow de test este deja in coada sau ruleaza. Asteapta sa se termine "
+"inainte sa pornesti alta actiune."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:138
+msgid ""
+"A deploy for this environment was started recently. Wait 2-3 minutes, then "
+"try again."
+msgstr ""
+"Un deploy pentru acest environment a fost pornit recent. Asteapta 2-3 "
+"minute, apoi incearca din nou."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:152
+msgid "A deploy for this environment is already queued or running."
+msgstr "Un deploy pentru acest environment este deja in coada sau ruleaza."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:184
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:202
+msgid "You do not have permission to test the GitHub connection."
+msgstr "Nu ai permisiunea de a testa conexiunea GitHub."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:221
+msgid "You do not have permission to view deploy status."
+msgstr "Nu ai permisiunea de a vedea statusul deploy-ului."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:228
+msgid "Deploy & Test is not fully configured."
+msgstr "Deploy & Test nu este configurat complet."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:244
+msgid "You do not have permission to view test status."
+msgstr "Nu ai permisiunea de a vedea statusul testelor."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:251
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:14
+msgid "Testing repository is not fully configured."
+msgstr "Repository-ul de testare nu este configurat complet."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:267
+msgid "You do not have permission to view test summary."
+msgstr "Nu ai permisiunea de a vedea summary-ul testului."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:277
+msgid "Missing test run ID."
+msgstr "Lipseste ID-ul rularii de test."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:97
+msgid "You do not have permission to update deploy settings."
+msgstr "Nu ai permisiunea de a actualiza setarile de deploy."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:120
+msgid "Deploy & Test settings were updated."
+msgstr "Setarile de deploy au fost actualizate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:121
+msgid "Deploy & Test settings saved."
+msgstr "Setarile de deploy au fost salvate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:15
+msgid "General usage"
+msgstr "Utilizare generala"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:19
+msgid ""
+"Use <strong>Deploy Preview</strong> and <strong>Deploy Production</strong> "
+"to trigger the configured deploy workflows from WordPress. Use the "
+"<strong>Tests</strong> box to run the configured test actions against the "
+"selected test environment."
+msgstr ""
+"Foloseste <strong>Deploy Preview</strong> si <strong>Deploy Production</"
+"strong> pentru a porni workflow-urile de deploy configurate din WordPress. "
+"Foloseste boxul <strong>Tests</strong> pentru a rula actiunile de test "
+"configurate pe environment-ul selectat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:23
+msgid ""
+"The selected Tests on value is sent to GitHub Actions using the input "
+"configured in Connection > Test repository. Test buttons can point to the "
+"same workflow file with different input values, such as suite=api, suite=ui, "
+"or suite=seo."
+msgstr ""
+"Valoarea selectata la Tests on este trimisa catre GitHub Actions folosind "
+"inputul configurat in Connection > Test repository. Butoanele de test pot "
+"indica acelasi fisier workflow cu valori diferite, precum suite=api, "
+"suite=ui sau suite=seo."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:27
+msgid ""
+"Deploy and test buttons are locked while any workflow is queued or running, "
+"so only one action can run at a time. After starting a test, the page opens "
+"Test status automatically and refreshes while the run is active."
+msgstr ""
+"Butoanele de deploy si test sunt blocate cat timp orice workflow este in "
+"coada sau ruleaza, astfel incat sa ruleze o singura actiune odata. Dupa "
+"pornirea unui test, pagina deschide automat Test status si se "
+"reimprospateaza cat timp rularea este activa."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:31
+msgid ""
+"Use Deploy status for preview and production deploy results. Use Test status "
+"for recent test runs, summary artifacts, and individual passed or failed "
+"tests. For full logs and large reports, open the GitHub run."
+msgstr ""
+"Foloseste Deploy status pentru rezultatele de deploy preview si productie. "
+"Foloseste Test status pentru rulari recente de test, artifacte summary si "
+"teste individuale trecute sau esuate. Pentru loguri complete si rapoarte "
+"mari, deschide rularea din GitHub."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:38
+msgid "Creating and Configuring the GitHub App"
+msgstr "Crearea si configurarea GitHub App"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:42
+msgid ""
+"Log in to GitHub with an account that owns or can administer the "
+"organization/repository used for deploys."
+msgstr ""
+"Autentifica-te in GitHub cu un cont care detine sau poate administra "
+"organizatia/repository-ul folosit pentru deploy-uri."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:43
+msgid "Open GitHub, then go to <strong>Settings</strong>."
+msgstr "Deschide GitHub, apoi mergi la <strong>Settings</strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:44
+msgid ""
+"Go to <strong>Developer settings</strong>, then <strong>GitHub Apps</strong>."
+msgstr ""
+"Mergi la <strong>Developer settings</strong>, apoi la <strong>GitHub Apps</"
+"strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:45
+msgid "Click <strong>New GitHub App</strong>."
+msgstr "Apasa <strong>New GitHub App</strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:46
+msgid "Use a clear app name that explains the deploy purpose."
+msgstr "Foloseste un nume clar pentru app, care explica scopul deploy-ului."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:47
+msgid "Set the <strong>Homepage URL</strong> to the WordPress site URL."
+msgstr "Seteaza <strong>Homepage URL</strong> la URL-ul site-ului WordPress."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:48
+msgid ""
+"Leave <strong>Callback URL</strong> empty. This deploy flow does not use "
+"GitHub OAuth login."
+msgstr ""
+"Lasa <strong>Callback URL</strong> gol. Acest flow de deploy nu foloseste "
+"login GitHub OAuth."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:49
+msgid ""
+"Leave <strong>Request user authorization (OAuth) during installation</"
+"strong> unchecked."
+msgstr ""
+"Lasa <strong>Request user authorization (OAuth) during installation</strong> "
+"debifat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:50
+msgid "Leave <strong>Enable Device Flow</strong> unchecked."
+msgstr "Lasa <strong>Enable Device Flow</strong> debifat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:51
+msgid ""
+"Leave <strong>Setup URL</strong> empty and leave <strong>Redirect on update</"
+"strong> unchecked."
+msgstr ""
+"Lasa <strong>Setup URL</strong> gol si <strong>Redirect on update</strong> "
+"debifat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:52
+msgid ""
+"Leave <strong>Webhook Active</strong> unchecked. Webhooks are not needed for "
+"the current deploy status flow."
+msgstr ""
+"Lasa <strong>Webhook Active</strong> debifat. Webhook-urile nu sunt necesare "
+"pentru flow-ul actual de status deploy."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:53
+msgid ""
+"Under <strong>Repository permissions</strong>, set <strong>Actions</strong> "
+"to <strong>Read and write</strong>."
+msgstr ""
+"La <strong>Repository permissions</strong>, seteaza <strong>Actions</strong> "
+"pe <strong>Read and write</strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:54
+msgid ""
+"Leave all other permissions disabled unless they are explicitly required "
+"later."
+msgstr ""
+"Lasa toate celelalte permisiuni dezactivate, cu exceptia cazului in care vor "
+"fi necesare explicit mai tarziu."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:56
+msgid ""
+"Under <strong>Where can this GitHub App be installed?</strong>, choose "
+"<strong>Any account</strong> if the app is created under a personal account "
+"but needs to be installed on an organization."
+msgstr ""
+"La <strong>Where can this GitHub App be installed?</strong>, alege "
+"<strong>Any account</strong> daca app-ul este creat sub un cont personal, "
+"dar trebuie instalat pe o organizatie."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:58
+msgid "Create the GitHub App."
+msgstr "Creeaza GitHub App."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:59
+msgid "After the app is created, copy the <strong>App ID</strong>."
+msgstr "Dupa ce app-ul este creat, copiaza <strong>App ID</strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:60
+msgid "Generate a private key and download the <code>.pem</code> file."
+msgstr "Genereaza o cheie privata si descarca fisierul <code>.pem</code>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:61
+msgid ""
+"Install the app on the organization or account that owns the repository."
+msgstr "Instaleaza app-ul pe organizatia sau contul care detine repository-ul."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:62
+msgid ""
+"Choose <strong>Only select repositories</strong> and select only the "
+"repository or repositories connected to this deploy flow."
+msgstr ""
+"Alege <strong>Only select repositories</strong> si selecteaza doar "
+"repository-ul sau repository-urile conectate la acest flow de deploy."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:63
+msgid ""
+"If the repository belongs to an organization, an organization owner may need "
+"to approve or complete the installation."
+msgstr ""
+"Daca repository-ul apartine unei organizatii, un owner al organizatiei poate "
+"fi nevoit sa aprobe sau sa finalizeze instalarea."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:64
+msgid ""
+"After installation, open the installation page URL and copy the numeric "
+"installation ID from the URL."
+msgstr ""
+"Dupa instalare, deschide URL-ul paginii de instalare si copiaza ID-ul "
+"numeric al instalarii din URL."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:68
+msgid ""
+"Deploy & Test reads deploy status by calling the GitHub API when the admin "
+"page loads or refreshes. Webhooks can be added later for real-time status "
+"updates, but they require a secure WordPress REST endpoint and webhook "
+"secret validation."
+msgstr ""
+"Deploy & Test citeste statusul deploy-ului apeland GitHub API cand pagina de "
+"admin se incarca sau se reimprospateaza. Webhook-urile pot fi adaugate mai "
+"tarziu pentru status in timp real, dar necesita un endpoint WordPress REST "
+"securizat si validarea unui webhook secret."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:72
+msgid "The installation URL usually looks similar to this:"
+msgstr "URL-ul instalarii arata de obicei asemanator cu acesta:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:78
+msgid "In this example, <code>12345678</code> is the installation ID."
+msgstr "In acest exemplu, <code>12345678</code> este installation ID."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:82
+msgid ""
+"<strong>Security notice:</strong> The GitHub App private key must never be "
+"committed to a repository, shown in browser JavaScript, or saved in a public "
+"folder."
+msgstr ""
+"<strong>Nota de securitate:</strong> Cheia privata GitHub App nu trebuie "
+"niciodata commit-uita intr-un repository, afisata in JavaScript in browser "
+"sau salvata intr-un folder public."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:88
+msgid "Adding GitHub App Settings to wp-config.php"
+msgstr "Adaugarea setarilor GitHub App in wp-config.php"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:92
+msgid ""
+"Connect to the server where WordPress is installed and open the <code>wp-"
+"config.php</code> file, typically located in the root directory of the "
+"WordPress installation."
+msgstr ""
+"Conecteaza-te la serverul unde este instalat WordPress si deschide fisierul "
+"<code>wp-config.php</code>, de obicei aflat in directorul root al instalarii "
+"WordPress."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:95
+msgid "Add the GitHub App constants before the comment:"
+msgstr "Adauga constantele GitHub App inainte de comentariul:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:100
+msgid ""
+"<strong>Recommended option:</strong> store the private key in a separate "
+"<code>.pem</code> file and keep only the file path in <code>wp-config.php</"
+"code>."
+msgstr ""
+"<strong>Optiune recomandata:</strong> salveaza cheia privata intr-un fisier "
+"<code>.pem</code> separat si pastreaza in <code>wp-config.php</code> doar "
+"path-ul catre fisier."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:111
+msgid ""
+"The <code>.pem</code> file should ideally live outside the public WordPress "
+"web root. If that is not possible on the hosting environment, keep it in a "
+"protected server folder and make sure it is not committed to Git."
+msgstr ""
+"Fisierul <code>.pem</code> ar trebui ideal sa fie in afara web root-ului "
+"public WordPress. Daca acest lucru nu este posibil pe hosting, pastreaza-l "
+"intr-un folder protejat de pe server si asigura-te ca nu este commit-uit in "
+"Git."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:114
+msgid "Recommended permissions for the private key folder and file:"
+msgstr "Permisiuni recomandate pentru folderul si fisierul cheii private:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:119
+msgid ""
+"If WordPress cannot read the private key with those permissions, use this "
+"fallback:"
+msgstr ""
+"Daca WordPress nu poate citi cheia privata cu acele permisiuni, foloseste "
+"acest fallback:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:125
+msgid ""
+"Avoid using public read permissions for the private key file unless the "
+"hosting environment gives no other option."
+msgstr ""
+"Evita permisiunile de citire publica pentru fisierul cheii private, cu "
+"exceptia cazului in care hostingul nu ofera alta optiune."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:129
+msgid ""
+"<strong>Fallback option:</strong> place the private key directly in <code>wp-"
+"config.php</code>. This works, but it is easier to break because the newline "
+"characters must stay correct."
+msgstr ""
+"<strong>Optiune fallback:</strong> pune cheia privata direct in <code>wp-"
+"config.php</code>. Functioneaza, dar este mai usor de stricat, deoarece "
+"caracterele newline trebuie sa ramana corecte."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:140
+msgid ""
+"<strong>Important:</strong> The private key is a production secret. Anyone "
+"who has this key and the app IDs can generate temporary GitHub tokens for "
+"the repositories where the app is installed."
+msgstr ""
+"<strong>Important:</strong> Cheia privata este un secret de productie. "
+"Oricine are aceasta cheie si ID-urile app-ului poate genera tokenuri GitHub "
+"temporare pentru repository-urile unde app-ul este instalat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:146
+msgid "Configuring Workflows"
+msgstr "Configurarea workflow-urilor"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:150
+msgid ""
+"In the <strong>Connection</strong> tab, set the GitHub owner, deploy "
+"repository, testing repository, source refs, target labels, and workflow "
+"filenames used by the buttons."
+msgstr ""
+"In tab-ul <strong>Connection</strong>, seteaza owner-ul GitHub, repository-"
+"ul de deploy, repository-ul de testare, source ref-urile, etichetele target "
+"si numele fisierelor workflow folosite de butoane."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:161
+msgid ""
+"The workflow filenames must match files in each repository's <code>.github/"
+"workflows</code> directory. Enabled test actions automatically appear as "
+"buttons in the General tab."
+msgstr ""
+"Numele fisierelor workflow trebuie sa corespunda fisierelor din directorul "
+"<code>.github/workflows</code> al fiecarui repository. Actiunile de test "
+"active apar automat ca butoane in tab-ul General."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:167
+msgid "Structuring the Deploy Workflow to Work with the Plugin"
+msgstr "Structurarea workflow-ului de deploy ca sa functioneze cu pluginul"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:171
+msgid ""
+"The deploy repository should contain one GitHub Actions workflow for preview "
+"and one for production, or equivalent workflow files configured in "
+"<strong>Connection > Deploy repository</strong>. The plugin triggers these "
+"workflows with <code>workflow_dispatch</code>."
+msgstr ""
+"Repository-ul de deploy ar trebui sa contina un workflow GitHub Actions "
+"pentru preview si unul pentru productie, sau fisiere workflow echivalente "
+"configurate in <strong>Connection > Deploy repository</strong>. Pluginul "
+"porneste aceste workflow-uri cu <code>workflow_dispatch</code>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:178
+msgid ""
+"Each deploy workflow should support manual dispatch and deploy the ref "
+"configured in the plugin."
+msgstr ""
+"Fiecare workflow de deploy trebuie sa suporte pornire manuala si sa faca "
+"deploy pentru ref-ul configurat in plugin."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:203
+msgid "For production, use a separate workflow file and a clear workflow name:"
+msgstr ""
+"Pentru productie, foloseste un fisier workflow separat si un nume clar "
+"pentru workflow:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:228
+msgid ""
+"Recommended plugin settings: <code>Preview workflow file</code> should point "
+"to <code>deploy-preview.yml</code>, and <code>Production workflow file</"
+"code> should point to <code>deploy-production.yml</code>. Use names like "
+"<code>Deploy Preview</code> and <code>Deploy Production</code> so the status "
+"cards can classify recent runs correctly."
+msgstr ""
+"Setari recomandate in plugin: <code>Preview workflow file</code> ar trebui "
+"sa indice <code>deploy-preview.yml</code>, iar <code>Production workflow "
+"file</code> ar trebui sa indice <code>deploy-production.yml</code>. "
+"Foloseste nume precum <code>Deploy Preview</code> si <code>Deploy "
+"Production</code>, ca status cards sa poata clasifica corect rularile "
+"recente."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:232
+msgid ""
+"Keep deploy workflows idempotent and safe to re-run. The plugin locks deploy "
+"and test buttons while any workflow is queued or running, but the workflow "
+"itself should still handle retries safely."
+msgstr ""
+"Pastreaza workflow-urile de deploy idempotente si sigure la rerulare. "
+"Pluginul blocheaza butoanele de deploy si test cat timp orice workflow este "
+"in coada sau ruleaza, dar workflow-ul in sine trebuie totusi sa gestioneze "
+"retry-urile in siguranta."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:238
+msgid "Structuring the Test Framework to Work with the Plugin"
+msgstr "Structurarea test framework-ului ca sa functioneze cu pluginul"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:242
+msgid ""
+"The testing repository should expose a manually dispatched GitHub Actions "
+"workflow with inputs that match the buttons configured in <strong>Connection "
+"> Test repository</strong>."
+msgstr ""
+"Repository-ul de testare trebuie sa expuna un workflow GitHub Actions pornit "
+"manual, cu inputuri care corespund butoanelor configurate in "
+"<strong>Connection > Test repository</strong>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:259
+msgid "Recommended Deploy & Test settings for that workflow:"
+msgstr "Setari Deploy & Test recomandate pentru acel workflow:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:268
+msgid ""
+"Every test run should upload a small JSON summary artifact with this "
+"predictable name:"
+msgstr ""
+"Fiecare rulare de test trebuie sa incarce un artifact JSON summary mic, cu "
+"acest nume predictibil:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:274
+msgid "The artifact must contain this file:"
+msgstr "Artifactul trebuie sa contina acest fisier:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:280
+msgid ""
+"Deploy & Test reads that JSON and displays the test stats and individual "
+"test results in WordPress. Keep the JSON stable and small; use GitHub for "
+"full logs and large reports."
+msgstr ""
+"Deploy & Test citeste acel JSON si afiseaza statisticile si rezultatele "
+"individuale ale testelor in WordPress. Pastreaza JSON-ul stabil si mic; "
+"foloseste GitHub pentru loguri complete si rapoarte mari."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:311
+msgid ""
+"The workflow should generate and upload this summary with if: always(), so "
+"WordPress can show results even when tests fail."
+msgstr ""
+"Workflow-ul trebuie sa genereze si sa incarce acest summary cu if: always(), "
+"ca WordPress sa poata afisa rezultatele chiar si cand testele esueaza."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:317
+msgid "Audit Log"
+msgstr "Jurnal audit"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:321
+msgid ""
+"The audit log is stored in the WordPress database within the "
+"<code>wp_options</code> table under:"
+msgstr ""
+"Jurnalul audit este salvat in baza de date WordPress, in tabelul "
+"<code>wp_options</code>, sub:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:326
+msgid "The data is stored as a WordPress serialized array containing:"
+msgstr "Datele sunt salvate ca array serializat WordPress care contine:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:329
+msgid "Timestamp"
+msgstr "Timestamp"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:330
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:26
+msgid "User"
+msgstr "Utilizator"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:331
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:27
+msgid "Action"
+msgstr "Actiune"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:332
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:28
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:246
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:764
+msgid "Status"
+msgstr "Status"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:333
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:29
+msgid "Details"
+msgstr "Detalii"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:337
+msgid ""
+"The system keeps the most recent 100 entries. When a new entry exceeds this "
+"limit, the oldest record is automatically removed."
+msgstr ""
+"Sistemul pastreaza cele mai recente 100 de intrari. Cand o intrare noua "
+"depaseste aceasta limita, cea mai veche inregistrare este eliminata automat."
+
+#. translators: %d: number of GitHub workflows found.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:19
+#, php-format
+msgid "GitHub connection works. Found %d workflow."
+msgid_plural "GitHub connection works. Found %d workflows."
+msgstr[0] "Conexiunea GitHub functioneaza. A fost gasit %d workflow."
+msgstr[1] "Conexiunea GitHub functioneaza. Au fost gasite %d workflow-uri."
+
+#. translators: %d: number of GitHub workflows found.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:33
+#, php-format
+msgid "Testing repository connection works. Found %d workflow."
+msgid_plural "Testing repository connection works. Found %d workflows."
+msgstr[0] ""
+"Conexiunea repository-ului de testare functioneaza. A fost gasit %d workflow."
+msgstr[1] ""
+"Conexiunea repository-ului de testare functioneaza. Au fost gasite %d "
+"workflow-uri."
+
+#. translators: %s: GitHub Actions workflow file.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:74
+#, php-format
+msgid "GitHub workflow dispatch started for %s."
+msgstr "Workflow dispatch GitHub a pornit pentru %s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:144
+msgid "GitHub artifact archive download URL is missing."
+msgstr "Lipseste URL-ul de descarcare pentru arhiva artifactului GitHub."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:170
+msgid "GitHub artifact download redirect did not include a Location header."
+msgstr ""
+"Redirectul pentru descarcarea artifactului GitHub nu a inclus headerul "
+"Location."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:179
+msgid "Could not download GitHub artifact archive."
+msgstr "Nu s-a putut descarca arhiva artifactului GitHub."
+
+#. translators: 1: GitHub error message, 2: HTTP status code, 3: artifact name.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:185
+#, php-format
+msgid "%1$s HTTP %2$d. Artifact: %3$s."
+msgstr "%1$s HTTP %2$d. Artifact: %3$s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:212
+msgid ""
+"Could not download GitHub artifact archive from the temporary storage URL."
+msgstr ""
+"Nu s-a putut descarca arhiva artifactului GitHub din URL-ul temporar de "
+"stocare."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:251
+msgid "GitHub API request failed."
+msgstr "Request-ul catre GitHub API a esuat."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:271
+msgid ""
+"Check that the GitHub owner and repository are correct, the GitHub App is "
+"installed on that repository, and the app has Actions read/write permission."
+msgstr ""
+"Verifica daca owner-ul si repository-ul GitHub sunt corecte, daca GitHub App "
+"este instalat pe acel repository si daca app-ul are permisiunea Actions read/"
+"write."
+
+#. translators: %s: repository field value.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:276
+#, php-format
+msgid ""
+"The Repository field should contain only the repo name, for example "
+"\"my-wordpress-site\", not \"%s\"."
+msgstr ""
+"Campul Repository trebuie sa contina doar numele repo-ului, de exemplu "
+"\"my-wordpress-site\", nu \"%s\"."
+
+#. translators: %s: GitHub owner/repository target.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:284
+#, php-format
+msgid "Current repository target: %s."
+msgstr "Repository target curent: %s."
+
+#. translators: %s: GitHub API endpoint.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:291
+#, php-format
+msgid "GitHub endpoint: %s."
+msgstr "Endpoint GitHub: %s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:340
+msgid "Could not create GitHub App installation token."
+msgstr "Nu s-a putut crea installation token-ul pentru GitHub App."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:345
+msgid "GitHub did not return an installation token."
+msgstr "GitHub nu a returnat un installation token."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:353
+msgid "Missing DEPLOY_AND_TEST_GITHUB_APP_ID in wp-config.php."
+msgstr "Lipseste DEPLOY_AND_TEST_GITHUB_APP_ID in wp-config.php."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:357
+msgid "OpenSSL is required to sign GitHub App JWTs."
+msgstr "OpenSSL este necesar pentru semnarea JWT-urilor GitHub App."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:381
+msgid "Could not sign the GitHub App JWT."
+msgstr "Nu s-a putut semna JWT-ul GitHub App."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:392
+msgid "GitHub App private key file is not readable."
+msgstr "Fisierul cu cheia privata GitHub App nu poate fi citit."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:398
+msgid "GitHub App private key file is empty."
+msgstr "Fisierul cu cheia privata GitHub App este gol."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/github.php:408
+msgid ""
+"Missing DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH or "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY in wp-config.php."
+msgstr ""
+"Lipseste DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH sau "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY in wp-config.php."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:17
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:31
+msgid "GitHub App constants"
+msgstr "constantele GitHub App"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:21
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:35
+msgid "owner"
+msgstr "owner"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:25
+msgid "repository"
+msgstr "repository"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:39
+msgid "testing repository"
+msgstr "repository de testare"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:44
+msgid "GitHub connection"
+msgstr "Conexiune GitHub"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:46
+msgid ""
+"Deploy & Test uses a GitHub App. WordPress generates a short-lived "
+"installation token server-side when an action runs."
+msgstr ""
+"Deploy & Test foloseste un GitHub App. WordPress genereaza server-side un "
+"installation token cu durata scurta atunci cand ruleaza o actiune."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:51
+msgid "GitHub App ID"
+msgstr "GitHub App ID"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:56
+msgid "Missing DEPLOY_AND_TEST_GITHUB_APP_ID."
+msgstr "Lipseste DEPLOY_AND_TEST_GITHUB_APP_ID."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:61
+msgid "Installation ID"
+msgstr "Installation ID"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:66
+msgid "Missing DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID."
+msgstr "Lipseste DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:71
+msgid "Private key"
+msgstr "Cheie privata"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:74
+msgid "Configured:"
+msgstr "Configurata:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:76
+msgid ""
+"Missing DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH or "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY."
+msgstr ""
+"Lipseste DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH sau "
+"DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:83
+msgid "Only administrators can update connection settings."
+msgstr "Doar administratorii pot actualiza setarile conexiunii."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:89
+msgid "GitHub owner"
+msgstr "Owner GitHub"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:91
+msgid ""
+"Use one GitHub owner or organization for the deploy and testing "
+"repositories. Repository fields below should contain only the repo name, not "
+"<code>owner/repo</code>."
+msgstr ""
+"Foloseste acelasi owner sau aceeasi organizatie GitHub pentru repository-"
+"urile de deploy si testare. Campurile Repository de mai jos trebuie sa "
+"contina doar numele repo-ului, nu <code>owner/repo</code>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:96
+msgid "Owner or organization"
+msgstr "Owner sau organizatie"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:102
+msgid "Repository settings"
+msgstr "Setari repository"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:104
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:112
+msgid "Deploy repository"
+msgstr "Repository deploy"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:107
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:154
+msgid "Test repository"
+msgstr "Repository testare"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:114
+msgid ""
+"Add the deploy repository, source ref, target labels, and workflow filenames "
+"used by the deploy buttons. Example workflow filenames: <code>deploy-"
+"preview.yml</code> and <code>deploy-production.yml</code>."
+msgstr ""
+"Adauga repository-ul de deploy, source ref-ul, etichetele target si numele "
+"fisierelor workflow folosite de butoanele de deploy. Exemple de fisiere "
+"workflow: <code>deploy-preview.yml</code> si <code>deploy-production.yml</"
+"code>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:119
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:161
+msgid "Repository"
+msgstr "Repository"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:124
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:166
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:208
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:248
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:326
+msgid "Source ref"
+msgstr "Source ref"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:129
+msgid "Workflow buttons"
+msgstr "Butoane workflow"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:132
+msgid "Preview workflow file"
+msgstr "Fisier workflow preview"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:137
+msgid "Production workflow file"
+msgstr "Fisier workflow productie"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:142
+msgid "Preview target label"
+msgstr "Eticheta target preview"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:147
+msgid "Production target label"
+msgstr "Eticheta target productie"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:156
+msgid ""
+"Configure the separate repository that contains automation tests, then add "
+"the buttons that should appear in the General tab."
+msgstr ""
+"Configureaza repository-ul separat care contine testele automate, apoi "
+"adauga butoanele care trebuie sa apara in tab-ul General."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:176
+msgid "Save settings"
+msgstr "Salveaza setarile"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:185
+msgid "Test deploy repository"
+msgstr "Testeaza repository-ul de deploy"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:190
+#, php-format
+msgid "Save the missing connection details first: %s."
+msgstr "Salveaza mai intai detaliile lipsa ale conexiunii: %s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:200
+msgid "Test testing repository"
+msgstr "Testeaza repository-ul de testare"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:205
+#, php-format
+msgid "Save the missing testing details first: %s."
+msgstr "Salveaza mai intai detaliile lipsa pentru testare: %s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:223
+msgid "Test environments"
+msgstr "Environment-uri de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:224
+msgid "Add test environment"
+msgstr "Adauga environment de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:228
+msgid ""
+"These options appear in the General tab next to Tests. The selected value is "
+"sent to GitHub Actions using the input name below."
+msgstr ""
+"Aceste optiuni apar in tab-ul General langa Tests. Valoarea selectata este "
+"trimisa catre GitHub Actions folosind numele inputului de mai jos."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:233
+msgid "GitHub Actions input name"
+msgstr "Nume input GitHub Actions"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:241
+msgid "Label name"
+msgstr "Nume eticheta"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:242
+msgid "Env variable"
+msgstr "Variabila env"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:243
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:280
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:311
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:369
+msgid "Remove"
+msgstr "Sterge"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:274
+msgid "Preview"
+msgstr "Preview"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:294
+msgid "Test actions"
+msgstr "Actiuni de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:295
+msgid "Add test action"
+msgstr "Adauga actiune de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:299
+msgid ""
+"Each enabled row becomes a button in General. Input name and value are "
+"optional; use them for workflows that dispatch one file with different "
+"suites."
+msgstr ""
+"Fiecare rand activ devine un buton in General. Input name si input value "
+"sunt optionale; foloseste-le pentru workflow-uri care pornesc acelasi fisier "
+"cu suite diferite."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:305
+msgid "Enabled"
+msgstr "Activ"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:306
+msgid "Button label"
+msgstr "Eticheta buton"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:307
+msgid "Workflow file"
+msgstr "Fisier workflow"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:308
+msgid "Input name"
+msgstr "Nume input"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:309
+msgid "Input value"
+msgstr "Valoare input"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:310
+msgid "Order"
+msgstr "Ordine"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:354
+msgid "Run smoke tests"
+msgstr "Ruleaza smoke tests"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:12
+msgid "You do not have permission to access this page."
+msgstr "Nu ai permisiunea de a accesa aceasta pagina."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:44
+msgid ""
+"Configure GitHub App constants in wp-config.php and repository/workflow "
+"settings in Connection before using deploy actions."
+msgstr ""
+"Configureaza constantele GitHub App in wp-config.php si setarile repository/"
+"workflow in Connection inainte de a folosi actiunile de deploy."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:49
+msgid "How to use"
+msgstr "Cum se foloseste"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:53
+msgid "Deploy tabs"
+msgstr "Taburi deploy"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:54
+msgid "General"
+msgstr "General"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:56
+msgid "Connection"
+msgstr "Conexiune"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:57
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:15
+msgid "Audit log"
+msgstr "Jurnal audit"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:80
+msgid "Instructions will be added here."
+msgstr "Instructiunile vor fi adaugate aici."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:18
+msgid "No deploy actions logged yet."
+msgstr "Nu exista inca actiuni de deploy in jurnal."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/audit-log-tab.php:25
+msgid "Time"
+msgstr "Timp"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:26
+msgid "Deploy"
+msgstr "Deploy"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:27
+msgid ""
+"Trigger configured GitHub Actions deploy workflows without pushing code."
+msgstr ""
+"Declanseaza workflow-urile GitHub Actions configurate pentru deploy, fara sa "
+"faci push de cod."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:30
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:398
+msgid "Deploy Preview"
+msgstr "Deploy Preview"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:31
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:403
+msgid "Deploy Production"
+msgstr "Deploy Production"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:31
+msgid "Are you sure you want to deploy production?"
+msgstr "Sigur vrei sa faci deploy pe productie?"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:34
+msgid "Actions are locked while a deploy or test workflow is running."
+msgstr ""
+"Actiunile sunt blocate cat timp ruleaza un workflow de deploy sau test."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:40
+msgid "Tests"
+msgstr "Teste"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:43
+msgid "Run configured test workflows from the testing repository."
+msgstr ""
+"Ruleaza workflow-urile de test configurate din repository-ul de testare."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:65
+msgid "No test actions configured yet."
+msgstr "Nu exista inca actiuni de test configurate."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:69
+msgid "Test buttons are locked until the active workflow finishes."
+msgstr "Butoanele de test sunt blocate pana cand workflow-ul activ se termina."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:82
+msgid "Status panels"
+msgstr "Panouri status"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:84
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:164
+msgid "Deploy status"
+msgstr "Status deploy"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:87
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:282
+msgid "Test status"
+msgstr "Status test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:113
+msgid "Tests on:"
+msgstr "Teste pe:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:161
+msgid "If deploy fails, wait 2-3 minutes and re-try."
+msgstr "Daca deploy-ul esueaza, asteapta 2-3 minute si incearca din nou."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:168
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:286
+msgid "Auto-refreshing every 5 seconds"
+msgstr "Auto-refresh la fiecare 5 secunde"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:184
+msgid "Recent GitHub runs"
+msgstr "Rulari GitHub recente"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:193
+msgid "No recent deploy found."
+msgstr "Nu a fost gasit niciun deploy recent."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:212
+msgid "Target"
+msgstr "Target"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:216
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:249
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:330
+msgid "Updated"
+msgstr "Actualizat"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:223
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:337
+msgid "Open GitHub run"
+msgstr "Deschide rularea GitHub"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:237
+msgid "No workflow runs found."
+msgstr "Nu au fost gasite rulari de workflow."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:245
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:322
+msgid "Workflow"
+msgstr "Workflow"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:247
+msgid "Conclusion"
+msgstr "Concluzie"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:250
+msgid "GitHub"
+msgstr "GitHub"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:263
+msgid "Open"
+msgstr "Deschide"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:279
+msgid ""
+"Test results can take a few minutes to appear after a workflow starts. The "
+"summary is loaded from the deploy-update-summary artifact and cached "
+"temporarily."
+msgstr ""
+"Rezultatele testelor pot dura cateva minute pana apar dupa pornirea unui "
+"workflow. Summary-ul este incarcat din artifactul deploy-update-summary si "
+"cache-uit temporar."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:294
+msgid "No recent test run found."
+msgstr "Nu a fost gasita nicio rulare recenta de test."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:301
+msgid "Recent test runs"
+msgstr "Rulari recente de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:314
+msgid "Latest test run"
+msgstr "Cea mai recenta rulare de test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:346
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:57
+msgid "Load test summary"
+msgstr "Incarca summary-ul testului"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:373
+msgid "Test job"
+msgstr "Job test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:514
+msgid "Queued"
+msgstr "In coada"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:515
+msgid "Running"
+msgstr "Ruleaza"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:516
+msgid "Success"
+msgstr "Succes"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:517
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:720
+msgid "Failed"
+msgstr "Esuate"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:518
+msgid "Idle"
+msgstr "Inactiv"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:521
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:542
+msgid "GitHub accepted the deploy and is waiting for a runner."
+msgstr "GitHub a acceptat deploy-ul si asteapta un runner."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:546
+msgid "Build and deploy are currently running."
+msgstr "Build-ul si deploy-ul ruleaza acum."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:550
+msgid "Deploy completed successfully."
+msgstr "Deploy-ul s-a finalizat cu succes."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:554
+msgid ""
+"Deploy failed. Open GitHub logs, wait 2-3 minutes, then run deploy again."
+msgstr ""
+"Deploy-ul a esuat. Deschide logurile GitHub, asteapta 2-3 minute, apoi "
+"ruleaza deploy-ul din nou."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:557
+msgid "No active deploy is running."
+msgstr "Nu ruleaza niciun deploy activ."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:569
+msgid ""
+"Server cannot read GitHub artifact archives because ZipArchive is not "
+"available. Open the GitHub run to view results."
+msgstr ""
+"Serverul nu poate citi arhivele artifactelor GitHub deoarece ZipArchive nu "
+"este disponibil. Deschide rularea din GitHub pentru a vedea rezultatele."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:646
+msgid "No deploy-update-summary artifact found for this test run yet."
+msgstr ""
+"Nu s-a gasit inca artifactul deploy-update-summary pentru aceasta rulare de "
+"test."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:674
+msgid "Could not create a temporary file for the test summary artifact."
+msgstr ""
+"Nu s-a putut crea un fisier temporar pentru artifactul summary al testului."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:683
+msgid "Could not open the test summary artifact."
+msgstr "Nu s-a putut deschide artifactul summary al testului."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:701
+msgid ""
+"The deploy-update-summary artifact does not contain deploy-update-"
+"summary.json."
+msgstr ""
+"Artifactul deploy-update-summary nu contine deploy-update-summary.json."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:707
+msgid "The deploy-update-summary.json file is not valid JSON."
+msgstr "Fisierul deploy-update-summary.json nu este JSON valid."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:718
+msgid "Total"
+msgstr "Total"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:719
+msgid "Passed"
+msgstr "Trecute"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:721
+msgid "Skipped"
+msgstr "Sarite"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:722
+msgid "Timed out"
+msgstr "Timeout"
+
+#. translators: 1: suite, 2: target environment, 3: browser.
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:729
+#, php-format
+msgid "Suite %1$s on %2$s using %3$s."
+msgstr "Suita %1$s pe %2$s folosind %3$s."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:756
+msgid "No individual test results were included in the summary."
+msgstr "Summary-ul nu contine rezultate individuale de test."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:765
+msgid "Project"
+msgstr "Proiect"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:766
+msgid "Test"
+msgstr "Test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:767
+msgid "Duration"
+msgstr "Durata"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:768
+msgid "Error"
+msgstr "Eroare"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:12
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:13
+msgid "Deploy & Test"
+msgstr "Deploy & Test"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:56
+msgid "Starting..."
+msgstr "Porneste..."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:58
+msgid "Loading summary..."
+msgstr "Se incarca summary-ul..."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:59
+msgid "Downloading test summary from GitHub. This can take a minute."
+msgstr "Se descarca summary-ul testului din GitHub. Poate dura un minut."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/assets.php:60
+msgid "Test summary is available after the GitHub Actions run finishes."
+msgstr "Summary-ul testului este disponibil dupa ce rularea GitHub Actions se termina."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:100
+msgid "Delete plugin data on uninstall"
+msgstr "Sterge datele pluginului la uninstall"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/admin-page.php:102
+msgid "When enabled, uninstalling the plugin removes Deploy & Test settings, audit logs, temporary locks, and cached test summaries from the database."
+msgstr "Cand este activ, uninstall-ul pluginului sterge din baza de date setarile Deploy & Test, audit log-urile, lock-urile temporare si sumarul testelor din cache."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:138
+msgid "Uninstall cleanup setting was updated."
+msgstr "Setarea de cleanup la uninstall a fost actualizata."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:139
+msgid "Uninstall cleanup setting saved."
+msgstr "Setarea de cleanup la uninstall a fost salvata."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:165
+msgid "For test actions, each enabled row becomes one button. Use the label for the button text, the workflow file for the GitHub Actions file, and the input name/value pair for the suite or mode you want that button to run."
+msgstr "Pentru actiunile de test, fiecare rand activ devine un buton. Foloseste label-ul pentru textul butonului, workflow file pentru fisierul GitHub Actions si perechea input name/value pentru suita sau modul pe care vrei sa il ruleze butonul."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:188
+msgid "Each deploy workflow should support manual dispatch. Deploy & Test sends the source ref configured in the Connection tab when it dispatches the workflow."
+msgstr "Fiecare workflow de deploy trebuie sa suporte pornire manuala. Deploy & Test trimite source ref-ul configurat in tab-ul Connection atunci cand porneste workflow-ul."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:256
+msgid "Use a stable <code>run-name</code> pattern so Deploy & Test can match a run to the expected summary artifact. The recommended pattern is <code>Run ${{ inputs.suite }} tests on ${{ inputs.target_env }}</code>."
+msgstr "Foloseste un pattern stabil pentru <code>run-name</code>, ca Deploy & Test sa poata potrivi rularea cu artifactul de summary asteptat. Pattern-ul recomandat este <code>Run ${{ inputs.suite }} tests on ${{ inputs.target_env }}</code>."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:288
+msgid "A minimal workflow should run the selected suite, write a compact JSON summary, and upload that summary even when tests fail."
+msgstr "Un workflow minimal ar trebui sa ruleze suita selectata, sa scrie un summary JSON compact si sa incarce acel summary chiar si cand testele esueaza."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:328
+msgid "The recommended file path inside the artifact is:"
+msgstr "Calea recomandata pentru fisierul din artifact este:"
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:334
+msgid "Deploy & Test looks for a file named deploy-update-summary.json inside the artifact archive, so the parent folder can be different if your test framework needs another layout."
+msgstr "Deploy & Test cauta un fisier numit deploy-update-summary.json in arhiva artifactului, deci folderul parinte poate fi diferit daca framework-ul de test are nevoie de alta structura."
+
+#: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:399
+msgid "If Delete plugin data on uninstall is enabled, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries."
+msgstr "Daca Delete plugin data on uninstall este activ, uninstall-ul pluginului sterge si setarile salvate, audit log-ul, lock-urile temporare si summary-urile de test din cache."
+
+#~ msgid "Buttons are prepared for a future test workflow implementation."
+#~ msgstr ""
+#~ "Butoanele sunt pregatite pentru o implementare viitoare a workflow-urilor "
+#~ "de test."
+
+#~ msgid "Run all tests"
+#~ msgstr "Ruleaza toate testele"
+
+#~ msgid "Run regression tests"
+#~ msgstr "Ruleaza testele de regresie"
+
+#~ msgid "Run performance tests"
+#~ msgstr "Ruleaza testele de performanta"
+
+#~ msgid "Run security tests"
+#~ msgstr "Ruleaza testele de securitate"
+
+#~ msgid "Run SEO tests"
+#~ msgstr "Ruleaza testele SEO"
+
+#~ msgid ""
+#~ "Use <strong>Deploy Preview</strong> to trigger the configured preview "
+#~ "workflow. Use <strong>Deploy Production</strong> only when the preview "
+#~ "environment looks correct and the update is ready for the live site."
+#~ msgstr ""
+#~ "Foloseste <strong>Deploy Preview</strong> pentru a porni workflow-ul de "
+#~ "preview configurat. Foloseste <strong>Deploy Production</strong> doar "
+#~ "cand environment-ul de preview arata corect si update-ul este pregatit "
+#~ "pentru site-ul live."
+
+#~ msgid ""
+#~ "Deploy buttons are automatically locked while a matching workflow run is "
+#~ "queued or running. Wait for the job to finish, then check the deploy "
+#~ "status cards. If a job fails, open the GitHub logs, wait 2-3 minutes, "
+#~ "then run deploy again."
+#~ msgstr ""
+#~ "Butoanele de deploy sunt blocate automat cat timp un workflow "
+#~ "corespunzator este in coada sau ruleaza. Asteapta finalizarea jobului, "
+#~ "apoi verifica status cards. Daca un job esueaza, deschide logurile "
+#~ "GitHub, asteapta 2-3 minute, apoi ruleaza deploy-ul din nou."

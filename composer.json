@@ -1,0 +1,19 @@
+{
+  "name": "deploy-and-test/wordpress-plugin",
+  "description": "WordPress admin plugin for dispatching GitHub Actions deploy and test workflows.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+    "squizlabs/php_codesniffer": "^3.10",
+    "wp-coding-standards/wpcs": "^3.1"
+  },
+  "scripts": {
+    "lint:php": "phpcs"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
