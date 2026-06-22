@@ -18,6 +18,19 @@ Small WordPress teams often use GitHub Actions for deploys and automated testing
 
 Deploy & Test brings controlled deploy buttons, test suite triggers, status checks, and audit logs into the WordPress admin, without exposing personal access tokens or requiring non-technical users to work inside GitHub.
 
+## Deploy & Test Demo
+
+[<video>](https://github.com/user-attachments/assets/1ecfaf41-1c42-49eb-a6c1-a67900a2a530)
+
+## Example Test Summary
+<img width="2688" height="2870" alt="tests-example" src="https://github.com/user-attachments/assets/eb102488-7c02-4a91-9996-2a8f48a1acbc" />
+
+
+
+
+
+
+
 ## Use Case
 
 - Give editors or site managers a controlled deploy button in WordPress.
