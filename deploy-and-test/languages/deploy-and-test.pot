@@ -890,7 +890,7 @@ msgid "Are you sure you want to deploy production?"
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:34
-msgid "Actions are locked while a deploy or test workflow is running."
+msgid "Actions are locked while a deploy or test workflow is running. Refresh this page after it finishes to re-enable the buttons."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:40
@@ -906,7 +906,7 @@ msgid "No test actions configured yet."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:69
-msgid "Test buttons are locked until the active workflow finishes."
+msgid "Test buttons are locked until the active workflow finishes. Refresh this page after it finishes to re-enable the buttons."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:82

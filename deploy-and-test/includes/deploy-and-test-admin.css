@@ -129,6 +129,15 @@
     color: #646970;
 }
 
+.deploy-and-test-lock-notice {
+    margin: 16px 0 0;
+    padding: 10px 12px;
+    border-left: 4px solid #dba617;
+    background: #fcf9e8;
+    color: #3c434a;
+    font-weight: 500;
+}
+
 .deploy-and-test-actions,
 .deploy-and-test-test-actions,
 .deploy-and-test-status-card-actions {

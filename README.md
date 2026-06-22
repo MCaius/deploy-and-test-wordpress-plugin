@@ -4,7 +4,7 @@ Deploy & Test is a WordPress admin plugin for developers and small teams that de
 
 This is a public portfolio/reference project. It is not currently managed as an open contribution project, but forks are welcome under the license.
 
-[![CI](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/ci.yml)
+[![CI](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/ci.yml)
 [![Release](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/MCaius/deploy-and-test-wordpress-plugin/actions/workflows/release.yml)
 [![Latest release](https://img.shields.io/github/v/release/MCaius/deploy-and-test-wordpress-plugin)](https://github.com/MCaius/deploy-and-test-wordpress-plugin/releases/latest)
 ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)

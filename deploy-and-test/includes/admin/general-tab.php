@@ -31,7 +31,7 @@ function deploy_and_test_render_general_tab( $configured ) {
 				<?php deploy_and_test_action_form( 'deploy_production', __( 'Deploy Production', 'deploy-and-test' ), 'button button-secondary button-hero', ! $can_run_actions || $has_active_action, __( 'Are you sure you want to deploy production?', 'deploy-and-test' ), 'production' ); ?>
 			</div>
 			<?php if ( $has_active_action ) : ?>
-				<p class="deploy-and-test-muted"><?php echo esc_html__( 'Actions are locked while a deploy or test workflow is running.', 'deploy-and-test' ); ?></p>
+				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Actions are locked while a deploy or test workflow is running. Refresh this page after it finishes to re-enable the buttons.', 'deploy-and-test' ); ?></p>
 			<?php endif; ?>
 		</section>
 
@@ -66,7 +66,7 @@ function deploy_and_test_render_general_tab( $configured ) {
 				<?php endif; ?>
 			</div>
 			<?php if ( $has_active_action ) : ?>
-				<p class="deploy-and-test-muted"><?php echo esc_html__( 'Test buttons are locked until the active workflow finishes.', 'deploy-and-test' ); ?></p>
+				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Test buttons are locked until the active workflow finishes. Refresh this page after it finishes to re-enable the buttons.', 'deploy-and-test' ); ?></p>
 			<?php endif; ?>
 		</section>
 	</div>

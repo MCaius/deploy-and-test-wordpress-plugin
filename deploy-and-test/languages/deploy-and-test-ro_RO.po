@@ -1035,9 +1035,10 @@ msgid "Are you sure you want to deploy production?"
 msgstr "Sigur vrei sa faci deploy pe productie?"
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:34
-msgid "Actions are locked while a deploy or test workflow is running."
+msgid "Actions are locked while a deploy or test workflow is running. Refresh this page after it finishes to re-enable the buttons."
 msgstr ""
-"Actiunile sunt blocate cat timp ruleaza un workflow de deploy sau test."
+"Actiunile sunt blocate cat timp ruleaza un workflow de deploy sau test. "
+"Reimprospateaza pagina dupa ce se termina ca sa reactivezi butoanele."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:40
 msgid "Tests"
@@ -1053,8 +1054,10 @@ msgid "No test actions configured yet."
 msgstr "Nu exista inca actiuni de test configurate."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:69
-msgid "Test buttons are locked until the active workflow finishes."
-msgstr "Butoanele de test sunt blocate pana cand workflow-ul activ se termina."
+msgid "Test buttons are locked until the active workflow finishes. Refresh this page after it finishes to re-enable the buttons."
+msgstr ""
+"Butoanele de test sunt blocate pana cand workflow-ul activ se termina. "
+"Reimprospateaza pagina dupa ce se termina ca sa reactivezi butoanele."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/general-tab.php:82
 msgid "Status panels"
