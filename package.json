@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build:zip": "node scripts/build-zip.mjs"
+    "build:zip": "node scripts/build-zip.mjs",
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "env:status": "wp-env status",
+    "env:reset": "wp-env reset all",
+    "env:destroy": "wp-env destroy"
+  },
+  "devDependencies": {
+    "@wordpress/env": "11.11.0"
   }
 }
