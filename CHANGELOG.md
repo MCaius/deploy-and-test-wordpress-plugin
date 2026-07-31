@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 - 2026-06-22
+
+### Changed
+
+- Improved admin notices shown while deploy or test workflows are running, including refresh guidance and Romanian translation updates.
+
 ## 1.0.0 - 2026-06-20
 
 ### Added

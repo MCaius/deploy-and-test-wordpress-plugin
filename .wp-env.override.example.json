@@ -6,6 +6,6 @@
     "DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH": "/var/www/html/wp-content/deploy-and-test-secrets/github-app.pem"
   },
   "mappings": {
-    "wp-content/deploy-and-test-secrets/github-app.pem": "./local-secrets/github-app.pem"
+    "wp-content/deploy-and-test-secrets": "./local-secrets"
   }
 }

@@ -22,6 +22,7 @@ local-secrets/
 *.key
 TO-DO.md
 z-Notes-temp.md
+local-secrets/
 
 # Logs and temporary files
 *.log
