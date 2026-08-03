@@ -1,0 +1,130 @@
+name: Bug report
+description: Report a reproducible problem in Deploy & Test.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Please do not include GitHub App private keys, installation tokens, JWTs, or other credentials.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the problem and its impact.
+      placeholder: After a test workflow finishes, the action buttons remain disabled until the page is refreshed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest reliable sequence that reproduces the problem.
+      placeholder: |
+        1. Open Deploy & Test in WordPress Admin.
+        2. Select a configured test environment.
+        3. Start a test workflow.
+        4. Wait for polling to report a terminal result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include exact messages where useful.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Test layer
+      description: Where was the problem reproduced?
+      options:
+        - Local wp-env
+        - Live GitHub sandbox
+        - Packaged plugin installation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: plugin_version
+    attributes:
+      label: Deploy & Test version
+      placeholder: 1.0.1
+    validations:
+      required: true
+
+  - type: input
+    id: wordpress_version
+    attributes:
+      label: WordPress version
+      placeholder: 7.0.2
+    validations:
+      required: true
+
+  - type: input
+    id: php_version
+    attributes:
+      label: PHP version
+      placeholder: 8.3.33
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: Select the closest user impact.
+      options:
+        - Low - cosmetic or minor inconvenience
+        - Medium - workflow is disrupted but has a workaround
+        - High - core workflow is blocked without a reasonable workaround
+        - Critical - security issue, data loss, or widespread outage
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add sanitized logs, screenshots, audit entries, or links. Do not include credentials.
+      placeholder: Drag screenshots here or paste sanitized output.
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: List the observable conditions that should be true when the bug is fixed.
+      placeholder: |
+        - [ ] Buttons unlock automatically after success.
+        - [ ] Buttons unlock automatically after failure.
+        - [ ] Buttons remain locked while a workflow is queued or running.
+        - [ ] Automated regression coverage is added.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues for duplicates.
+          required: true
+        - label: I removed private keys, tokens, JWTs, and other credentials from the report.
+          required: true
+        - label: I can reproduce this problem using the steps above.
+          required: true
