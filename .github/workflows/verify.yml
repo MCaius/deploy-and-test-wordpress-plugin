@@ -1,0 +1,169 @@
+name: Release gates
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-build:
+    name: Lint, audit, and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: "8.2"
+          coverage: none
+          tools: composer
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Audit Composer dependencies
+        run: composer audit
+
+      - name: Lint PHP
+        run: composer lint:php
+
+      - name: Build plugin ZIP
+        run: npm run build:zip
+
+  php-compatibility:
+    name: WordPress ${{ matrix.wordpress }} / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - wordpress: "6.0"
+            php: "7.4"
+            config: .wp-env.wordpress-6.0.json
+          - wordpress: "6.0"
+            php: "8.0"
+            config: .wp-env.wordpress-6.0.json
+          - wordpress: latest
+            php: "7.4"
+            config: .wp-env.test.json
+          - wordpress: latest
+            php: "8.0"
+            config: .wp-env.test.json
+          - wordpress: latest
+            php: "8.2"
+            config: .wp-env.test.json
+          - wordpress: latest
+            php: "8.3"
+            config: .wp-env.test.json
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction --prefer-dist
+          npm ci
+
+      - name: Start WordPress test environment
+        env:
+          WP_ENV_PHP_VERSION: ${{ matrix.php }}
+        run: npx wp-env --config=${{ matrix.config }} start --update
+
+      - name: Run PHPUnit integration suite
+        env:
+          WP_ENV_PHP_VERSION: ${{ matrix.php }}
+        run: >-
+          npx wp-env --config=${{ matrix.config }} run cli php
+          wp-content/plugins/deploy-and-test/vendor/bin/phpunit
+          -c wp-content/plugins/deploy-and-test/phpunit.xml.dist
+          --do-not-cache-result
+
+      - name: Stop WordPress test environment
+        if: always()
+        env:
+          WP_ENV_PHP_VERSION: ${{ matrix.php }}
+        run: npx wp-env --config=${{ matrix.config }} stop
+
+  plugin-check:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+
+      - name: Build and unpack plugin ZIP
+        run: |
+          npm run build:zip
+          mkdir -p dist/package
+          unzip -q dist/deploy-and-test.zip -d dist/package
+
+      - name: Run Plugin Check against packaged plugin
+        uses: WordPress/plugin-check-action@18573eb38f13543484a1f095672dae3849a4fbb0 # v1.1.6
+        with:
+          build-dir: ./dist/package/deploy-and-test
+
+  packaged-install:
+    name: Packaged plugin install and activation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build and unpack plugin ZIP
+        run: |
+          npm run build:zip
+          mkdir -p dist/package
+          unzip -q dist/deploy-and-test.zip -d dist/package
+
+      - name: Start clean WordPress with packaged plugin
+        run: npx wp-env --config=.wp-env.package.json start --update
+
+      - name: Confirm packaged plugin is active
+        run: |
+          npx wp-env --config=.wp-env.package.json run cli wp plugin status deploy-and-test
+          npx wp-env --config=.wp-env.package.json run cli wp eval 'if ( ! defined( "DEPLOY_AND_TEST_PLUGIN_FILE" ) ) { exit( 1 ); } echo "Packaged plugin loaded successfully.\n";'
+
+      - name: Stop packaged-plugin environment
+        if: always()
+        run: npx wp-env --config=.wp-env.package.json stop

@@ -9,9 +9,15 @@
     "env:status": "wp-env status",
     "env:reset": "wp-env reset all",
     "env:destroy": "wp-env destroy",
-    "test:php": "wp-env run tests-cli php wp-content/plugins/deploy-and-test/vendor/bin/phpunit -c wp-content/plugins/deploy-and-test/phpunit.xml.dist --do-not-cache-result"
+    "env:test:start": "wp-env --config=.wp-env.test.json start",
+    "env:test:stop": "wp-env --config=.wp-env.test.json stop",
+    "env:test:status": "wp-env --config=.wp-env.test.json status",
+    "test:php": "wp-env --config=.wp-env.test.json run cli php wp-content/plugins/deploy-and-test/vendor/bin/phpunit -c wp-content/plugins/deploy-and-test/phpunit.xml.dist --do-not-cache-result"
   },
   "devDependencies": {
-    "@wordpress/env": "11.11.0"
+    "@wordpress/env": "11.12.0"
+  },
+  "overrides": {
+    "adm-zip": "0.6.0"
   }
 }
