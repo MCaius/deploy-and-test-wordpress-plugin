@@ -5,6 +5,7 @@
 
 abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 	protected $github_response_callback;
+	protected $installation_token_response_callback;
 
 	public function set_up() {
 		parent::set_up();
@@ -16,6 +17,7 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 		delete_option( deploy_and_test_deploy_lock_key( 'production' ) );
 
 		$this->github_response_callback = null;
+		$this->installation_token_response_callback = null;
 		add_filter( 'pre_http_request', array( $this, 'filter_github_http_request' ), 10, 3 );
 	}
 
@@ -65,8 +67,16 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 		$this->github_response_callback = $callback;
 	}
 
+	protected function mock_installation_token( $callback ) {
+		$this->installation_token_response_callback = $callback;
+	}
+
 	public function filter_github_http_request( $preempt, $args, $url ) {
 		if ( strpos( $url, 'https://api.github.com/app/installations/' ) === 0 ) {
+			if ( is_callable( $this->installation_token_response_callback ) ) {
+				return call_user_func( $this->installation_token_response_callback, $url, $args );
+			}
+
 			return $this->http_response( 201, array( 'token' => 'test-installation-token' ) );
 		}
 

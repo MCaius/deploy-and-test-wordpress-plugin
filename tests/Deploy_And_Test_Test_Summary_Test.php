@@ -6,6 +6,87 @@
 require_once __DIR__ . '/test-case.php';
 
 class Deploy_And_Test_Test_Summary_Test extends Deploy_And_Test_Test_Case {
+	public function test_cached_summary_is_returned_without_a_github_request() {
+		$expected      = array( 'total' => 2, 'passed' => 2 );
+		$github_called = false;
+		set_transient( deploy_and_test_test_summary_cache_key( 77 ), $expected, 600 );
+		$this->mock_github(
+			function () use ( &$github_called ) {
+				$github_called = true;
+				return $this->http_response( 500, array() );
+			}
+		);
+
+		$result = deploy_and_test_get_cached_test_summary( 77 );
+
+		$this->assertSame( $expected, $result );
+		$this->assertFalse( $github_called );
+	}
+
+	public function test_artifact_content_length_over_limit_is_rejected() {
+		$response = $this->raw_http_response( 200, 'small body' );
+		$response['headers']['content-length'] = DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT + 1;
+
+		$result = deploy_and_test_get_limited_artifact_response_body( $response );
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'github_artifact_archive_too_large', $result->get_error_code() );
+	}
+
+	public function test_artifact_body_over_limit_is_rejected() {
+		$response = $this->raw_http_response( 200, str_repeat( 'x', DEPLOY_AND_TEST_ARTIFACT_ARCHIVE_LIMIT + 1 ) );
+
+		$result = deploy_and_test_get_limited_artifact_response_body( $response );
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'github_artifact_archive_too_large', $result->get_error_code() );
+	}
+
+	public function test_archive_with_too_many_files_is_rejected() {
+		if ( ! class_exists( 'ZipArchive' ) ) {
+			$this->markTestSkipped( 'ZipArchive is required for artifact extraction.' );
+		}
+
+		$archive_path = wp_tempnam( 'too-many-files.zip' );
+		$zip          = new ZipArchive();
+		$zip->open( $archive_path, ZipArchive::CREATE | ZipArchive::OVERWRITE );
+
+		for ( $index = 0; $index <= DEPLOY_AND_TEST_ARTIFACT_FILE_LIMIT; ++$index ) {
+			$zip->addFromString( 'result-' . $index . '.json', '{}' );
+		}
+
+		$zip->close();
+		$archive = file_get_contents( $archive_path );
+		unlink( $archive_path );
+
+		$result = deploy_and_test_extract_test_summary_artifact( $archive );
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'zip_too_many_files', $result->get_error_code() );
+	}
+
+	public function test_summary_json_over_limit_is_rejected() {
+		if ( ! class_exists( 'ZipArchive' ) ) {
+			$this->markTestSkipped( 'ZipArchive is required for artifact extraction.' );
+		}
+
+		$archive_path = wp_tempnam( 'large-summary.zip' );
+		$zip          = new ZipArchive();
+		$zip->open( $archive_path, ZipArchive::CREATE | ZipArchive::OVERWRITE );
+		$zip->addFromString(
+			'deploy-update-summary.json',
+			wp_json_encode( array( 'output' => str_repeat( 'x', DEPLOY_AND_TEST_TEST_SUMMARY_LIMIT ) ) )
+		);
+		$zip->close();
+		$archive = file_get_contents( $archive_path );
+		unlink( $archive_path );
+
+		$result = deploy_and_test_extract_test_summary_artifact( $archive );
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'summary_json_too_large', $result->get_error_code() );
+	}
+
 	public function test_exact_summary_artifact_is_selected_for_the_run_title() {
 		$this->configure_plugin();
 		$this->mock_github(
