@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/wp-env.json",
+  "config": {
+    "DEPLOY_AND_TEST_GITHUB_APP_ID": 0,
+    "DEPLOY_AND_TEST_GITHUB_INSTALLATION_ID": 0,
+    "DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY_PATH": "/var/www/html/wp-content/deploy-and-test-secrets/github-app.pem"
+  },
+  "mappings": {
+    "wp-content/deploy-and-test-secrets": "./local-secrets"
+  }
+}

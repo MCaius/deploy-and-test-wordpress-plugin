@@ -1,8 +1,17 @@
 {
   "name": "deploy-and-test-wordpress-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
-    "build:zip": "node scripts/build-zip.mjs"
+    "build:zip": "node scripts/build-zip.mjs",
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "env:status": "wp-env status",
+    "env:reset": "wp-env reset all",
+    "env:destroy": "wp-env destroy",
+    "test:php": "wp-env run tests-cli php wp-content/plugins/deploy-and-test/vendor/bin/phpunit -c wp-content/plugins/deploy-and-test/phpunit.xml.dist"
+  },
+  "devDependencies": {
+    "@wordpress/env": "11.11.0"
   }
 }

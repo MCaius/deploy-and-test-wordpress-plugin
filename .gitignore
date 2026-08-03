@@ -16,9 +16,13 @@ dist/
 .env
 .env.*
 !.env.example
+.wp-env.override.json
+local-secrets/
 *.pem
 *.key
 TO-DO.md
+z-Notes-temp.md
+local-secrets/
 
 # Logs and temporary files
 *.log
