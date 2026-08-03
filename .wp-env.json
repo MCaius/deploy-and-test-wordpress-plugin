@@ -4,8 +4,13 @@
   "plugins": [
     "./deploy-and-test"
   ],
+  "mappings": {
+    "wp-content/plugins/deploy-and-test/phpunit.xml.dist": "./phpunit.xml.dist",
+    "wp-content/plugins/deploy-and-test/tests": "./tests",
+    "wp-content/plugins/deploy-and-test/vendor": "./vendor"
+  },
   "port": 8888,
-  "testsEnvironment": false,
+  "testsEnvironment": true,
   "config": {
     "WP_DEBUG": true,
     "WP_DEBUG_LOG": true,

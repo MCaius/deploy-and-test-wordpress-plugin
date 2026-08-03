@@ -8,7 +8,8 @@
     "env:stop": "wp-env stop",
     "env:status": "wp-env status",
     "env:reset": "wp-env reset all",
-    "env:destroy": "wp-env destroy"
+    "env:destroy": "wp-env destroy",
+    "test:php": "wp-env run tests-cli php wp-content/plugins/deploy-and-test/vendor/bin/phpunit -c wp-content/plugins/deploy-and-test/phpunit.xml.dist"
   },
   "devDependencies": {
     "@wordpress/env": "11.11.0"
