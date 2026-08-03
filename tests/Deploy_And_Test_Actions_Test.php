@@ -63,4 +63,69 @@ class Deploy_And_Test_Actions_Test extends Deploy_And_Test_Test_Case {
 		$this->assertSame( 'action_already_starting', $result->get_error_code() );
 		$this->assertFalse( $github_called );
 	}
+
+	public function test_failed_dispatch_is_audited_and_releases_the_lock() {
+		$this->configure_plugin();
+		$user_id = self::factory()->user->create(
+			array(
+				'role'       => 'administrator',
+				'user_login' => 'qa-failure-admin',
+			)
+		);
+		wp_set_current_user( $user_id );
+		$this->mock_github(
+			function ( $url ) {
+				if ( strpos( $url, '/actions/runs?' ) !== false ) {
+					return $this->http_response( 200, array( 'workflow_runs' => array() ) );
+				}
+
+				return $this->http_response( 503, array( 'message' => 'Controlled dispatch failure' ) );
+			}
+		);
+
+		$result = deploy_and_test_execute_action( 'deploy_preview' );
+		$logs   = deploy_and_test_get_audit_log();
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'github_api_error', $result->get_error_code() );
+		$this->assertFalse( get_option( deploy_and_test_deploy_lock_key( 'preview' ), false ) );
+		$this->assertCount( 1, $logs );
+		$this->assertSame( 'deploy_preview', $logs[0]['action'] );
+		$this->assertSame( 'failed', $logs[0]['status'] );
+		$this->assertSame( 'qa-failure-admin', $logs[0]['user'] );
+		$this->assertStringContainsString( 'Controlled dispatch failure HTTP 503.', $logs[0]['details'] );
+		$this->assertStringNotContainsString( 'test-installation-token', $logs[0]['details'] );
+	}
+
+	public function test_duplicate_action_is_blocked_and_audited_without_github_request() {
+		$this->configure_plugin();
+		$user_id = self::factory()->user->create(
+			array(
+				'role'       => 'editor',
+				'user_login' => 'qa-blocked-editor',
+			)
+		);
+		wp_set_current_user( $user_id );
+		add_option( deploy_and_test_deploy_lock_key( 'global' ), time(), '', false );
+		$github_called = false;
+		$this->mock_github(
+			function () use ( &$github_called ) {
+				$github_called = true;
+				return $this->http_response( 200, array() );
+			}
+		);
+
+		$result = deploy_and_test_execute_action( 'test_smoke' );
+		$logs   = deploy_and_test_get_audit_log();
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'action_already_starting', $result->get_error_code() );
+		$this->assertStringContainsString( 'A workflow was started recently.', $result->get_error_message() );
+		$this->assertFalse( $github_called );
+		$this->assertCount( 1, $logs );
+		$this->assertSame( 'test_smoke', $logs[0]['action'] );
+		$this->assertSame( 'blocked', $logs[0]['status'] );
+		$this->assertSame( 'qa-blocked-editor', $logs[0]['user'] );
+		$this->assertSame( $result->get_error_message(), $logs[0]['details'] );
+	}
 }

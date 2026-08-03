@@ -14,7 +14,17 @@ function deploy_and_test_handle_deploy_action() {
 
 	check_admin_referer( 'deploy_and_test_action', 'deploy_and_test_nonce' );
 
-	$deploy_action    = isset( $_POST['deploy_action'] ) ? sanitize_key( wp_unslash( $_POST['deploy_action'] ) ) : '';
+	$deploy_action = isset( $_POST['deploy_action'] ) ? sanitize_key( wp_unslash( $_POST['deploy_action'] ) ) : '';
+	$result        = deploy_and_test_execute_action( $deploy_action );
+
+	if ( is_wp_error( $result ) ) {
+		deploy_and_test_redirect( 'error', $result->get_error_message() );
+	}
+
+	deploy_and_test_redirect( 'success', deploy_and_test_action_success_message( $deploy_action ), 'general', strpos( $deploy_action, 'test_' ) === 0 ? 'test' : 'deploy', true );
+}
+
+function deploy_and_test_execute_action( $deploy_action ) {
 	$result           = new WP_Error( 'invalid_action', __( 'Unknown deploy action.', 'deploy-and-test' ) );
 	$environment      = deploy_and_test_environment_from_action( $deploy_action );
 	$lock_environment = $environment ? $environment : 'global';
@@ -22,7 +32,7 @@ function deploy_and_test_handle_deploy_action() {
 
 	if ( is_wp_error( $active_check ) ) {
 		deploy_and_test_add_audit_log( $deploy_action, 'blocked', $active_check->get_error_message() );
-		deploy_and_test_redirect( 'error', $active_check->get_error_message() );
+		return $active_check;
 	}
 
 	if ( $deploy_action === 'deploy_preview' ) {
@@ -37,11 +47,12 @@ function deploy_and_test_handle_deploy_action() {
 		deploy_and_test_release_deploy_lock( $lock_environment );
 
 		deploy_and_test_add_audit_log( $deploy_action, 'failed', $result->get_error_message() );
-		deploy_and_test_redirect( 'error', $result->get_error_message() );
+		return $result;
 	}
 
 	deploy_and_test_add_audit_log( $deploy_action, 'success', $result );
-	deploy_and_test_redirect( 'success', deploy_and_test_action_success_message( $deploy_action ), 'general', strpos( $deploy_action, 'test_' ) === 0 ? 'test' : 'deploy', true );
+
+	return $result;
 }
 
 function deploy_and_test_action_success_message( $deploy_action ) {
