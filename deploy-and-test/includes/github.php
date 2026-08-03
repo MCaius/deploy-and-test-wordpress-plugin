@@ -298,6 +298,10 @@ function deploy_and_test_github_request( $endpoint, $method = 'GET', $body = nul
 		return new WP_Error( 'github_api_error', deploy_and_test_github_error_message( $message, $code, $endpoint ) );
 	}
 
+	if ( $raw_body && json_last_error() !== JSON_ERROR_NONE ) {
+		return new WP_Error( 'github_invalid_json', __( 'GitHub API returned malformed JSON.', 'deploy-and-test' ) );
+	}
+
 	return is_array( $decoded ) ? $decoded : array();
 }
 

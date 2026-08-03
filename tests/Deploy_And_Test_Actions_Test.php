@@ -5,7 +5,32 @@
 
 require_once __DIR__ . '/test-case.php';
 
+class Deploy_And_Test_WP_Die_Exception extends RuntimeException {}
+
 class Deploy_And_Test_Actions_Test extends Deploy_And_Test_Test_Case {
+	public function test_deploy_handler_rejects_an_invalid_nonce() {
+		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+		$_POST['deploy_action']           = 'deploy_preview';
+		$_POST['deploy_and_test_nonce']   = 'invalid-nonce';
+		$_REQUEST['deploy_and_test_nonce'] = 'invalid-nonce';
+		$die_handler_filter               = function () {
+			return function ( $message ) {
+				throw new Deploy_And_Test_WP_Die_Exception( wp_strip_all_tags( $message ) );
+			};
+		};
+		add_filter( 'wp_die_handler', $die_handler_filter );
+
+		try {
+			deploy_and_test_handle_deploy_action();
+			$this->fail( 'The handler accepted an invalid nonce.' );
+		} catch ( Deploy_And_Test_WP_Die_Exception $exception ) {
+			$this->assertStringContainsString( 'link you followed has expired', strtolower( $exception->getMessage() ) );
+		} finally {
+			remove_filter( 'wp_die_handler', $die_handler_filter );
+		}
+	}
+
 	public function test_unknown_test_environment_is_rejected_before_dispatch() {
 		$this->configure_plugin();
 		$_POST['test_environment'] = 'not-configured';

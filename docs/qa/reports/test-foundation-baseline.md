@@ -35,7 +35,7 @@ commits fix a failure.
 - Preview and production deploy workflows completed successfully.
 - Passing and intentionally failing test workflows returned their expected
   statuses and summary artifacts.
-- The WordPress integration suite completed with 18 tests and 60
+- The WordPress integration suite completed with 27 tests and 88
   assertions on PHP 8.3.33.
 - Disposable uninstall tests confirmed both cleanup and data-preservation modes
   without GitHub App credentials or GitHub API requests.
@@ -60,11 +60,11 @@ failure paths and uninstall behavior still require their dedicated test layers.
 | QA-011 | Pass | Exactly one preview workflow was dispatched. Polling detected success, action buttons unlocked automatically, the audit recorded `deploy_preview` success, and the GitHub link was correct. | None |
 | QA-012 | Pass | Cancelling the production confirmation created no workflow, start notice, or production audit event; buttons remained available. | None |
 | QA-013 | Pass | Exactly one production workflow was dispatched after confirmation. Polling detected success, buttons unlocked automatically, the audit recorded `deploy_production` success, and the GitHub link was correct. | None |
-| QA-014 | Pass | Mocked GitHub HTTP 503 and network-timeout responses returned useful errors without exposing the installation token. The action execution boundary recorded a `failed` audit event and released the preview lock after a controlled dispatch failure. | None |
+| QA-014 | Pass | Mocked GitHub HTTP 401, 403, 404, 422, 500, 503, network-timeout, and malformed-success responses returned useful errors without exposing the installation token. The action execution boundary recorded a `failed` audit event and released the preview lock after a controlled dispatch failure. | None |
 | QA-015 | Pass | The QA Sandbox environment sent `target_env=preview`; one passing workflow completed successfully. Its summary rendered 3 total, 3 passed, 0 failed, 0 skipped, and 0 timed out tests with three individual results and the correct GitHub link. | Fix the post-test unlock failure recorded below |
 | QA-016 | Pass | One intentional-failure workflow completed as failure. Its summary rendered 2 total, 1 passed, 1 failed, 0 skipped, and 0 timed out tests, including the expected readable failure, and linked to the correct GitHub run. | Fix the post-test unlock failure recorded below |
 | QA-017 | Pass | An unknown test environment returned `invalid_test_environment` before any mocked GitHub request was made. A configured environment sent the expected `suite` and `target_env` inputs. | None |
-| QA-018 | Pass | Mocked missing artifacts returned `summary_artifact_missing`; archives with missing or malformed `deploy-update-summary.json` files returned the expected explicit errors. | None |
+| QA-018 | Pass | The exact summary artifact was selected from multiple candidates and a valid summary parsed successfully. Mocked missing artifacts returned `summary_artifact_missing`; archives with missing or malformed `deploy-update-summary.json` files returned the expected explicit errors. | None |
 | QA-019 | Pass | Audit log contained successful and failed operations with time, user, action, status, and details; no App ID, Installation ID, token, JWT, or private-key content was exposed. | None |
 | QA-020 | Pass | After 105 generated audit events, only the newest 100 remained in newest-first order with the expected user attribution. | None |
 | QA-021 | Pass | A rapid double-click created exactly one live workflow because the UI disabled the button immediately. The automated integration test confirmed that a recent server-side lock returns `action_already_starting`, records a `blocked` audit event for the acting user, and makes no GitHub request. | None |
@@ -89,4 +89,4 @@ failure paths and uninstall behavior still require their dedicated test layers.
 
 All scenarios available in the local and live-sandbox layers were attempted.
 Every scenario was attempted in its required layer. All 24 baseline scenarios
-now pass, and the automated suite passes 18 tests with 60 assertions.
+now pass, and the automated suite passes 27 tests with 88 assertions.

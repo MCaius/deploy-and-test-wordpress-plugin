@@ -22,6 +22,8 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 	public function tear_down() {
 		remove_filter( 'pre_http_request', array( $this, 'filter_github_http_request' ), 10 );
 		unset( $_POST['test_environment'] );
+		unset( $_POST['deploy_action'], $_POST['deploy_and_test_nonce'] );
+		unset( $_REQUEST['deploy_and_test_nonce'] );
 
 		parent::tear_down();
 	}
@@ -76,9 +78,13 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 	}
 
 	protected function http_response( $code, $body = array() ) {
+		return $this->raw_http_response( $code, wp_json_encode( $body ) );
+	}
+
+	protected function raw_http_response( $code, $body ) {
 		return array(
 			'headers'  => array(),
-			'body'     => wp_json_encode( $body ),
+			'body'     => $body,
 			'response' => array(
 				'code'    => $code,
 				'message' => '',
