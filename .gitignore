@@ -30,3 +30,4 @@ local-secrets/
 *.temp
 tmp/
 temp/
+.phpunit.result.cache
