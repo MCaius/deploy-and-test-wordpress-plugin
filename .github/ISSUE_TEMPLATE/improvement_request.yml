@@ -1,0 +1,89 @@
+name: Improvement request
+description: Propose an improvement to an existing Deploy & Test workflow or user experience.
+title: "[Enhancement]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when the current behavior works as designed but could be clearer, faster, safer, or easier to use. Do not include private keys, tokens, JWTs, or other credentials.
+
+  - type: textarea
+    id: opportunity
+    attributes:
+      label: Improvement opportunity
+      description: Describe the workflow or experience that could be improved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Current behavior
+      description: Explain how the product behaves today, including any documented workaround.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_behavior
+    attributes:
+      label: Proposed improvement
+      description: Describe the desired behavior without prescribing an implementation unless necessary.
+    validations:
+      required: true
+
+  - type: textarea
+    id: value
+    attributes:
+      label: User value
+      description: Explain who benefits and what friction, risk, or inconsistency this removes.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - WordPress admin experience
+        - GitHub integration
+        - Deployment workflow
+        - Test workflow and summaries
+        - Configuration
+        - Audit and locking
+        - Documentation
+        - Developer experience
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Add sanitized screenshots, QA scenarios, measurements, or examples. Do not include credentials.
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: List the observable conditions that define completion.
+      placeholder: |
+        - [ ] Current safeguards continue to work.
+        - [ ] The improved workflow is covered by automated tests.
+        - [ ] Relevant manual QA is complete.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues for a similar request.
+          required: true
+        - label: The current behavior works, and this request proposes an improvement rather than reporting a defect.
+          required: true
+        - label: I removed private keys, tokens, JWTs, and other credentials from this request.
+          required: true

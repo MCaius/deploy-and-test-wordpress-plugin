@@ -72,12 +72,12 @@ failure paths and uninstall behavior still require their dedicated test layers.
 | QA-023 | Pass | A disposable plugin copy was uninstalled with cleanup enabled. Settings, Audit log, the preview lock, and both test-summary transient options were removed; the mapped source plugin remained intact. | None |
 | QA-024 | Pass | A disposable plugin copy was uninstalled with cleanup disabled. Settings containing repository values, Audit log, the preview lock, and both test-summary transient options remained present after plugin files were removed. | None |
 
-## Failures
+## Observations and improvement opportunities
 
 | Scenario | Summary | Reproduction | Evidence | Follow-up |
 | --- | --- | --- | --- | --- |
-| QA-015, QA-016, QA-022 | Test completion does not automatically unlock action buttons. | Start a passing or failing test workflow, leave the page open until polling detects completion, and observe the controls without refreshing. | The final success/failure and summary become available, but Admin and Editor action buttons remain disabled until a manual page refresh. Deploy workflows did unlock automatically. | Correct the client-side lock state after test polling reaches a terminal status, then retest both roles. |
-| QA-015 | A full refresh loses the selected Test status tab. | Open Test status and refresh the page to unlock the controls. | The page returns to Deploy status instead of preserving Test status. | Consider preserving the lower status tab in the URL or browser state. |
+| QA-015, QA-016 | Test actions require the documented manual refresh after completion. | Start a passing or failing test workflow, leave the page open until polling detects completion, and observe the controls without refreshing. | The final success/failure and summary become available, while the buttons remain disabled as described by the UI notice: refresh the page after completion to re-enable them. Deploy workflows already unlock automatically. | Track automatic test-action unlocking as an optional UX enhancement, not a defect. |
+| QA-015 | A full refresh returns to the Deploy status tab. | Open Test status and refresh the page after a test completes. | The page returns to Deploy status instead of preserving Test status. | Consider tab persistence as a separate UX enhancement. |
 
 ## Retests
 
