@@ -724,7 +724,7 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 	$zip = new ZipArchive();
 
 	if ( $zip->open( $tmp ) !== true ) {
-		@unlink( $tmp );
+		wp_delete_file( $tmp );
 		return new WP_Error( 'zip_open_failed', __( 'Could not open the test summary artifact.', 'deploy-and-test' ) );
 	}
 
@@ -733,7 +733,7 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- ZipArchive exposes the public numFiles property.
 	if ( $zip->numFiles > DEPLOY_AND_TEST_ARTIFACT_FILE_LIMIT ) {
 		$zip->close();
-		@unlink( $tmp );
+		wp_delete_file( $tmp );
 		return new WP_Error( 'zip_too_many_files', __( 'The test summary artifact contains too many files to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
 	}
 
@@ -746,7 +746,7 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 
 			if ( is_array( $file_stat ) && isset( $file_stat['size'] ) && (int) $file_stat['size'] > DEPLOY_AND_TEST_TEST_SUMMARY_LIMIT ) {
 				$zip->close();
-				@unlink( $tmp );
+				wp_delete_file( $tmp );
 				return new WP_Error( 'summary_json_too_large', __( 'The deploy-update-summary.json file is too large to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
 			}
 
@@ -754,7 +754,7 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 
 			if ( is_string( $summary_json ) && strlen( $summary_json ) > DEPLOY_AND_TEST_TEST_SUMMARY_LIMIT ) {
 				$zip->close();
-				@unlink( $tmp );
+				wp_delete_file( $tmp );
 				return new WP_Error( 'summary_json_too_large', __( 'The deploy-update-summary.json file is too large to load in WordPress. Open the GitHub run to view the full report.', 'deploy-and-test' ) );
 			}
 
@@ -763,7 +763,7 @@ function deploy_and_test_extract_test_summary_artifact( $archive ) {
 	}
 
 	$zip->close();
-	@unlink( $tmp );
+	wp_delete_file( $tmp );
 
 	if ( ! $summary_json ) {
 		return new WP_Error( 'summary_json_missing', __( 'The deploy-update-summary artifact does not contain deploy-update-summary.json.', 'deploy-and-test' ) );

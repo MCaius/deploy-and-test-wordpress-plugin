@@ -10,7 +10,7 @@ const pluginDir = join(rootDir, pluginSlug);
 const distDir = join(rootDir, 'dist');
 const zipPath = join(distDir, `${pluginSlug}.zip`);
 const allowedExtensions = new Set(['.php', '.css', '.js', '.mo']);
-const extraAllowedFiles = new Set([]);
+const extraAllowedFiles = new Set(['readme.txt']);
 
 function crc32(buffer) {
     let crc = 0xffffffff;
