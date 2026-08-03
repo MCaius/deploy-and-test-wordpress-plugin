@@ -2,7 +2,7 @@
 
 ## Report status
 
-**In progress**
+**Complete for the currently available test layers**
 
 This report preserves the initial behavior of Deploy & Test on the
 `qa/test-foundation` branch. Results must remain in this file even when later
@@ -18,7 +18,7 @@ commits fix a failure.
 | WordPress version | 7.0.2 |
 | PHP version | 8.3.32 |
 | Deploy & Test version | `1.0.1` |
-| GitHub sandbox | Not configured yet |
+| GitHub sandbox | `mcaius-qa-sandbox` organization with separate deploy and test repositories |
 
 ## Evidence already observed
 
@@ -28,8 +28,15 @@ commits fix a failure.
 - Deploy controls were unavailable while configuration was incomplete.
 - Administrator, Editor, and Subscriber QA users were created successfully.
 
-These observations establish the local foundation only. They do not establish
-GitHub integration, role restrictions, locking, or uninstall behavior.
+- GitHub App credentials loaded successfully from the ignored local override,
+  and the private key was readable inside `wp-env`.
+- Both sandbox repository connection checks found the expected two workflows.
+- Preview and production deploy workflows completed successfully.
+- Passing and intentionally failing test workflows returned their expected
+  statuses and summary artifacts.
+
+These observations establish the local and live-sandbox baseline. Mocked API
+failure paths and uninstall behavior still require their dedicated test layers.
 
 ## Results
 
@@ -37,37 +44,35 @@ GitHub integration, role restrictions, locking, or uninstall behavior.
 | --- | --- | --- | --- |
 | QA-001 | Pass | Plugin reported Active through WP-CLI and its admin page loaded. | None |
 | QA-002 | Pass | Configuration notice was shown; deploy and test actions were unavailable. | None |
-| QA-003 | Pass | Administrator page access was observed, but all tabs and controls were not checked systematically. | Execute locally |
-| QA-004 | Pass | Editor account exists. | Execute locally |
-| QA-005 | Pass | Subscriber account exists. | Execute locally |
-| QA-006 | Blocked | Requires GitHub sandbox configuration. | Run after sandbox setup |
-| QA-007 | Pass | — | Execute locally |
-| QA-008 | Pass | — | Execute locally |
-| QA-009 | Blocked | Requires GitHub sandbox configuration. | Run after sandbox setup |
-| QA-010 | Blocked | Requires GitHub sandbox configuration. | Run after sandbox setup |
-| QA-011 | Blocked | Requires GitHub sandbox workflows. | Run after sandbox setup |
-| QA-012 | Blocked | Requires GitHub sandbox workflows. | Run after sandbox setup |
-| QA-013 | Blocked | Requires GitHub sandbox workflows. | Run after sandbox setup |
+| QA-003 | Pass | Administrator accessed General, Connection, and Audit log, saved Connection settings, and managed the uninstall-cleanup option. | None |
+| QA-004 | Pass | Editor accessed the plugin and operational deploy/test controls; Connection and uninstall-cleanup settings were hidden. | None |
+| QA-005 | Pass | Subscriber saw no Deploy & Test menu; direct access returned “Sorry, you are not allowed to access this page.” | None |
+| QA-006 | Pass | Valid sandbox deployment and test settings saved successfully, persisted after refresh, enabled the action buttons, and produced a successful audit entry. | None |
+| QA-007 | Pass | Malformed owner, repository, ref, and non-YAML workflow values produced specific validation errors and were not persisted. The same behavior was confirmed for deployment and test settings. | None |
+| QA-008 | Pass | Without GitHub App constants, the configuration notice remained visible and deploy/test actions stayed unavailable even though repository settings could be saved. | None |
+| QA-009 | Pass | Deployment connection reported “GitHub connection works. Found 2 workflows.” The audit status was success and no credentials were exposed. | None |
+| QA-010 | Pass | Testing connection reported “Testing repository connection works. Found 2 workflows.” The audit status was success and no credentials were exposed. | None |
+| QA-011 | Pass | Exactly one preview workflow was dispatched. Polling detected success, action buttons unlocked automatically, the audit recorded `deploy_preview` success, and the GitHub link was correct. | None |
+| QA-012 | Pass | Cancelling the production confirmation created no workflow, start notice, or production audit event; buttons remained available. | None |
+| QA-013 | Pass | Exactly one production workflow was dispatched after confirmation. Polling detected success, buttons unlocked automatically, the audit recorded `deploy_production` success, and the GitHub link was correct. | None |
 | QA-014 | Blocked | Requires the mocked HTTP test harness. | Run during PHPUnit milestone |
-| QA-015 | Blocked | Requires GitHub sandbox workflows and summary artifact. | Run after sandbox setup |
-| QA-016 | Blocked | Requires intentionally failing sandbox workflow. | Run after sandbox setup |
+| QA-015 | Pass | The QA Sandbox environment sent `target_env=preview`; one passing workflow completed successfully. Its summary rendered 3 total, 3 passed, 0 failed, 0 skipped, and 0 timed out tests with three individual results and the correct GitHub link. | Fix the post-test unlock failure recorded below |
+| QA-016 | Pass | One intentional-failure workflow completed as failure. Its summary rendered 2 total, 1 passed, 1 failed, 0 skipped, and 0 timed out tests, including the expected readable failure, and linked to the correct GitHub run. | Fix the post-test unlock failure recorded below |
 | QA-017 | Blocked | Requires the mocked HTTP test harness. | Run during PHPUnit milestone |
 | QA-018 | Blocked | Requires mocked artifact responses. | Run during PHPUnit milestone |
-| QA-019 | Pass | — | Execute local portion now; complete after sandbox setup |
+| QA-019 | Pass | Audit log contained successful and failed operations with time, user, action, status, and details; no App ID, Installation ID, token, JWT, or private-key content was exposed. | None |
 | QA-020 | Blocked | Best executed after automated integration harness exists. | Run during PHPUnit milestone |
-| QA-021 | Blocked | Requires deliberately slow sandbox workflow. | Run after sandbox setup |
-| QA-022 | Blocked | Requires deliberately slow sandbox workflow and two sessions. | Run after sandbox setup |
+| QA-021 | Partial | A rapid double-click created exactly one workflow because the UI disabled the button immediately. The browser did not submit a second request, so the server-side blocked message and `blocked` audit entry were not exercised. | Cover the server-side race with an automated concurrency test |
+| QA-022 | Pass | While an Admin test workflow was active, all actions in the pre-opened Editor session were locked, no preview workflow was dispatched, and both sessions required refresh after the test completed. | Fix the post-test unlock failure recorded below |
 | QA-023 | Blocked | Requires a disposable WordPress environment with an installed ZIP or copied plugin. | Never delete the mapped source plugin; prepare disposable uninstall environment |
 | QA-024 | Blocked | Requires a disposable WordPress environment with an installed ZIP or copied plugin. | Execute after QA-023 in the disposable environment |
 
 ## Failures
 
-No failure has been recorded yet. Add every observed failure here; do not replace
-it with only a later passing retest.
-
 | Scenario | Summary | Reproduction | Evidence | Follow-up |
 | --- | --- | --- | --- | --- |
-| — | — | — | — | — |
+| QA-015, QA-016, QA-022 | Test completion does not automatically unlock action buttons. | Start a passing or failing test workflow, leave the page open until polling detects completion, and observe the controls without refreshing. | The final success/failure and summary become available, but Admin and Editor action buttons remain disabled until a manual page refresh. Deploy workflows did unlock automatically. | Correct the client-side lock state after test polling reaches a terminal status, then retest both roles. |
+| QA-015 | A full refresh loses the selected Test status tab. | Open Test status and refresh the page to unlock the controls. | The page returns to Deploy status instead of preserving Test status. | Consider preserving the lower status tab in the URL or browser state. |
 
 ## Retests
 
@@ -77,5 +82,8 @@ it with only a later passing retest.
 
 ## Completion note
 
-The baseline is complete when every scenario has been attempted in its available
-layer and all remaining Blocked results identify a concrete missing dependency.
+All scenarios available in the local and live-sandbox layers were attempted.
+Remaining Blocked scenarios identify the mocked HTTP harness, automated
+integration harness, or disposable uninstall environment they require. QA-021
+remains Partial because the immediate UI lock prevented a second request from
+reaching the server-side concurrency guard.
