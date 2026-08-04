@@ -64,7 +64,7 @@ body:
     id: plugin_version
     attributes:
       label: Deploy & Test version
-      placeholder: 1.0.1
+      placeholder: 1.0.2
     validations:
       required: true
 

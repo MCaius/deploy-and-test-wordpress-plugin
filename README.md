@@ -76,11 +76,19 @@ flowchart LR
 
 ## Install
 
-1. Upload the `deploy-and-test` folder to `wp-content/plugins/`.
-2. Activate `Deploy & Test` in WordPress.
-3. Create and install a GitHub App with `Actions: Read and write`.
-4. Add the GitHub App constants to `wp-config.php`.
-5. Configure repository and workflow settings in `Deploy & Test -> Connection`.
+For a quick plugin download, open [**Releases**](https://github.com/MCaius/deploy-and-test-wordpress-plugin/releases) from the GitHub sidebar, select the latest release, and download the packaged `deploy-and-test.zip` file from its assets.
+
+Install it from WordPress:
+
+1. Open `Plugins -> Add New Plugin -> Upload Plugin`.
+2. Select the downloaded `deploy-and-test.zip` file and choose `Install Now`.
+3. Activate `Deploy & Test`.
+
+Then configure the GitHub integration:
+
+1. Create and install a GitHub App with `Actions: Read and write`.
+2. Add the GitHub App constants to `wp-config.php`.
+3. Configure repository and workflow settings in `Deploy & Test -> Connection`.
 
 For detailed setup instructions, GitHub App settings, workflow examples, and test summary format, see [HOW-TO-USE.md](HOW-TO-USE.md).
 
