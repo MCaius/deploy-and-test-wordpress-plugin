@@ -128,6 +128,14 @@ npm run build:zip
 
 The CI workflow runs the same lint/build steps.
 
+## Development and Testing
+
+- PHPUnit integration suite: 49 tests and 134 assertions.
+- Playwright WordPress admin E2E suite: 5 journeys.
+- Release gates: Composer audit, WordPress Coding Standards, WordPress/PHP compatibility, Plugin Check, packaged-plugin activation, and admin E2E.
+
+See [docs/development/testing.md](docs/development/testing.md) for local environments, commands, test layers, and release verification.
+
 ## Security Model
 
 - The plugin does not push code.

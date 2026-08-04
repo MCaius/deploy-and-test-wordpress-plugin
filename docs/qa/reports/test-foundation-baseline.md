@@ -18,7 +18,7 @@ commits fix a failure.
 | WordPress version | 7.0.2 |
 | PHP version | 8.3.32 |
 | Deploy & Test version | `1.0.1` |
-| GitHub sandbox | `mcaius-qa-sandbox` organization with separate deploy and test repositories |
+| GitHub sandbox | `deploy-and-test-qa-sandbox` organization with separate deploy and test repositories |
 | Automated suite | PHPUnit 9.6.35 through the WordPress `wp-env` tests environment |
 
 ## Evidence already observed
@@ -78,6 +78,24 @@ failure paths and uninstall behavior still require their dedicated test layers.
 | --- | --- | --- | --- | --- |
 | QA-015, QA-016 | Test actions require the documented manual refresh after completion. | Start a passing or failing test workflow, leave the page open until polling detects completion, and observe the controls without refreshing. | The final success/failure and summary become available, while the buttons remain disabled as described by the UI notice: refresh the page after completion to re-enable them. Deploy workflows already unlock automatically. | Track automatic test-action unlocking as an optional UX enhancement, not a defect. |
 | QA-015 | A full refresh returns to the Deploy status tab. | Open Test status and refresh the page after a test completes. | The page returns to Deploy status instead of preserving Test status. | Consider tab persistence as a separate UX enhancement. |
+
+## Follow-up verification
+
+The original baseline results above remain unchanged as historical evidence.
+After the QA foundation, the automated and release-verification layers were
+expanded and produced the following results:
+
+| Verification | Result | Evidence |
+| --- | --- | --- |
+| PHPUnit integration | Pass | PHPUnit 9.6.35 completed 49 tests with 134 assertions on the local PHP 8.3 environment. |
+| Playwright admin E2E | Pass | All 5 Administrator, Editor, and Subscriber browser journeys passed. |
+| Composer dependency audit | Pass | No security vulnerability advisories found. |
+| npm dependency audit | Pass | No vulnerabilities found. |
+| WordPress Coding Standards | Pass | `composer run lint:php` completed successfully. |
+| WordPress/PHP compatibility | Pass | WordPress 6.0 passed on PHP 7.4 and 8.0; latest WordPress passed on PHP 7.4, 8.0, 8.2, and 8.3. |
+| WordPress Plugin Check | Pass | The packaged plugin passed the release-gate Plugin Check job. |
+| Packaged ZIP install and activation | Pass | The generated ZIP installed, activated, and loaded successfully in a clean WordPress environment. |
+| Release gates | Configured | The existing release-gate jobs passed in CI. Admin E2E is now included in the reusable workflow and passed locally; the complete expanded workflow remains to be confirmed after pushing this branch. |
 
 ## Retests
 
