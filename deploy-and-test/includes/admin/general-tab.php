@@ -80,19 +80,19 @@ function deploy_and_test_render_general_tab( $configured ) {
 		data-has-active-action="<?php echo esc_attr( $has_active_action ? '1' : '0' ); ?>"
 	>
 		<div class="deploy-and-test-subtab-list" role="tablist" aria-label="<?php echo esc_attr__( 'Status panels', 'deploy-and-test' ); ?>">
-			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'deploy' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="deploy">
+			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'deploy' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="deploy" data-testid="status-tab-deploy">
 				<?php echo esc_html__( 'Deploy status', 'deploy-and-test' ); ?>
 			</button>
-			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'test' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="test">
+			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'test' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="test" data-testid="status-tab-test">
 				<?php echo esc_html__( 'Test status', 'deploy-and-test' ); ?>
 			</button>
 		</div>
 
-		<div id="deploy-and-test-deploy-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="deploy" <?php echo $active_status_tab === 'deploy' ? '' : 'hidden'; ?>>
+		<div id="deploy-and-test-deploy-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="deploy" data-testid="status-panel-deploy" <?php echo $active_status_tab === 'deploy' ? '' : 'hidden'; ?>>
 			<?php deploy_and_test_render_status_panel( $runs, $can_run_actions ); ?>
 		</div>
 
-		<div id="deploy-and-test-test-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="test" <?php echo $active_status_tab === 'test' ? '' : 'hidden'; ?>>
+		<div id="deploy-and-test-test-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="test" data-testid="status-panel-test" <?php echo $active_status_tab === 'test' ? '' : 'hidden'; ?>>
 			<?php deploy_and_test_render_test_status_panel( $test_runs, deploy_and_test_tests_are_configured() ); ?>
 		</div>
 	</div>

@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Separate `wp-env` configurations for local development, PHPUnit integration tests, Playwright admin E2E tests, and packaged-plugin verification.
+- PHPUnit integration coverage for permissions, validation, actions, GitHub authentication and API behavior, status handling, audit logs, and test summaries.
+- Five Playwright journeys covering Administrator navigation and settings, validation feedback, Editor access, and Subscriber denial.
+- Release gates for the supported WordPress/PHP matrix, Composer audit, WordPress Coding Standards, WordPress Plugin Check, packaged ZIP installation and activation, and WordPress admin E2E tests.
+- QA strategy, manual scenarios, baseline evidence, and developer testing documentation.
+
+### Changed
+
+- Updated development dependencies to resolve published security advisories.
+
 ## 1.0.1 - 2026-06-22
 
 ### Changed

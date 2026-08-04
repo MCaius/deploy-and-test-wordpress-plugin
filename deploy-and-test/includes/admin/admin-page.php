@@ -34,13 +34,13 @@ function deploy_and_test_render_admin_page() {
 		<h1>Deploy & Test</h1>
 
 		<?php if ( $message ) : ?>
-			<div class="notice notice-<?php echo esc_attr( $status === 'success' ? 'success' : ( $status === 'error' ? 'error' : 'info' ) ); ?> is-dismissible">
+			<div class="notice notice-<?php echo esc_attr( $status === 'success' ? 'success' : ( $status === 'error' ? 'error' : 'info' ) ); ?> is-dismissible" data-testid="admin-feedback-notice">
 				<p><?php echo esc_html( $message ); ?></p>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( ! $configured ) : ?>
-			<div class="notice notice-error">
+			<div class="notice notice-error" data-testid="configuration-notice">
 			<p><?php echo esc_html__( 'Configure GitHub App constants in wp-config.php and repository/workflow settings in Connection before using deploy actions.', 'deploy-and-test' ); ?></p>
 			</div>
 		<?php endif; ?>
@@ -53,7 +53,7 @@ function deploy_and_test_render_admin_page() {
 			<?php endif; ?>
 		</details>
 
-		<nav class="nav-tab-wrapper deploy-and-test-tabs" aria-label="<?php echo esc_attr__( 'Deploy tabs', 'deploy-and-test' ); ?>">
+		<nav class="nav-tab-wrapper deploy-and-test-tabs" aria-label="<?php echo esc_attr__( 'Deploy tabs', 'deploy-and-test' ); ?>" data-testid="primary-tabs">
 			<?php deploy_and_test_tab_link( 'general', __( 'General', 'deploy-and-test' ), $tab ); ?>
 			<?php if ( $can_manage_settings ) : ?>
 				<?php deploy_and_test_tab_link( 'connection', __( 'Connection', 'deploy-and-test' ), $tab ); ?>
@@ -116,9 +116,10 @@ function deploy_and_test_tab_link( $slug, $label, $active_tab ) {
 	);
 
 	printf(
-		'<a href="%s" class="nav-tab %s">%s</a>',
+		'<a href="%s" class="nav-tab %s" data-testid="tab-%s">%s</a>',
 		esc_url( $url ),
 		esc_attr( $active_tab === $slug ? 'nav-tab-active' : '' ),
+		esc_attr( $slug ),
 		esc_html( $label )
 	);
 }

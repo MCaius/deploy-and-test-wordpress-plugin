@@ -31,3 +31,8 @@ local-secrets/
 tmp/
 temp/
 .phpunit.result.cache
+
+# Playwright output and local E2E state
+playwright-report/
+test-results/
+tests/e2e/runtime/
