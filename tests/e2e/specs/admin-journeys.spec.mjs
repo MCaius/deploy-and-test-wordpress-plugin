@@ -30,6 +30,45 @@ test('Administrator can navigate plugin tabs and status panels', async ({ page }
     await expect(page.getByRole('heading', { name: 'Audit log' })).toBeVisible();
 });
 
+test('Completed test workflow restores the page with Test status selected', async ({ page }) => {
+    let testStatusRequests = 0;
+
+    await page.route('**/wp-admin/admin-ajax.php', async (route) => {
+        const requestBody = route.request().postData() || '';
+
+        if (!requestBody.includes('action=deploy_and_test_test_status')) {
+            await route.continue();
+            return;
+        }
+
+        testStatusRequests += 1;
+
+        if (testStatusRequests >= 3) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+                success: true,
+                data: {
+                    html: '<section><p>Mock test status</p></section>',
+                    hasActiveRun: testStatusRequests === 1,
+                },
+            }),
+        });
+    });
+
+    await loginAs(page, users.administrator);
+    await page.goto(`${pluginPage}&deploy_and_test_status_tab=test&deploy_and_test_workflow_started=1`);
+
+    await expect(page.getByTestId('status-tab-test')).toHaveAttribute('aria-selected', 'true');
+    await expect.poll(() => testStatusRequests, { timeout: 12000 }).toBeGreaterThanOrEqual(3);
+    await expect(page).toHaveURL(/deploy_and_test_status_tab=test/);
+    await expect(page.getByTestId('status-panel-test')).toBeVisible();
+});
+
 test('Administrator can save valid repository settings', async ({ page }) => {
     await loginAs(page, users.administrator);
     await page.goto(`${pluginPage}&tab=connection`);

@@ -75,11 +75,13 @@ uninstall behavior.
 
 ## Playwright admin E2E suite
 
-The Playwright suite runs six isolated WordPress admin journeys for
+The Playwright suite runs seven isolated WordPress admin journeys for
 Administrator, Editor, and Subscriber behavior. Test setup resets plugin state
-and creates the required local users. The security journey injects a controlled
-stored-content payload and confirms that settings and audit output escape it
-without executing JavaScript. The suite does not require GitHub credentials.
+and creates the required local users. A controlled polling journey verifies that
+test completion restores the page with Test status selected. The security journey
+injects a controlled stored-content payload and confirms that settings and audit
+output escape it without executing JavaScript. The suite does not require GitHub
+credentials.
 
 Start the environment and run the suite:
 
@@ -156,7 +158,7 @@ The reusable GitHub Actions release-gate workflow runs:
 - PHPUnit on latest WordPress with PHP 7.4, 8.0, 8.2, and 8.3.
 - WordPress Plugin Check against the packaged plugin.
 - Clean installation and activation of the packaged ZIP.
-- The six Playwright WordPress admin journeys, including the stored-content security boundary.
+- The seven Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
 
 The release workflow depends on the complete gate workflow. A tag must not
 publish a release when verification fails.

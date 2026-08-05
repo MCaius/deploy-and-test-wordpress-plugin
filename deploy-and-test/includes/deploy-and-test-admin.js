@@ -143,9 +143,14 @@
                 }
 
                 stopPolling();
-                cleanWorkflowQueryParams();
 
-                hasSeenActiveTestRun = false;
+                if (hasSeenActiveTestRun) {
+                    cleanWorkflowQueryParams('test');
+                    window.location.reload();
+                    return;
+                }
+
+                cleanWorkflowQueryParams();
             })
             .catch(() => {
                 stopPolling();
@@ -191,7 +196,7 @@
         updateActiveStatus();
     }
 
-    function cleanWorkflowQueryParams() {
+    function cleanWorkflowQueryParams(statusTab = '') {
         const cleanParams = new URLSearchParams(window.location.search);
         let changed = false;
 
@@ -201,6 +206,11 @@
                 changed = true;
             }
         });
+
+        if (statusTab) {
+            cleanParams.set('deploy_and_test_status_tab', statusTab);
+            changed = true;
+        }
 
         if (!changed || !window.history || !window.history.replaceState) {
             return;
