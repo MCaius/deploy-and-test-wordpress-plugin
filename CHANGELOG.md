@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.3 - 2026-08-05
+
 ### Added
 
 - Security hardening tests for privileged handler authorization, nonce enforcement, malicious configuration boundaries, output escaping, and credential leakage.

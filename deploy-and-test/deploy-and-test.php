@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Deploy & Test
  * Description: Trigger GitHub Actions deploy workflows from the WordPress admin using a GitHub App.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Deploy & Test
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
