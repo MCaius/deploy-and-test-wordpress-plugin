@@ -59,10 +59,11 @@ request boundaries, and credential leakage.
 
 ### 3. WordPress admin E2E
 
-Playwright runs six browser journeys against the isolated E2E WordPress
+Playwright runs seven browser journeys against the isolated E2E WordPress
 environment. These journeys cover:
 
 - Administrator navigation across General, Connection, Audit log, and status panels.
+- Automatic server-rendered action restoration with Test status preserved after test workflow completion.
 - Successful repository-setting persistence.
 - Validation feedback and rejection of malformed settings.
 - Editor access to approved actions without configuration or audit access.
@@ -112,7 +113,7 @@ The reusable release-gate workflow verifies:
 - Latest WordPress on PHP 7.4, 8.0, 8.2, and 8.3.
 - WordPress Plugin Check against the packaged plugin.
 - Installation and activation of the packaged ZIP in a clean WordPress environment.
-- The six Playwright WordPress admin journeys, including the stored-content security boundary.
+- The seven Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
 
 The release workflow must complete these gates before it can build and publish
 a GitHub release.

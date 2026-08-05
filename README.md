@@ -139,7 +139,7 @@ The CI workflow runs the same lint/build steps.
 ## Development and Testing
 
 - PHPUnit integration and security coverage for permissions, request boundaries, GitHub API behavior, output escaping, and credential leakage.
-- Playwright WordPress admin E2E suite: 6 journeys, including a stored-content XSS boundary check.
+- Playwright WordPress admin E2E suite: 7 journeys, including workflow-completion restoration and a stored-content XSS boundary check.
 - Release gates: Composer audit, WordPress Coding Standards, WordPress/PHP compatibility, Plugin Check, packaged-plugin activation, and admin E2E.
 
 See [docs/development/testing.md](docs/development/testing.md) for local environments, commands, test layers, and release verification.

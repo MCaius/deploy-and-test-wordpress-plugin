@@ -7,6 +7,10 @@
 - Security hardening tests for privileged handler authorization, nonce enforcement, malicious configuration boundaries, output escaping, and credential leakage.
 - A Playwright admin security journey confirming that stored untrusted content is escaped in settings and audit output without executing JavaScript.
 
+### Changed
+
+- Test workflow completion now restores the server-rendered action state automatically while preserving the Test status tab, with updated locking notices and Romanian translations.
+
 ## 1.0.2 - 2026-08-04
 
 ### Added

@@ -181,6 +181,7 @@ released, and the failed attempt is audited without leaking credentials.
 3. Wait for completion and load the summary.
 
 **Expected:** The correct workflow inputs are sent, status progresses to success,
+the available actions are restored automatically with Test status still selected,
 and the expected summary artifact is rendered understandably.
 
 ### QA-016 — Failing test workflow
@@ -190,8 +191,9 @@ and the expected summary artifact is rendered understandably.
 1. Trigger the intentionally failing test action.
 2. Wait for completion and load its result.
 
-**Expected:** WordPress reports failure rather than success and displays useful
-failed job or test information with a link to the correct GitHub run.
+**Expected:** WordPress reports failure rather than success, restores the
+available actions automatically with Test status still selected, and displays
+useful failed job or test information with a link to the correct GitHub run.
 
 ### QA-017 — Invalid test environment
 
