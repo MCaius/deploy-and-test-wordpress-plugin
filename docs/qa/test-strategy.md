@@ -51,14 +51,15 @@ This layer should cover:
 Mocks are the default for automated tests because they are repeatable, do not
 consume GitHub rate limits, and cannot trigger real workflows accidentally.
 
-The PHPUnit integration suite currently contains 49 tests and 134 assertions.
-It covers permissions, settings validation, action locking and dispatch,
-GitHub authentication and controlled API responses, status matching, audit
-logs, summary artifacts, and uninstall behavior.
+The PHPUnit integration suite covers permissions, settings validation, action
+locking and dispatch, GitHub authentication and controlled API responses,
+status matching, audit logs, summary artifacts, uninstall behavior, privileged
+handler authorization and nonce enforcement, output escaping, malicious
+request boundaries, and credential leakage.
 
 ### 3. WordPress admin E2E
 
-Playwright runs five browser journeys against the isolated E2E WordPress
+Playwright runs six browser journeys against the isolated E2E WordPress
 environment. These journeys cover:
 
 - Administrator navigation across General, Connection, Audit log, and status panels.
@@ -66,12 +67,27 @@ environment. These journeys cover:
 - Validation feedback and rejection of malformed settings.
 - Editor access to approved actions without configuration or audit access.
 - Subscriber denial at the plugin page.
+- Stored untrusted content escaped in settings and audit output without JavaScript execution.
 
 The browser suite uses stable plugin-owned `data-testid` attributes where a
 role or label could be ambiguous. It does not require GitHub App credentials
 and does not contact the live sandbox.
 
-### 4. Live GitHub sandbox
+### 4. Security hardening
+
+Security checks span PHPUnit and Playwright and cover:
+
+- Capability enforcement for every privileged POST and AJAX handler.
+- Missing or invalid nonce rejection before protected operations run.
+- Rejection of URL, traversal, reflog, and workflow-path configuration payloads.
+- Escaping of stored settings, audit details, and test-summary content.
+- Exclusion of private-key, JWT, installation-token, and authorization-header material from user-visible errors, audit entries, and admin HTML.
+- Browser confirmation that a controlled stored-content payload remains inert.
+
+These tests use generated or synthetic credentials and local payloads. They
+must never contain a real GitHub App private key or installation token.
+
+### 5. Live GitHub sandbox
 
 A dedicated GitHub organization, private GitHub App, and harmless sandbox
 repositories will provide a limited live-contract layer.
@@ -87,7 +103,7 @@ Use this layer for:
 The sandbox workflows must not deploy a real site or access production secrets.
 Run the live journey before releases and whenever the GitHub integration changes.
 
-### 5. Release gates
+### 6. Release gates
 
 The reusable release-gate workflow verifies:
 
@@ -96,7 +112,7 @@ The reusable release-gate workflow verifies:
 - Latest WordPress on PHP 7.4, 8.0, 8.2, and 8.3.
 - WordPress Plugin Check against the packaged plugin.
 - Installation and activation of the packaged ZIP in a clean WordPress environment.
-- The five Playwright WordPress admin journeys.
+- The six Playwright WordPress admin journeys, including the stored-content security boundary.
 
 The release workflow must complete these gates before it can build and publish
 a GitHub release.
