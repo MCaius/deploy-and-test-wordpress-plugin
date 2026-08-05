@@ -95,7 +95,21 @@ expanded and produced the following results:
 | WordPress/PHP compatibility | Pass | WordPress 6.0 passed on PHP 7.4 and 8.0; latest WordPress passed on PHP 7.4, 8.0, 8.2, and 8.3. |
 | WordPress Plugin Check | Pass | The packaged plugin passed the release-gate Plugin Check job. |
 | Packaged ZIP install and activation | Pass | The generated ZIP installed, activated, and loaded successfully in a clean WordPress environment. |
-| Release gates | Configured | The existing release-gate jobs passed in CI. Admin E2E is now included in the reusable workflow and passed locally; the complete expanded workflow remains to be confirmed after pushing this branch. |
+| Release gates | Pass | The expanded reusable workflow, including admin E2E, passed and produced the published `v1.0.2` release assets. |
+
+## Security hardening follow-up
+
+Security coverage added after the original foundation baseline passed in the
+local PHPUnit and Playwright environments:
+
+| Verification | Result | Evidence |
+| --- | --- | --- |
+| Privileged POST handlers | Pass | Deploy actions, settings, cleanup, and both connection handlers rejected unauthorized users and invalid nonces. |
+| Privileged AJAX handlers | Pass | Deploy status, test status, and test-summary handlers enforced capabilities and nonces and returned controlled JSON responses. |
+| Malicious setting boundaries | Pass | URL, traversal, reflog-expression, and workflow-path payloads were rejected before use. |
+| Output escaping | Pass | Stored settings, audit details, and test-summary fields rendered escaped content rather than executable markup. |
+| Credential leakage | Pass | Private-key, JWT, installation-token, and authorization-header material did not appear in tested errors, audit entries, or admin HTML. |
+| Browser XSS boundary | Pass | Stored untrusted content remained inert in Connection settings and Audit log output; JavaScript did not execute. |
 
 ## Retests
 

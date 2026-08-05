@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Security hardening tests for privileged handler authorization, nonce enforcement, malicious configuration boundaries, output escaping, and credential leakage.
+- A Playwright admin security journey confirming that stored untrusted content is escaped in settings and audit output without executing JavaScript.
+
 ## 1.0.2 - 2026-08-04
 
 ### Added
