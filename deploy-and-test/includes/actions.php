@@ -26,9 +26,9 @@ function deploy_and_test_handle_deploy_action() {
 
 function deploy_and_test_execute_action( $deploy_action ) {
 	$result           = new WP_Error( 'invalid_action', __( 'Unknown deploy action.', 'deploy-and-test' ) );
-	$environment      = deploy_and_test_environment_from_action( $deploy_action );
-	$lock_environment = $environment ? $environment : 'global';
-	$active_check     = deploy_and_test_prevent_any_parallel_action( $environment );
+	$lock_environment = 'global';
+	$lock_context     = deploy_and_test_action_lock_context( $deploy_action );
+	$active_check     = deploy_and_test_prevent_any_parallel_action( $lock_context );
 
 	if ( is_wp_error( $active_check ) ) {
 		deploy_and_test_add_audit_log( $deploy_action, 'blocked', $active_check->get_error_message() );
@@ -131,10 +131,35 @@ function deploy_and_test_environment_from_action( $deploy_action ) {
 	return '';
 }
 
-function deploy_and_test_prevent_any_parallel_action( $environment = '' ) {
-	$lock_environment = $environment ? $environment : 'global';
+function deploy_and_test_action_lock_context( $deploy_action ) {
+	$environment = deploy_and_test_environment_from_action( $deploy_action );
 
-	if ( ! deploy_and_test_acquire_deploy_lock( $lock_environment ) ) {
+	if ( $environment ) {
+		return array(
+			'type'        => 'deploy',
+			'environment' => $environment,
+			'workflow'    => deploy_and_test_get_setting( $environment . '_workflow' ),
+		);
+	}
+
+	if ( strpos( $deploy_action, 'test_' ) === 0 ) {
+		$test_action = deploy_and_test_get_test_action( substr( $deploy_action, 5 ) );
+
+		if ( $test_action && ! empty( $test_action['workflow'] ) ) {
+			return array(
+				'type'     => 'test',
+				'workflow' => $test_action['workflow'],
+			);
+		}
+	}
+
+	return array();
+}
+
+function deploy_and_test_prevent_any_parallel_action( $lock_context = array() ) {
+	$lock_environment = 'global';
+
+	if ( ! deploy_and_test_acquire_deploy_lock( $lock_environment, $lock_context ) ) {
 		return new WP_Error( 'action_already_starting', __( 'A workflow was started recently. Wait a moment, then try again.', 'deploy-and-test' ) );
 	}
 
@@ -168,7 +193,87 @@ function deploy_and_test_prevent_any_parallel_action( $environment = '' ) {
 		}
 	}
 
+	deploy_and_test_update_startup_lock_baseline( $lock_context, $deploy_runs, isset( $test_runs ) ? $test_runs : array() );
+
 	return true;
+}
+
+function deploy_and_test_update_startup_lock_baseline( $lock_context, $deploy_runs, $test_runs ) {
+	if ( empty( $lock_context['type'] ) || empty( $lock_context['workflow'] ) ) {
+		return;
+	}
+
+	$lock = deploy_and_test_get_deploy_lock( 'global' );
+
+	if ( ! is_array( $lock ) || ( $lock['lock_id'] ?? '' ) === '' ) {
+		return;
+	}
+
+	$runs       = $lock_context['type'] === 'test' ? $test_runs : $deploy_runs;
+	$latest_run = deploy_and_test_get_latest_startup_lock_run( $runs, $lock_context );
+
+	$lock['baseline_run_id'] = (string) ( $latest_run['id'] ?? '' );
+	update_option( deploy_and_test_deploy_lock_key( 'global' ), $lock, false );
+}
+
+function deploy_and_test_reconcile_startup_lock( $runs, $type ) {
+	$lock = deploy_and_test_get_deploy_lock( 'global' );
+
+	if ( ! is_array( $lock ) || ( $lock['type'] ?? '' ) !== $type || ! array_key_exists( 'baseline_run_id', $lock ) ) {
+		return false;
+	}
+
+	$latest_run = deploy_and_test_get_latest_startup_lock_run( $runs, $lock );
+
+	if ( ! $latest_run || (string) ( $latest_run['id'] ?? '' ) === (string) $lock['baseline_run_id'] ) {
+		return false;
+	}
+
+	$created_at = ! empty( $latest_run['created_at'] ) ? strtotime( $latest_run['created_at'] ) : false;
+	$started_at = isset( $lock['started_at'] ) ? (int) $lock['started_at'] : 0;
+
+	if ( ! $created_at || ! $started_at || $created_at < ( $started_at - 10 ) ) {
+		return false;
+	}
+
+	return deploy_and_test_release_deploy_lock( 'global', $lock );
+}
+
+function deploy_and_test_get_latest_startup_lock_run( $runs, $lock ) {
+	if ( ! is_array( $runs ) ) {
+		return null;
+	}
+
+	foreach ( $runs as $run ) {
+		if ( deploy_and_test_run_matches_startup_lock( $run, $lock ) ) {
+			return $run;
+		}
+	}
+
+	return null;
+}
+
+function deploy_and_test_run_matches_startup_lock( $run, $lock ) {
+	$workflow = (string) ( $lock['workflow'] ?? '' );
+
+	if ( $workflow === '' ) {
+		return false;
+	}
+
+	if ( ctype_digit( $workflow ) && (string) ( $run['workflow_id'] ?? '' ) === $workflow ) {
+		return true;
+	}
+
+	$run_path_parts = explode( '@', (string) ( $run['path'] ?? '' ), 2 );
+	$workflow_parts = explode( '@', $workflow, 2 );
+
+	if ( $run_path_parts[0] !== '' && basename( $run_path_parts[0] ) === basename( $workflow_parts[0] ) ) {
+		return true;
+	}
+
+	return ( $lock['type'] ?? '' ) === 'deploy'
+		&& ! empty( $lock['environment'] )
+		&& deploy_and_test_get_run_environment( $run ) === $lock['environment'];
 }
 
 function deploy_and_test_prevent_duplicate_deploy( $environment ) {
@@ -193,24 +298,60 @@ function deploy_and_test_prevent_duplicate_deploy( $environment ) {
 	return true;
 }
 
-function deploy_and_test_acquire_deploy_lock( $environment ) {
+function deploy_and_test_acquire_deploy_lock( $environment, $context = array() ) {
 	$lock_key      = deploy_and_test_deploy_lock_key( $environment );
 	$now           = time();
-	$existing_lock = (int) get_option( $lock_key, 0 );
+	$existing_lock = deploy_and_test_get_deploy_lock( $environment );
+	$lock_time     = is_array( $existing_lock ) ? (int) ( $existing_lock['started_at'] ?? 0 ) : (int) $existing_lock;
 
-	if ( $existing_lock && ( $now - $existing_lock ) < DEPLOY_AND_TEST_DEPLOY_LOCK_TTL ) {
+	if ( $lock_time && ( $now - $lock_time ) < DEPLOY_AND_TEST_DEPLOY_LOCK_TTL ) {
 		return false;
 	}
 
 	if ( $existing_lock ) {
-		delete_option( $lock_key );
+		deploy_and_test_release_deploy_lock( $environment, $existing_lock );
 	}
 
-	return add_option( $lock_key, $now, '', false );
+	$lock = array_merge(
+		array(
+			'lock_id'    => wp_generate_uuid4(),
+			'started_at' => $now,
+		),
+		$context
+	);
+
+	return add_option( $lock_key, $lock, '', false );
 }
 
-function deploy_and_test_release_deploy_lock( $environment ) {
-	delete_option( deploy_and_test_deploy_lock_key( $environment ) );
+function deploy_and_test_get_deploy_lock( $environment ) {
+	return get_option( deploy_and_test_deploy_lock_key( $environment ), 0 );
+}
+
+function deploy_and_test_release_deploy_lock( $environment, $expected_lock = null ) {
+	$lock_key = deploy_and_test_deploy_lock_key( $environment );
+
+	if ( $expected_lock === null ) {
+		return delete_option( $lock_key );
+	}
+
+	global $wpdb;
+
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- The exact option value is required for an atomic compare-and-delete lock release; the option cache is cleared below.
+	$deleted = $wpdb->delete(
+		$wpdb->options,
+		array(
+			'option_name'  => $lock_key,
+			'option_value' => maybe_serialize( $expected_lock ),
+		),
+		array( '%s', '%s' )
+	);
+
+	if ( $deleted === 1 ) {
+		wp_cache_delete( $lock_key, 'options' );
+		return true;
+	}
+
+	return false;
 }
 
 function deploy_and_test_deploy_lock_key( $environment ) {
@@ -267,6 +408,7 @@ function deploy_and_test_handle_status_ajax() {
 
 	$configured    = deploy_and_test_is_configured();
 	$runs          = $configured ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', __( 'Deploy & Test is not fully configured.', 'deploy-and-test' ) );
+	deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
 	$deploy_status = deploy_and_test_get_deploy_status( $runs );
 
 	ob_start();
@@ -295,6 +437,7 @@ function deploy_and_test_handle_test_status_ajax() {
 
 	$configured  = deploy_and_test_tests_are_configured();
 	$runs        = $configured ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
+	deploy_and_test_reconcile_startup_lock( $runs, 'test' );
 	$test_status = deploy_and_test_get_test_status( $runs );
 
 	ob_start();

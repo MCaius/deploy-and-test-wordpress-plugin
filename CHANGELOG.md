@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Release the duplicate-dispatch startup lock once GitHub exposes the dispatched run, allowing another action immediately after success, failure, cancellation, or timeout while preserving active-run and cross-session protection.
+
 ## 1.0.3 - 2026-08-05
 
 ### Added

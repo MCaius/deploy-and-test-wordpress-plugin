@@ -10,8 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 function deploy_and_test_render_general_tab( $configured ) {
 	$can_run_actions   = $configured;
 	$runs              = $can_run_actions ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', 'Deploy & Test is not fully configured.' );
-	$deploy_status     = deploy_and_test_get_deploy_status( $runs );
 	$test_runs         = deploy_and_test_tests_are_configured() ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
+	deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
+	deploy_and_test_reconcile_startup_lock( $test_runs, 'test' );
+	$deploy_status     = deploy_and_test_get_deploy_status( $runs );
 	$test_status       = deploy_and_test_get_test_status( $test_runs );
 	$has_active_action = deploy_and_test_status_has_active_run( $deploy_status ) || deploy_and_test_test_status_has_active_run( $test_status );
 	$active_status_tab = isset( $_GET['deploy_and_test_status_tab'] ) ? sanitize_key( $_GET['deploy_and_test_status_tab'] ) : 'deploy';
