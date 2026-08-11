@@ -20,10 +20,12 @@ Deploy & Test brings controlled deploy buttons, test suite triggers, status chec
 
 ## Deploy & Test Demo
 
-[<video>](https://github.com/user-attachments/assets/1ecfaf41-1c42-49eb-a6c1-a67900a2a530)
+
+[<video>](https://github.com/user-attachments/assets/101e107a-c474-49ab-a0b5-d8e9bd4ff44a)
+
 
 ## Example Test Summary
-<img width="2688" height="2870" alt="tests-example" src="https://github.com/user-attachments/assets/eb102488-7c02-4a91-9996-2a8f48a1acbc" />
+<img width="2744" height="2572" alt="Demo tests — 4 pass, 2 fail" src="https://github.com/user-attachments/assets/c0558905-3a2f-4463-91e5-b2cf2bc16413" />
 
 
 
