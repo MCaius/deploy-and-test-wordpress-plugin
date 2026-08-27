@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- Configurable Preview and Production deploy button labels.
+- Optional Preview and Production environment links in the deploy status area.
+- Regression coverage for deploy labels, environment URL validation, settings persistence, and safe link rendering.
+
 ## 1.0.4 - 2026-08-10
 
 ### Fixed

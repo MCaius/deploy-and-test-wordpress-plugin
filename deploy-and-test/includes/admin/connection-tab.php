@@ -139,6 +139,16 @@ function deploy_and_test_render_connection_tab() {
 							</label>
 
 							<label>
+								<?php echo esc_html__( 'Preview deploy button label', 'deploy-and-test' ); ?>
+								<input type="text" name="preview_button_label" value="<?php echo esc_attr( $settings['preview_button_label'] ); ?>" placeholder="<?php echo esc_attr__( 'Deploy Preview', 'deploy-and-test' ); ?>" data-testid="preview-button-label">
+							</label>
+
+							<label>
+								<?php echo esc_html__( 'Production deploy button label', 'deploy-and-test' ); ?>
+								<input type="text" name="production_button_label" value="<?php echo esc_attr( $settings['production_button_label'] ); ?>" placeholder="<?php echo esc_attr__( 'Deploy Production', 'deploy-and-test' ); ?>" data-testid="production-button-label">
+							</label>
+
+							<label>
 								<?php echo esc_html__( 'Preview target label', 'deploy-and-test' ); ?>
 								<input type="text" name="preview_target" value="<?php echo esc_attr( $settings['preview_target'] ); ?>" placeholder="preview.example.com">
 							</label>
@@ -146,6 +156,22 @@ function deploy_and_test_render_connection_tab() {
 							<label>
 								<?php echo esc_html__( 'Production target label', 'deploy-and-test' ); ?>
 								<input type="text" name="production_target" value="<?php echo esc_attr( $settings['production_target'] ); ?>" placeholder="example.com">
+							</label>
+						</div>
+
+						<h3><?php echo esc_html__( 'Environment links', 'deploy-and-test' ); ?></h3>
+						<p class="description">
+							<?php echo esc_html__( 'Add optional website URLs for quick access from the Deploy status area. These URLs do not affect deploy workflows.', 'deploy-and-test' ); ?>
+						</p>
+						<div class="deploy-and-test-settings-grid">
+							<label>
+								<?php echo esc_html__( 'Preview environment URL', 'deploy-and-test' ); ?>
+								<input type="url" name="preview_environment_url" value="<?php echo esc_attr( $settings['preview_environment_url'] ); ?>" placeholder="https://preview.example.com" data-deploy-and-test-environment-url data-testid="preview-environment-url">
+							</label>
+
+							<label>
+								<?php echo esc_html__( 'Production environment URL', 'deploy-and-test' ); ?>
+								<input type="url" name="production_environment_url" value="<?php echo esc_attr( $settings['production_environment_url'] ); ?>" placeholder="https://www.example.com" data-deploy-and-test-environment-url data-testid="production-environment-url">
 							</label>
 						</div>
 					</div>
@@ -173,7 +199,7 @@ function deploy_and_test_render_connection_tab() {
 					</div>
 				</div>
 
-				<button type="submit" class="button button-primary"><?php echo esc_html__( 'Save settings', 'deploy-and-test' ); ?></button>
+				<button type="submit" class="button button-primary" data-testid="save-connection-settings"><?php echo esc_html__( 'Save settings', 'deploy-and-test' ); ?></button>
 			</form>
 
 			<div class="deploy-and-test-connection-tests">

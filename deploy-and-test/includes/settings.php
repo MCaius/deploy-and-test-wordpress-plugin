@@ -22,8 +22,12 @@ function deploy_and_test_default_settings() {
 		'ref'                              => 'main',
 		'preview_workflow'                 => 'deploy-preview.yml',
 		'production_workflow'              => 'deploy-production.yml',
+		'preview_button_label'             => '',
+		'production_button_label'          => '',
 		'preview_target'                   => 'Preview environment',
 		'production_target'                => 'Production environment',
+		'preview_environment_url'          => '',
+		'production_environment_url'       => '',
 		'test_repo'                        => '',
 		'test_ref'                         => 'main',
 		'test_environment_input'           => 'target_env',
@@ -115,16 +119,20 @@ function deploy_and_test_handle_save_settings() {
 
 	$current_settings = deploy_and_test_get_settings();
 	$settings         = array(
-		'owner'                    => isset( $_POST['owner'] ) ? sanitize_text_field( wp_unslash( $_POST['owner'] ) ) : '',
-		'repo'                     => isset( $_POST['repo'] ) ? sanitize_text_field( wp_unslash( $_POST['repo'] ) ) : '',
-		'ref'                      => isset( $_POST['ref'] ) ? sanitize_text_field( wp_unslash( $_POST['ref'] ) ) : 'main',
-		'preview_workflow'         => isset( $_POST['preview_workflow'] ) ? sanitize_file_name( wp_unslash( $_POST['preview_workflow'] ) ) : 'deploy-preview.yml',
-		'production_workflow'      => isset( $_POST['production_workflow'] ) ? sanitize_file_name( wp_unslash( $_POST['production_workflow'] ) ) : 'deploy-production.yml',
-		'preview_target'           => isset( $_POST['preview_target'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_target'] ) ) : 'Preview environment',
-		'production_target'        => isset( $_POST['production_target'] ) ? sanitize_text_field( wp_unslash( $_POST['production_target'] ) ) : 'Production environment',
-		'test_repo'                => isset( $_POST['test_repo'] ) ? sanitize_text_field( wp_unslash( $_POST['test_repo'] ) ) : '',
-		'test_ref'                 => isset( $_POST['test_ref'] ) ? sanitize_text_field( wp_unslash( $_POST['test_ref'] ) ) : 'main',
-		'test_environment_input'   => isset( $_POST['test_environment_input'] ) ? sanitize_key( wp_unslash( $_POST['test_environment_input'] ) ) : 'target_env',
+		'owner'                      => isset( $_POST['owner'] ) ? sanitize_text_field( wp_unslash( $_POST['owner'] ) ) : '',
+		'repo'                       => isset( $_POST['repo'] ) ? sanitize_text_field( wp_unslash( $_POST['repo'] ) ) : '',
+		'ref'                        => isset( $_POST['ref'] ) ? sanitize_text_field( wp_unslash( $_POST['ref'] ) ) : 'main',
+		'preview_workflow'           => isset( $_POST['preview_workflow'] ) ? sanitize_file_name( wp_unslash( $_POST['preview_workflow'] ) ) : 'deploy-preview.yml',
+		'production_workflow'        => isset( $_POST['production_workflow'] ) ? sanitize_file_name( wp_unslash( $_POST['production_workflow'] ) ) : 'deploy-production.yml',
+		'preview_button_label'       => isset( $_POST['preview_button_label'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_button_label'] ) ) : '',
+		'production_button_label'    => isset( $_POST['production_button_label'] ) ? sanitize_text_field( wp_unslash( $_POST['production_button_label'] ) ) : '',
+		'preview_target'             => isset( $_POST['preview_target'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_target'] ) ) : 'Preview environment',
+		'production_target'          => isset( $_POST['production_target'] ) ? sanitize_text_field( wp_unslash( $_POST['production_target'] ) ) : 'Production environment',
+		'preview_environment_url'    => isset( $_POST['preview_environment_url'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_environment_url'] ) ) : '',
+		'production_environment_url' => isset( $_POST['production_environment_url'] ) ? sanitize_text_field( wp_unslash( $_POST['production_environment_url'] ) ) : '',
+		'test_repo'                  => isset( $_POST['test_repo'] ) ? sanitize_text_field( wp_unslash( $_POST['test_repo'] ) ) : '',
+		'test_ref'                   => isset( $_POST['test_ref'] ) ? sanitize_text_field( wp_unslash( $_POST['test_ref'] ) ) : 'main',
+		'test_environment_input'     => isset( $_POST['test_environment_input'] ) ? sanitize_key( wp_unslash( $_POST['test_environment_input'] ) ) : 'target_env',
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively by deploy_and_test_sanitize_test_environments().
 		'test_environments'        => isset( $_POST['test_environments'] ) ? deploy_and_test_sanitize_test_environments( wp_unslash( $_POST['test_environments'] ) ) : array(),
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively by deploy_and_test_sanitize_test_actions().
@@ -141,6 +149,9 @@ function deploy_and_test_handle_save_settings() {
 		deploy_and_test_add_audit_log( 'save_settings', 'failed', $validation->get_error_message() );
 		deploy_and_test_redirect( 'error', $validation->get_error_message(), 'connection' );
 	}
+
+	$settings['preview_environment_url']    = esc_url_raw( $settings['preview_environment_url'], array( 'http', 'https' ) );
+	$settings['production_environment_url'] = esc_url_raw( $settings['production_environment_url'], array( 'http', 'https' ) );
 
 	update_option( DEPLOY_AND_TEST_SETTINGS_OPTION, $settings, false );
 	deploy_and_test_add_audit_log( 'save_settings', 'success', __( 'Deploy & Test settings were updated.', 'deploy-and-test' ) );
@@ -164,10 +175,14 @@ function deploy_and_test_handle_save_cleanup_settings() {
 }
 
 function deploy_and_test_normalize_settings( $settings ) {
-	$settings['owner']                  = trim( $settings['owner'] );
-	$settings['repo']                   = trim( $settings['repo'] );
-	$settings['test_repo']              = trim( $settings['test_repo'] );
-	$settings['test_environment_input'] = $settings['test_environment_input'] ? $settings['test_environment_input'] : 'target_env';
+	$settings['owner']                      = trim( $settings['owner'] );
+	$settings['repo']                       = trim( $settings['repo'] );
+	$settings['test_repo']                  = trim( $settings['test_repo'] );
+	$settings['preview_button_label']       = trim( $settings['preview_button_label'] );
+	$settings['production_button_label']    = trim( $settings['production_button_label'] );
+	$settings['preview_environment_url']    = trim( $settings['preview_environment_url'] );
+	$settings['production_environment_url'] = trim( $settings['production_environment_url'] );
+	$settings['test_environment_input']     = $settings['test_environment_input'] ? $settings['test_environment_input'] : 'target_env';
 
 	if ( strpos( $settings['repo'], '/' ) !== false ) {
 		$parts = array_values( array_filter( explode( '/', $settings['repo'] ) ) );
@@ -216,6 +231,12 @@ function deploy_and_test_validate_settings( $settings ) {
 		}
 	}
 
+	foreach ( array( 'preview_environment_url', 'production_environment_url' ) as $environment_url_key ) {
+		if ( $settings[ $environment_url_key ] && ! deploy_and_test_is_valid_environment_url( $settings[ $environment_url_key ] ) ) {
+			return new WP_Error( 'invalid_environment_url', __( 'Environment URLs must be valid HTTP or HTTPS URLs.', 'deploy-and-test' ) );
+		}
+	}
+
 	return true;
 }
 
@@ -260,6 +281,21 @@ function deploy_and_test_is_valid_github_ref( $ref ) {
 
 function deploy_and_test_is_valid_github_workflow_file( $workflow_file ) {
 	return basename( $workflow_file ) === $workflow_file && (bool) preg_match( '/^[A-Za-z0-9._-]+\.ya?ml$/i', $workflow_file );
+}
+
+function deploy_and_test_is_valid_environment_url( $url ) {
+	if ( strlen( $url ) > 2048 || false === filter_var( $url, FILTER_VALIDATE_URL ) ) {
+		return false;
+	}
+
+	$parts = wp_parse_url( $url );
+
+	return is_array( $parts )
+		&& ! empty( $parts['host'] )
+		&& ! empty( $parts['scheme'] )
+		&& in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true )
+		&& empty( $parts['user'] )
+		&& empty( $parts['pass'] );
 }
 
 function deploy_and_test_sanitize_test_actions( $actions ) {

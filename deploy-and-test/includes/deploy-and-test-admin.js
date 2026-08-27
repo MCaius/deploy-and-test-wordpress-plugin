@@ -439,6 +439,33 @@
         });
     }
 
+    function setupEnvironmentUrlValidation() {
+        document.querySelectorAll('[data-deploy-and-test-environment-url]').forEach((input) => {
+            function validate() {
+                input.setCustomValidity('');
+
+                if (!input.value) {
+                    return;
+                }
+
+                try {
+                    const url = new URL(input.value);
+                    const validProtocol = url.protocol === 'http:' || url.protocol === 'https:';
+
+                    if (!validProtocol || !url.hostname || url.username || url.password) {
+                        input.setCustomValidity(config.environmentUrlError || 'Enter a valid URL beginning with http:// or https://.');
+                    }
+                } catch (error) {
+                    input.setCustomValidity(config.environmentUrlError || 'Enter a valid URL beginning with http:// or https://.');
+                }
+            }
+
+            input.addEventListener('input', validate);
+            input.addEventListener('change', validate);
+            validate();
+        });
+    }
+
     document.querySelectorAll('.deploy-and-test-action-form').forEach((form) => {
         form.addEventListener('submit', () => {
             setButtonsDisabled(true, true);
@@ -449,6 +476,7 @@
     setupTestEnvironmentRows();
     setupTestEnvironmentSelect();
     setupSubtabs();
+    setupEnvironmentUrlValidation();
     setupStatusTabs();
     syncActionButtons();
     if (testStatusContainer) {

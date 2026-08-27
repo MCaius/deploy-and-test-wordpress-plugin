@@ -68,4 +68,25 @@ class Deploy_And_Test_Output_Security_Test extends Deploy_And_Test_Test_Case {
 		$this->assertStringNotContainsString( 'BEGIN PRIVATE KEY', $html );
 		$this->assertStringContainsString( 'Configured:', $html );
 	}
+
+	public function test_environment_status_link_is_safely_rendered() {
+		$url = 'https://preview.example.com/?first=1&second=2';
+
+		ob_start();
+		deploy_and_test_render_environment_status_card( 'preview', 'Preview', 'Preview environment', $url, true, array() );
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( 'href="' . esc_url( $url, array( 'http', 'https' ) ) . '"', $html );
+		$this->assertStringContainsString( esc_html( 'Open: ' . $url ), $html );
+		$this->assertStringContainsString( 'target="_blank" rel="noopener noreferrer"', $html );
+	}
+
+	public function test_environment_status_link_is_hidden_when_url_is_empty() {
+		ob_start();
+		deploy_and_test_render_environment_status_card( 'preview', 'Preview', 'Preview environment', '', true, array() );
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( 'deploy-and-test-environment-link', $html );
+		$this->assertStringNotContainsString( '<a ', $html );
+	}
 }

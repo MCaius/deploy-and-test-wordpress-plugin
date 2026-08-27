@@ -321,11 +321,32 @@
 }
 
 .deploy-and-test-status-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     padding: 16px;
     border: 1px solid #dcdcde;
     border-left-width: 4px;
     border-radius: 4px;
     background: #ffffff;
+}
+
+.deploy-and-test-status-environment {
+    display: flex;
+    min-width: 0;
+    align-self: stretch;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.deploy-and-test-environment-link {
+    min-height: 20px;
+    margin: 0;
+    line-height: 20px;
+}
+
+.deploy-and-test-environment-link a {
+    overflow-wrap: anywhere;
 }
 
 .deploy-and-test-status-card-queued,

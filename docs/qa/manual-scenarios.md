@@ -289,3 +289,24 @@ canonical environment that maps the repository's source directory.
 
 **Expected:** The saved settings and audit history remain available after
 reinstallation.
+
+## Deploy presentation
+
+### QA-025 — Deploy labels and environment links
+
+**Layer:** Local
+
+1. Save custom Preview and Production deploy button labels.
+2. Save valid HTTP or HTTPS URLs for both environments.
+3. Open General and verify the configured labels and `Open: <URL>` links.
+4. Confirm each link opens the correct URL in a new tab without dispatching a
+   workflow.
+5. Leave only one environment URL configured and verify that only its link
+   appears.
+6. Clear both labels and URLs, save again, and return to General.
+7. Try to save an invalid or non-HTTP/HTTPS environment URL.
+
+**Expected:** Custom labels and URLs persist. Empty labels restore `Deploy
+Preview` and `Deploy Production`. Empty URLs remove the environment links.
+Invalid environment URLs are rejected without replacing previously valid
+settings.
