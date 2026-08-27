@@ -29,8 +29,8 @@ function deploy_and_test_render_general_tab( $configured ) {
 			<p class="deploy-and-test-muted"><?php echo esc_html__( 'Trigger configured GitHub Actions deploy workflows without pushing code.', 'deploy-and-test' ); ?></p>
 
 			<div class="deploy-and-test-actions">
-				<?php deploy_and_test_action_form( 'deploy_preview', __( 'Deploy Preview', 'deploy-and-test' ), 'button button-primary button-hero', ! $can_run_actions || $has_active_action, '', 'preview' ); ?>
-				<?php deploy_and_test_action_form( 'deploy_production', __( 'Deploy Production', 'deploy-and-test' ), 'button button-secondary button-hero', ! $can_run_actions || $has_active_action, __( 'Are you sure you want to deploy production?', 'deploy-and-test' ), 'production' ); ?>
+				<?php deploy_and_test_action_form( 'deploy_preview', deploy_and_test_get_deploy_button_label( 'preview' ), 'button button-primary button-hero', ! $can_run_actions || $has_active_action, '', 'preview' ); ?>
+				<?php deploy_and_test_action_form( 'deploy_production', deploy_and_test_get_deploy_button_label( 'production' ), 'button button-secondary button-hero', ! $can_run_actions || $has_active_action, __( 'Are you sure you want to deploy production?', 'deploy-and-test' ), 'production' ); ?>
 			</div>
 			<?php if ( $has_active_action ) : ?>
 				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Actions are locked while a deploy or test workflow is running.', 'deploy-and-test' ); ?></p>
@@ -135,6 +135,17 @@ function deploy_and_test_default_test_environment_value() {
 	return '';
 }
 
+function deploy_and_test_get_deploy_button_label( $environment ) {
+	$setting_key = 'production' === $environment ? 'production_button_label' : 'preview_button_label';
+	$label       = deploy_and_test_get_setting( $setting_key );
+
+	if ( $label ) {
+		return $label;
+	}
+
+	return 'production' === $environment ? __( 'Deploy Production', 'deploy-and-test' ) : __( 'Deploy Preview', 'deploy-and-test' );
+}
+
 function deploy_and_test_action_form( $action_type, $label, $class, $disabled = false, $confirm = '', $environment = '', $hidden_fields = array() ) {
 	$confirm_attribute = $confirm ? 'return confirm(' . wp_json_encode( $confirm ) . ');' : '';
 
@@ -159,7 +170,10 @@ function deploy_and_test_action_form( $action_type, $label, $class, $disabled = 
 }
 
 function deploy_and_test_render_status_panel( $runs, $can_run_actions ) {
-	$deploy_status = deploy_and_test_get_deploy_status( $runs );
+	$deploy_status               = deploy_and_test_get_deploy_status( $runs );
+	$preview_environment_url     = deploy_and_test_get_setting( 'preview_environment_url' );
+	$production_environment_url  = deploy_and_test_get_setting( 'production_environment_url' );
+	$show_environment_link_rows = $preview_environment_url || $production_environment_url;
 
 	?>
 	<section class="deploy-and-test-card">
@@ -179,8 +193,8 @@ function deploy_and_test_render_status_panel( $runs, $can_run_actions ) {
 			<p class="deploy-and-test-muted"><?php echo esc_html( $runs->get_error_message() ); ?></p>
 		<?php else : ?>
 			<div class="deploy-and-test-status-grid">
-				<?php deploy_and_test_render_environment_status_card( 'preview', 'Preview', deploy_and_test_get_setting( 'preview_target' ), $deploy_status ); ?>
-				<?php deploy_and_test_render_environment_status_card( 'production', 'Production', deploy_and_test_get_setting( 'production_target' ), $deploy_status ); ?>
+				<?php deploy_and_test_render_environment_status_card( 'preview', 'Preview', deploy_and_test_get_setting( 'preview_target' ), $preview_environment_url, $show_environment_link_rows, $deploy_status ); ?>
+				<?php deploy_and_test_render_environment_status_card( 'production', 'Production', deploy_and_test_get_setting( 'production_target' ), $production_environment_url, $show_environment_link_rows, $deploy_status ); ?>
 			</div>
 		<?php endif; ?>
 	</section>
@@ -192,43 +206,64 @@ function deploy_and_test_render_status_panel( $runs, $can_run_actions ) {
 	<?php
 }
 
-function deploy_and_test_render_environment_status_card( $environment, $label, $target, $deploy_status ) {
-	$run     = $deploy_status[ $environment ]['latest'] ?? null;
-	$state   = $run ? deploy_and_test_get_run_state( $run ) : 'idle';
-	$message = $run ? deploy_and_test_get_run_message( $run ) : __( 'No recent deploy found.', 'deploy-and-test' );
+function deploy_and_test_render_environment_status_card( $environment, $label, $target, $environment_url, $show_environment_link_row, $deploy_status ) {
+	$run                  = $deploy_status[ $environment ]['latest'] ?? null;
+	$state                = $run ? deploy_and_test_get_run_state( $run ) : 'idle';
+	$message              = $run ? deploy_and_test_get_run_message( $run ) : __( 'No recent deploy found.', 'deploy-and-test' );
+	$safe_environment_url = esc_url( $environment_url, array( 'http', 'https' ) );
 
 	?>
-	<article class="deploy-and-test-status-card deploy-and-test-status-card-<?php echo esc_attr( $state ); ?>">
-		<div class="deploy-and-test-status-card-header">
-			<h3><?php echo esc_html( $label ); ?></h3>
-			<span class="deploy-and-test-status-badge deploy-and-test-status-badge-<?php echo esc_attr( $state ); ?>">
-				<?php echo esc_html( deploy_and_test_get_run_state_label( $state ) ); ?>
-			</span>
-		</div>
-
-		<p><?php echo esc_html( $message ); ?></p>
-
-		<dl>
-			<div>
-				<dt><?php echo esc_html__( 'Source ref', 'deploy-and-test' ); ?></dt>
-				<dd><?php echo esc_html( $run['head_branch'] ?? deploy_and_test_get_setting( 'ref' ) ); ?></dd>
-			</div>
-			<div>
-				<dt><?php echo esc_html__( 'Target', 'deploy-and-test' ); ?></dt>
-				<dd><?php echo esc_html( $target ); ?></dd>
-			</div>
-			<div>
-				<dt><?php echo esc_html__( 'Updated', 'deploy-and-test' ); ?></dt>
-				<dd><?php echo esc_html( deploy_and_test_format_github_datetime( $run['updated_at'] ?? '' ) ); ?></dd>
-			</div>
-		</dl>
-
-		<?php if ( ! empty( $run['html_url'] ) ) : ?>
-			<div class="deploy-and-test-status-card-actions">
-				<a href="<?php echo esc_url( $run['html_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Open GitHub run', 'deploy-and-test' ); ?></a>
-			</div>
+	<div class="deploy-and-test-status-environment">
+		<?php if ( $show_environment_link_row ) : ?>
+			<p class="deploy-and-test-environment-link">
+				<?php if ( $safe_environment_url ) : ?>
+					<a href="<?php echo esc_url( $safe_environment_url, array( 'http', 'https' ) ); ?>" target="_blank" rel="noopener noreferrer">
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %s: configured environment URL. */
+								__( 'Open: %s', 'deploy-and-test' ),
+								$environment_url
+							)
+						);
+						?>
+					</a>
+				<?php endif; ?>
+			</p>
 		<?php endif; ?>
-	</article>
+
+		<article class="deploy-and-test-status-card deploy-and-test-status-card-<?php echo esc_attr( $state ); ?>">
+			<div class="deploy-and-test-status-card-header">
+				<h3><?php echo esc_html( $label ); ?></h3>
+				<span class="deploy-and-test-status-badge deploy-and-test-status-badge-<?php echo esc_attr( $state ); ?>">
+					<?php echo esc_html( deploy_and_test_get_run_state_label( $state ) ); ?>
+				</span>
+			</div>
+
+			<p><?php echo esc_html( $message ); ?></p>
+
+			<dl>
+				<div>
+					<dt><?php echo esc_html__( 'Source ref', 'deploy-and-test' ); ?></dt>
+					<dd><?php echo esc_html( $run['head_branch'] ?? deploy_and_test_get_setting( 'ref' ) ); ?></dd>
+				</div>
+				<div>
+					<dt><?php echo esc_html__( 'Target', 'deploy-and-test' ); ?></dt>
+					<dd><?php echo esc_html( $target ); ?></dd>
+				</div>
+				<div>
+					<dt><?php echo esc_html__( 'Updated', 'deploy-and-test' ); ?></dt>
+					<dd><?php echo esc_html( deploy_and_test_format_github_datetime( $run['updated_at'] ?? '' ) ); ?></dd>
+				</div>
+			</dl>
+
+			<?php if ( ! empty( $run['html_url'] ) ) : ?>
+				<div class="deploy-and-test-status-card-actions">
+					<a href="<?php echo esc_url( $run['html_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Open GitHub run', 'deploy-and-test' ); ?></a>
+				</div>
+			<?php endif; ?>
+		</article>
+	</div>
 	<?php
 }
 

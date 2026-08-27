@@ -87,6 +87,27 @@ test('Administrator can save valid repository settings', async ({ page }) => {
     await expect(page.locator('input[name="repo"]')).toHaveValue('deploy-target-sandbox');
 });
 
+test('Administrator can save and clear deploy environment URLs', async ({ page }) => {
+    await loginAs(page, users.administrator);
+    await page.goto(`${pluginPage}&tab=connection`);
+
+    await page.getByTestId('preview-environment-url').fill('https://preview.example.test');
+    await page.getByTestId('production-environment-url').fill('https://www.example.test');
+    await page.getByTestId('save-connection-settings').click();
+
+    await expect(page.getByTestId('admin-feedback-notice')).toContainText('Settings saved.');
+    await expect(page.getByTestId('preview-environment-url')).toHaveValue('https://preview.example.test');
+    await expect(page.getByTestId('production-environment-url')).toHaveValue('https://www.example.test');
+
+    await page.getByTestId('preview-environment-url').fill('');
+    await page.getByTestId('production-environment-url').fill('');
+    await page.getByTestId('save-connection-settings').click();
+
+    await expect(page.getByTestId('admin-feedback-notice')).toContainText('Settings saved.');
+    await expect(page.getByTestId('preview-environment-url')).toHaveValue('');
+    await expect(page.getByTestId('production-environment-url')).toHaveValue('');
+});
+
 test('Administrator sees validation feedback and invalid settings are not stored', async ({ page }) => {
     await loginAs(page, users.administrator);
     await page.goto(`${pluginPage}&tab=connection`);

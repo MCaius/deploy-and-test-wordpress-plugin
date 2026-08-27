@@ -16,7 +16,7 @@ $deploy_and_test_can_manage_settings = current_user_can( deploy_and_test_setting
 
 		<div class="deploy-and-test-how-to-use-content">
 			<p>
-				<?php echo wp_kses_post( __( 'Use <strong>Deploy Preview</strong> and <strong>Deploy Production</strong> to trigger the configured deploy workflows from WordPress. Use the <strong>Tests</strong> box to run the configured test actions against the selected test environment.', 'deploy-and-test' ) ); ?>
+				<?php echo wp_kses_post( __( 'Use the configured Preview and Production deploy buttons to trigger deploy workflows from WordPress. Their default labels are <strong>Deploy Preview</strong> and <strong>Deploy Production</strong>. Use the <strong>Tests</strong> box to run the configured test actions against the selected test environment.', 'deploy-and-test' ) ); ?>
 			</p>
 
 			<p>
@@ -29,6 +29,10 @@ $deploy_and_test_can_manage_settings = current_user_can( deploy_and_test_setting
 
 			<p>
 				<?php echo esc_html__( 'Use Deploy status for preview and production deploy results. Use Test status for recent test runs, summary artifacts, and individual passed or failed tests. For full logs and large reports, open the GitHub run.', 'deploy-and-test' ); ?>
+			</p>
+
+			<p>
+				<?php echo esc_html__( 'When an Administrator configures an environment URL, Deploy status shows it as Open: <URL> above the corresponding status card. Environment links are shortcuts and do not affect deploy workflows.', 'deploy-and-test' ); ?>
 			</p>
 
 			<p>
@@ -151,15 +155,25 @@ define('DEPLOY_AND_TEST_GITHUB_APP_PRIVATE_KEY', "-----BEGIN RSA PRIVATE KEY----
 
 		<div class="deploy-and-test-how-to-use-content">
 			<p>
-				<?php echo wp_kses_post( __( 'In the <strong>Connection</strong> tab, set the GitHub owner, deploy repository, testing repository, source refs, target labels, and workflow filenames used by the buttons.', 'deploy-and-test' ) ); ?>
+				<?php echo wp_kses_post( __( 'In the <strong>Connection</strong> tab, set the GitHub owner, repositories, source refs, workflow filenames, deploy button labels, target labels, and optional environment URLs.', 'deploy-and-test' ) ); ?>
 			</p>
 
 			<pre><code>Deploy repository: example-website
 Preview workflow file: deploy-preview.yml
 Production workflow file: deploy-production.yml
+Preview deploy button label: Deploy Preview
+Production deploy button label: Deploy Production
+Preview target label: preview.example.com
+Production target label: example.com
+Preview environment URL: https://preview.example.com
+Production environment URL: https://www.example.com
 Testing repository: example-tests
 Test action: Run smoke tests -> tests.yml with suite=smoke
 Source ref: main</code></pre>
+
+			<p>
+				<?php echo esc_html__( 'Deploy button labels are optional. Empty values use the default labels Deploy Preview and Deploy Production. Environment URLs are optional, must begin with http:// or https://, and appear as direct links in Deploy status.', 'deploy-and-test' ); ?>
+			</p>
 
 			<p>
 				<?php echo wp_kses_post( __( 'The workflow filenames must match files in each repository\'s <code>.github/workflows</code> directory. Enabled test actions automatically appear as buttons in the General tab.', 'deploy-and-test' ) ); ?>

@@ -76,6 +76,7 @@ add_action(
 				'loadingSummaryText'     => __( 'Loading summary...', 'deploy-and-test' ),
 				'loadingSummaryHint'     => __( 'Downloading test summary from GitHub. This can take a minute.', 'deploy-and-test' ),
 				'summaryUnavailableText' => __( 'Test summary is available after the GitHub Actions run finishes.', 'deploy-and-test' ),
+				'environmentUrlError'     => __( 'Enter a valid URL beginning with http:// or https://.', 'deploy-and-test' ),
 			)
 		);
 	}

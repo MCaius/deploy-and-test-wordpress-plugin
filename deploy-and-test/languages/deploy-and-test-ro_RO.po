@@ -115,13 +115,15 @@ msgstr "Utilizare generala"
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:19
 msgid ""
-"Use <strong>Deploy Preview</strong> and <strong>Deploy Production</strong> "
-"to trigger the configured deploy workflows from WordPress. Use the "
-"<strong>Tests</strong> box to run the configured test actions against the "
-"selected test environment."
+"Use the configured Preview and Production deploy buttons to trigger deploy "
+"workflows from WordPress. Their default labels are <strong>Deploy Preview</"
+"strong> and <strong>Deploy Production</strong>. Use the <strong>Tests</"
+"strong> box to run the configured test actions against the selected test "
+"environment."
 msgstr ""
-"Foloseste <strong>Deploy Preview</strong> si <strong>Deploy Production</"
-"strong> pentru a porni workflow-urile de deploy configurate din WordPress. "
+"Foloseste butoanele de deploy Preview si Production configurate pentru a "
+"porni workflow-urile de deploy din WordPress. Etichetele implicite sunt "
+"<strong>Deploy Preview</strong> si <strong>Deploy Production</strong>. "
 "Foloseste boxul <strong>Tests</strong> pentru a rula actiunile de test "
 "configurate pe environment-ul selectat."
 
@@ -412,13 +414,13 @@ msgstr "Configurarea workflow-urilor"
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:150
 msgid ""
-"In the <strong>Connection</strong> tab, set the GitHub owner, deploy "
-"repository, testing repository, source refs, target labels, and workflow "
-"filenames used by the buttons."
+"In the <strong>Connection</strong> tab, set the GitHub owner, repositories, "
+"source refs, workflow filenames, deploy button labels, target labels, and "
+"optional environment URLs."
 msgstr ""
 "In tab-ul <strong>Connection</strong>, seteaza owner-ul GitHub, repository-"
-"ul de deploy, repository-ul de testare, source ref-urile, etichetele target "
-"si numele fisierelor workflow folosite de butoane."
+"urile, source ref-urile, numele fisierelor workflow, etichetele butoanelor "
+"de deploy, etichetele target si URL-urile optionale ale environment-urilor."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:161
 msgid ""
@@ -1440,6 +1442,39 @@ msgstr "Setarile au fost salvate."
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:162
 msgid "Cleanup setting saved."
 msgstr "Setarea de cleanup a fost salvata."
+
+msgid "Preview deploy button label"
+msgstr "Eticheta butonului de deploy pentru Preview"
+
+msgid "Production deploy button label"
+msgstr "Eticheta butonului de deploy pentru Production"
+
+msgid "Environment links"
+msgstr "Linkuri catre medii"
+
+msgid "Add optional website URLs for quick access from the Deploy status area. These URLs do not affect deploy workflows."
+msgstr "Adauga URL-uri optionale pentru acces rapid din zona de status a deploy-ului. Aceste URL-uri nu afecteaza workflow-urile de deploy."
+
+msgid "Preview environment URL"
+msgstr "URL-ul mediului Preview"
+
+msgid "Production environment URL"
+msgstr "URL-ul mediului Production"
+
+msgid "Open: %s"
+msgstr "Deschide: %s"
+
+msgid "Environment URLs must be valid HTTP or HTTPS URLs."
+msgstr "URL-urile mediilor trebuie sa fie URL-uri HTTP sau HTTPS valide."
+
+msgid "Enter a valid URL beginning with http:// or https://."
+msgstr "Introdu un URL valid care incepe cu http:// sau https://."
+
+msgid "When an Administrator configures an environment URL, Deploy status shows it as Open: <URL> above the corresponding status card. Environment links are shortcuts and do not affect deploy workflows."
+msgstr "Cand un Administrator configureaza URL-ul unui environment, Deploy status il afiseaza ca Open: <URL> deasupra status card-ului corespunzator. Linkurile environment-urilor sunt scurtaturi si nu afecteaza workflow-urile de deploy."
+
+msgid "Deploy button labels are optional. Empty values use the default labels Deploy Preview and Deploy Production. Environment URLs are optional, must begin with http:// or https://, and appear as direct links in Deploy status."
+msgstr "Etichetele butoanelor de deploy sunt optionale. Valorile goale folosesc etichetele implicite Deploy Preview si Deploy Production. URL-urile environment-urilor sunt optionale, trebuie sa inceapa cu http:// sau https:// si apar ca linkuri directe in Deploy status."
 
 #~ msgid "Buttons are prepared for a future test workflow implementation."
 #~ msgstr ""

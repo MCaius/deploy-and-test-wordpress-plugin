@@ -2,7 +2,7 @@
 Contributors: mcaius
 Tags: github-actions, deployment, testing, developer-tools
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.0.4
 License: GPLv2 or later
@@ -16,7 +16,7 @@ Deploy & Test gives trusted WordPress users controlled buttons for triggering co
 
 GitHub App credentials remain server-side. The plugin generates short-lived installation tokens when an action runs, displays recent workflow status, loads compact test-summary artifacts, and records an audit trail in WordPress.
 
-Administrators configure the GitHub owner, repositories, refs, workflow files, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
+Administrators configure the GitHub owner, repositories, refs, workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
 
 == Installation ==
 

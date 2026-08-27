@@ -45,10 +45,10 @@ Deploy & Test brings controlled deploy buttons, test suite triggers, status chec
 
 - WordPress admin page with Deploy, Tests, Connection, and Audit log tabs.
 - GitHub App authentication with short-lived installation tokens.
-- Configurable repository owner, deploy repository, test repository, refs, workflow filenames, and target labels.
+- Configurable repository owner, repositories, refs, workflow filenames, deploy button labels, target labels, and optional environment URLs.
 - Preview and production deploy actions.
 - Configurable test action buttons and test environments.
-- Recent workflow run status cards with polling while actions are active.
+- Recent workflow run status cards with optional direct environment links and polling while actions are active.
 - Test summary artifact display for compact JSON reports.
 - Audit log stored in WordPress options and limited to the latest 100 entries.
 - Optional uninstall cleanup for settings, audit logs, locks, and cached test summaries.

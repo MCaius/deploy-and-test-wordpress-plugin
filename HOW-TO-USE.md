@@ -85,13 +85,21 @@ Deploy repository: example-website
 Deploy source ref: main
 Preview workflow file: deploy-preview.yml
 Production workflow file: deploy-production.yml
+Preview deploy button label: Deploy Preview
+Production deploy button label: Deploy Production
 Preview target label: preview.example.com
 Production target label: example.com
+Preview environment URL: https://preview.example.com
+Production environment URL: https://www.example.com
 Testing repository: example-tests
 Testing source ref: main
 ```
 
 Repository fields should contain only the repository name, not `owner/repo`.
+
+Deploy button labels are optional. Empty values use the default labels `Deploy Preview` and `Deploy Production`.
+
+Environment URLs are optional and must begin with `http://` or `https://`. When configured, they appear above the corresponding status card as `Open: <URL>`. These links are administrative shortcuts and do not affect workflow dispatching or GitHub status requests.
 
 Only WordPress Administrators can change connection settings, workflow filenames, test action definitions, cleanup settings, and audit-log access. WordPress Editors can trigger the configured deploy and test actions from the General tab, but they cannot change the plugin configuration. This permission split is intentional for teams that want trusted, non-technical WordPress users to run approved workflows without granting administrator or GitHub access.
 

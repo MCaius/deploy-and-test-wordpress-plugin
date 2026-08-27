@@ -112,10 +112,11 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:19
 msgid ""
-"Use <strong>Deploy Preview</strong> and <strong>Deploy Production</strong> "
-"to trigger the configured deploy workflows from WordPress. Use the "
-"<strong>Tests</strong> box to run the configured test actions against the "
-"selected test environment."
+"Use the configured Preview and Production deploy buttons to trigger deploy "
+"workflows from WordPress. Their default labels are <strong>Deploy Preview</"
+"strong> and <strong>Deploy Production</strong>. Use the <strong>Tests</"
+"strong> box to run the configured test actions against the selected test "
+"environment."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:23
@@ -341,9 +342,9 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:150
 msgid ""
-"In the <strong>Connection</strong> tab, set the GitHub owner, deploy "
-"repository, testing repository, source refs, target labels, and workflow "
-"filenames used by the buttons."
+"In the <strong>Connection</strong> tab, set the GitHub owner, repositories, "
+"source refs, workflow filenames, deploy button labels, target labels, and "
+"optional environment URLs."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:161
@@ -1258,4 +1259,37 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/settings.php:162
 msgid "Cleanup setting saved."
+msgstr ""
+
+msgid "Preview deploy button label"
+msgstr ""
+
+msgid "Production deploy button label"
+msgstr ""
+
+msgid "Environment links"
+msgstr ""
+
+msgid "Add optional website URLs for quick access from the Deploy status area. These URLs do not affect deploy workflows."
+msgstr ""
+
+msgid "Preview environment URL"
+msgstr ""
+
+msgid "Production environment URL"
+msgstr ""
+
+msgid "Open: %s"
+msgstr ""
+
+msgid "Environment URLs must be valid HTTP or HTTPS URLs."
+msgstr ""
+
+msgid "Enter a valid URL beginning with http:// or https://."
+msgstr ""
+
+msgid "When an Administrator configures an environment URL, Deploy status shows it as Open: <URL> above the corresponding status card. Environment links are shortcuts and do not affect deploy workflows."
+msgstr ""
+
+msgid "Deploy button labels are optional. Empty values use the default labels Deploy Preview and Deploy Production. Environment URLs are optional, must begin with http:// or https://, and appear as direct links in Deploy status."
 msgstr ""
