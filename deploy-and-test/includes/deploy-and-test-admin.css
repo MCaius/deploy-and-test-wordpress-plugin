@@ -125,6 +125,10 @@
     margin-top: 0;
 }
 
+.deploy-and-test-status-grid > :only-child {
+    grid-column: 1 / -1;
+}
+
 .deploy-and-test-muted {
     color: #646970;
 }

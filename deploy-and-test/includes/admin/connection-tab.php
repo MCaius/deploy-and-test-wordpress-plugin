@@ -111,7 +111,7 @@ function deploy_and_test_render_connection_tab() {
 					<div class="deploy-and-test-subtab-panel is-active" id="deploy-and-test-deploy-repo-panel" role="tabpanel" aria-labelledby="deploy-and-test-deploy-repo-tab" data-deploy-and-test-subtab-panel="deploy">
 						<h3><?php echo esc_html__( 'Deploy repository', 'deploy-and-test' ); ?></h3>
 						<p class="description">
-							<?php echo wp_kses_post( __( 'Add the deploy repository, source ref, target labels, and workflow filenames used by the deploy buttons. Example workflow filenames: <code>deploy-preview.yml</code> and <code>deploy-production.yml</code>.', 'deploy-and-test' ) ); ?>
+							<?php echo wp_kses_post( __( 'Add the deploy repository, source ref, target labels, and workflow filenames used by the deploy buttons. Preview and Production workflow files are optional and independent; leave either field empty to hide that deploy action.', 'deploy-and-test' ) ); ?>
 						</p>
 
 						<div class="deploy-and-test-settings-grid">
@@ -130,12 +130,12 @@ function deploy_and_test_render_connection_tab() {
 						<div class="deploy-and-test-settings-grid">
 							<label>
 								<?php echo esc_html__( 'Preview workflow file', 'deploy-and-test' ); ?>
-								<input type="text" name="preview_workflow" value="<?php echo esc_attr( $settings['preview_workflow'] ); ?>" placeholder="deploy-preview.yml">
+								<input type="text" name="preview_workflow" value="<?php echo esc_attr( $settings['preview_workflow'] ); ?>" placeholder="deploy-preview.yml" data-testid="preview-workflow-file">
 							</label>
 
 							<label>
 								<?php echo esc_html__( 'Production workflow file', 'deploy-and-test' ); ?>
-								<input type="text" name="production_workflow" value="<?php echo esc_attr( $settings['production_workflow'] ); ?>" placeholder="deploy-production.yml">
+								<input type="text" name="production_workflow" value="<?php echo esc_attr( $settings['production_workflow'] ); ?>" placeholder="deploy-production.yml" data-testid="production-workflow-file">
 							</label>
 
 							<label>

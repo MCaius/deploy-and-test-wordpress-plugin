@@ -7,6 +7,7 @@
 - Configurable Preview and Production deploy button labels.
 - Optional Preview and Production environment links in the deploy status area.
 - Regression coverage for deploy labels, environment URL validation, settings persistence, and safe link rendering.
+- Independent Preview and Production workflow configuration, including per-environment controls and status cards.
 
 ## 1.0.4 - 2026-08-10
 

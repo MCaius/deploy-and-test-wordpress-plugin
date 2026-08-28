@@ -16,7 +16,7 @@ Deploy & Test gives trusted WordPress users controlled buttons for triggering co
 
 GitHub App credentials remain server-side. The plugin generates short-lived installation tokens when an action runs, displays recent workflow status, loads compact test-summary artifacts, and records an audit trail in WordPress.
 
-Administrators configure the GitHub owner, repositories, refs, workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
+Administrators configure the GitHub owner, repositories, refs, independently optional Preview and Production workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
 
 == Installation ==
 

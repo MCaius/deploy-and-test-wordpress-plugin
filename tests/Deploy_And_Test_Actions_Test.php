@@ -122,6 +122,54 @@ class Deploy_And_Test_Actions_Test extends Deploy_And_Test_Test_Case {
 		$this->assertStringNotContainsString( 'test-installation-token', $logs[0]['details'] );
 	}
 
+	public function test_unconfigured_deploy_environment_is_rejected_without_a_github_request() {
+		$this->configure_plugin( array( 'production_workflow' => '' ) );
+		$github_called = false;
+		$this->mock_github(
+			function () use ( &$github_called ) {
+				$github_called = true;
+				return $this->http_response( 204 );
+			}
+		);
+
+		$result = deploy_and_test_execute_action( 'deploy_production' );
+
+		$this->assertWPError( $result );
+		$this->assertSame( 'missing_deploy_config', $result->get_error_code() );
+		$this->assertFalse( $github_called );
+		$this->assertFalse( get_option( deploy_and_test_deploy_lock_key( 'global' ), false ) );
+	}
+
+	/**
+	 * @dataProvider independently_configured_deploy_provider
+	 */
+	public function test_configured_deploy_environment_dispatches_when_the_other_is_empty( $deploy_action, $overrides, $expected_workflow ) {
+		$this->configure_plugin( $overrides );
+		$dispatch_url = '';
+		$this->mock_github(
+			function ( $url ) use ( &$dispatch_url ) {
+				if ( strpos( $url, '/actions/runs?' ) !== false ) {
+					return $this->http_response( 200, array( 'workflow_runs' => array() ) );
+				}
+
+				$dispatch_url = $url;
+				return $this->http_response( 204 );
+			}
+		);
+
+		$result = deploy_and_test_execute_action( $deploy_action );
+
+		$this->assertNotWPError( $result );
+		$this->assertStringContainsString( '/actions/workflows/' . rawurlencode( $expected_workflow ) . '/dispatches', $dispatch_url );
+	}
+
+	public function independently_configured_deploy_provider() {
+		return array(
+			'preview only'    => array( 'deploy_preview', array( 'production_workflow' => '' ), 'deploy-preview.yml' ),
+			'production only' => array( 'deploy_production', array( 'preview_workflow' => '' ), 'deploy-production.yml' ),
+		);
+	}
+
 	public function test_duplicate_action_is_blocked_and_audited_without_github_request() {
 		$this->configure_plugin();
 		$user_id = self::factory()->user->create(

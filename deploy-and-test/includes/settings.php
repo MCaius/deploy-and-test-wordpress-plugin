@@ -381,13 +381,25 @@ function deploy_and_test_get_test_environment( $environment_value ) {
 	return null;
 }
 
-function deploy_and_test_is_configured() {
+function deploy_and_test_deploy_repository_is_configured() {
 	return deploy_and_test_github_app_is_configured()
 		&& deploy_and_test_get_setting( 'owner' )
 		&& deploy_and_test_get_setting( 'repo' )
-		&& deploy_and_test_get_setting( 'ref' )
-		&& deploy_and_test_get_setting( 'preview_workflow' )
-		&& deploy_and_test_get_setting( 'production_workflow' );
+		&& deploy_and_test_get_setting( 'ref' );
+}
+
+function deploy_and_test_deploy_environment_is_configured( $environment ) {
+	if ( ! in_array( $environment, array( 'preview', 'production' ), true ) ) {
+		return false;
+	}
+
+	return deploy_and_test_deploy_repository_is_configured()
+		&& deploy_and_test_get_setting( $environment . '_workflow' );
+}
+
+function deploy_and_test_is_configured() {
+	return deploy_and_test_deploy_environment_is_configured( 'preview' )
+		|| deploy_and_test_deploy_environment_is_configured( 'production' );
 }
 
 function deploy_and_test_redirect( $status, $message, $tab = 'general', $status_tab = '', $workflow_started = false ) {
