@@ -310,3 +310,21 @@ reinstallation.
 Preview` and `Deploy Production`. Empty URLs remove the environment links.
 Invalid environment URLs are rejected without replacing previously valid
 settings.
+
+### QA-026 — Independent deploy workflows
+
+**Layer:** Local plus mocked API
+
+1. Configure both Preview and Production workflow files and confirm that both
+   deploy actions appear.
+2. Clear only the Production workflow, save, and return to General.
+3. Confirm that Preview remains available and Production is absent.
+4. Repeat with only Production configured.
+5. Clear both workflow fields and return to General.
+6. Submit a forged action request for an environment whose workflow is empty.
+7. Confirm separately that configured test actions remain available.
+
+**Expected:** Each configured deploy environment works independently. Missing
+workflow buttons and status cards are not displayed, the both-empty state is
+explained clearly, no GitHub request is made for an unconfigured environment,
+and test actions are unaffected.

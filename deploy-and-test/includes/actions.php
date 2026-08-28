@@ -28,7 +28,15 @@ function deploy_and_test_execute_action( $deploy_action ) {
 	$result           = new WP_Error( 'invalid_action', __( 'Unknown deploy action.', 'deploy-and-test' ) );
 	$lock_environment = 'global';
 	$lock_context     = deploy_and_test_action_lock_context( $deploy_action );
-	$active_check     = deploy_and_test_prevent_any_parallel_action( $lock_context );
+	$environment      = deploy_and_test_environment_from_action( $deploy_action );
+
+	if ( $environment && ! deploy_and_test_deploy_environment_is_configured( $environment ) ) {
+		$result = new WP_Error( 'missing_deploy_config', __( 'The requested deployment workflow is not configured.', 'deploy-and-test' ) );
+		deploy_and_test_add_audit_log( $deploy_action, 'failed', $result->get_error_message() );
+		return $result;
+	}
+
+	$active_check = deploy_and_test_prevent_any_parallel_action( $lock_context );
 
 	if ( is_wp_error( $active_check ) ) {
 		deploy_and_test_add_audit_log( $deploy_action, 'blocked', $active_check->get_error_message() );

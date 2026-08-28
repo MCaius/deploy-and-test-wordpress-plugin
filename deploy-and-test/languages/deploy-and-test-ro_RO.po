@@ -20,6 +20,9 @@ msgstr "Nu ai permisiunea de a rula actiuni de deploy."
 msgid "Unknown deploy action."
 msgstr "Actiune de deploy necunoscuta."
 
+msgid "The requested deployment workflow is not configured."
+msgstr "Workflow-ul de deploy solicitat nu este configurat."
+
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:49
 msgid "Testing repository and test action settings are not fully configured."
 msgstr ""
@@ -79,6 +82,9 @@ msgstr "Nu ai permisiunea de a vedea statusul deploy-ului."
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:228
 msgid "Deploy & Test is not fully configured."
 msgstr "Deploy & Test nu este configurat complet."
+
+msgid "No deployment workflows are configured."
+msgstr "Nu este configurat niciun workflow de deploy."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:244
 msgid "You do not have permission to view test status."
@@ -438,15 +444,16 @@ msgstr "Structurarea workflow-ului de deploy ca sa functioneze cu pluginul"
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:171
 msgid ""
-"The deploy repository should contain one GitHub Actions workflow for preview "
-"and one for production, or equivalent workflow files configured in "
-"<strong>Connection > Deploy repository</strong>. The plugin triggers these "
-"workflows with <code>workflow_dispatch</code>."
+"The deploy repository can contain a GitHub Actions workflow for Preview, "
+"Production, or both. Configure the available workflow files in "
+"<strong>Connection > Deploy repository</strong>. The plugin triggers each "
+"configured workflow independently with <code>workflow_dispatch</code>."
 msgstr ""
-"Repository-ul de deploy ar trebui sa contina un workflow GitHub Actions "
-"pentru preview si unul pentru productie, sau fisiere workflow echivalente "
-"configurate in <strong>Connection > Deploy repository</strong>. Pluginul "
-"porneste aceste workflow-uri cu <code>workflow_dispatch</code>."
+"Repository-ul de deploy poate contine un workflow GitHub Actions pentru "
+"Preview, Production sau pentru ambele. Configureaza fisierele workflow "
+"disponibile in <strong>Connection > Deploy repository</strong>. Pluginul "
+"porneste independent fiecare workflow configurat cu "
+"<code>workflow_dispatch</code>."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:178
 msgid ""
@@ -464,18 +471,19 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:228
 msgid ""
-"Recommended plugin settings: <code>Preview workflow file</code> should point "
-"to <code>deploy-preview.yml</code>, and <code>Production workflow file</"
-"code> should point to <code>deploy-production.yml</code>. Use names like "
+"Configure either or both deployment environments. <code>Preview workflow "
+"file</code> can point to <code>deploy-preview.yml</code>, and <code>Production "
+"workflow file</code> can point to <code>deploy-production.yml</code>. An empty "
+"field disables only its corresponding deploy action. Use names like "
 "<code>Deploy Preview</code> and <code>Deploy Production</code> so the status "
 "cards can classify recent runs correctly."
 msgstr ""
-"Setari recomandate in plugin: <code>Preview workflow file</code> ar trebui "
-"sa indice <code>deploy-preview.yml</code>, iar <code>Production workflow "
-"file</code> ar trebui sa indice <code>deploy-production.yml</code>. "
-"Foloseste nume precum <code>Deploy Preview</code> si <code>Deploy "
-"Production</code>, ca status cards sa poata clasifica corect rularile "
-"recente."
+"Configureaza unul sau ambele medii de deploy. <code>Preview workflow file</"
+"code> poate indica <code>deploy-preview.yml</code>, iar <code>Production "
+"workflow file</code> poate indica <code>deploy-production.yml</code>. Un camp "
+"gol dezactiveaza numai actiunea de deploy corespunzatoare. Foloseste nume "
+"precum <code>Deploy Preview</code> si <code>Deploy Production</code>, astfel "
+"incat status cards sa poata clasifica corect rularile recente."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:232
 msgid ""
@@ -810,13 +818,13 @@ msgstr "Repository testare"
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:114
 msgid ""
 "Add the deploy repository, source ref, target labels, and workflow filenames "
-"used by the deploy buttons. Example workflow filenames: <code>deploy-"
-"preview.yml</code> and <code>deploy-production.yml</code>."
+"used by the deploy buttons. Preview and Production workflow files are optional "
+"and independent; leave either field empty to hide that deploy action."
 msgstr ""
 "Adauga repository-ul de deploy, source ref-ul, etichetele target si numele "
-"fisierelor workflow folosite de butoanele de deploy. Exemple de fisiere "
-"workflow: <code>deploy-preview.yml</code> si <code>deploy-production.yml</"
-"code>."
+"fisierelor workflow folosite de butoanele de deploy. Fisierele workflow "
+"Preview si Production sunt optionale si independente; lasa oricare camp gol "
+"pentru a ascunde actiunea de deploy respectiva."
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:119
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:161
@@ -1475,6 +1483,9 @@ msgstr "Cand un Administrator configureaza URL-ul unui environment, Deploy statu
 
 msgid "Deploy button labels are optional. Empty values use the default labels Deploy Preview and Deploy Production. Environment URLs are optional, must begin with http:// or https://, and appear as direct links in Deploy status."
 msgstr "Etichetele butoanelor de deploy sunt optionale. Valorile goale folosesc etichetele implicite Deploy Preview si Deploy Production. URL-urile environment-urilor sunt optionale, trebuie sa inceapa cu http:// sau https:// si apar ca linkuri directe in Deploy status."
+
+msgid "Preview and Production workflow files are optional and independent. Leave either field empty to hide only that deploy action. Test actions remain independent of deploy workflow settings."
+msgstr "Fisierele workflow Preview si Production sunt optionale si independente. Lasa oricare camp gol pentru a ascunde numai actiunea de deploy respectiva. Actiunile de test raman independente de setarile workflow-urilor de deploy."
 
 #~ msgid "Buttons are prepared for a future test workflow implementation."
 #~ msgstr ""

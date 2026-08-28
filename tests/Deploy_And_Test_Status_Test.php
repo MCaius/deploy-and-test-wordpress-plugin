@@ -66,6 +66,21 @@ class Deploy_And_Test_Status_Test extends Deploy_And_Test_Test_Case {
 		$this->assertTrue( deploy_and_test_status_has_active_run( $status ) );
 	}
 
+	public function test_deploy_status_ignores_an_unconfigured_environment() {
+		$this->configure_plugin( array( 'production_workflow' => '' ) );
+		$runs = array(
+			array( 'id' => 20, 'name' => 'Deploy Preview', 'status' => 'completed', 'conclusion' => 'success' ),
+			array( 'id' => 19, 'name' => 'Deploy Production', 'status' => 'in_progress' ),
+		);
+
+		$status = deploy_and_test_get_deploy_status( $runs );
+
+		$this->assertSame( 20, $status['preview']['latest']['id'] );
+		$this->assertNull( $status['production']['latest'] );
+		$this->assertNull( $status['production']['active'] );
+		$this->assertFalse( deploy_and_test_status_has_active_run( $status ) );
+	}
+
 	public function test_test_status_tracks_the_first_latest_and_active_runs() {
 		$latest = array( 'id' => 30, 'status' => 'completed', 'conclusion' => 'success' );
 		$active = array( 'id' => 29, 'status' => 'in_progress' );

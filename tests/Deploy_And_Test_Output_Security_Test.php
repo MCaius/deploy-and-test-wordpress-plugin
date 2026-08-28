@@ -89,4 +89,15 @@ class Deploy_And_Test_Output_Security_Test extends Deploy_And_Test_Test_Case {
 		$this->assertStringContainsString( 'deploy-and-test-environment-link', $html );
 		$this->assertStringNotContainsString( '<a ', $html );
 	}
+
+	public function test_deploy_status_only_renders_configured_environments() {
+		$this->configure_plugin( array( 'production_workflow' => '' ) );
+
+		ob_start();
+		deploy_and_test_render_status_panel( array(), true );
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( 'data-testid="deploy-status-preview"', $html );
+		$this->assertStringNotContainsString( 'data-testid="deploy-status-production"', $html );
+	}
 }

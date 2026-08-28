@@ -70,6 +70,43 @@ class Deploy_And_Test_Settings_Validation_Test extends Deploy_And_Test_Test_Case
 	}
 
 	/**
+	 * @dataProvider deploy_workflow_configuration_provider
+	 */
+	public function test_deploy_workflows_are_configured_independently( $preview_workflow, $production_workflow, $preview_configured, $production_configured, $any_configured ) {
+		$this->configure_plugin(
+			array(
+				'preview_workflow'    => $preview_workflow,
+				'production_workflow' => $production_workflow,
+			)
+		);
+
+		$this->assertSame( $preview_configured, deploy_and_test_deploy_environment_is_configured( 'preview' ) );
+		$this->assertSame( $production_configured, deploy_and_test_deploy_environment_is_configured( 'production' ) );
+		$this->assertSame( $any_configured, deploy_and_test_is_configured() );
+	}
+
+	public function deploy_workflow_configuration_provider() {
+		return array(
+			'both configured'    => array( 'deploy-preview.yml', 'deploy-production.yml', true, true, true ),
+			'preview only'       => array( 'deploy-preview.yml', '', true, false, true ),
+			'production only'    => array( '', 'deploy-production.yml', false, true, true ),
+			'neither configured' => array( '', '', false, false, false ),
+		);
+	}
+
+	public function test_test_actions_remain_configured_without_deploy_workflows() {
+		$this->configure_plugin(
+			array(
+				'preview_workflow'    => '',
+				'production_workflow' => '',
+			)
+		);
+
+		$this->assertFalse( deploy_and_test_is_configured() );
+		$this->assertTrue( (bool) deploy_and_test_tests_are_configured() );
+	}
+
+	/**
 	 * @dataProvider invalid_environment_url_provider
 	 */
 	public function test_invalid_environment_url_is_rejected( $url ) {

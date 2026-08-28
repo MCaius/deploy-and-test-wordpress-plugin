@@ -8,9 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function deploy_and_test_render_general_tab( $configured ) {
-	$can_run_actions   = $configured;
-	$runs              = $can_run_actions ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', 'Deploy & Test is not fully configured.' );
-	$test_runs         = deploy_and_test_tests_are_configured() ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
+	$can_run_actions                = $configured;
+	$preview_workflow_configured    = (bool) deploy_and_test_get_setting( 'preview_workflow' );
+	$production_workflow_configured = (bool) deploy_and_test_get_setting( 'production_workflow' );
+	$has_deploy_workflow            = $preview_workflow_configured || $production_workflow_configured;
+	$missing_config_message         = $has_deploy_workflow ? __( 'Deploy & Test is not fully configured.', 'deploy-and-test' ) : __( 'No deployment workflows are configured.', 'deploy-and-test' );
+	$runs                           = $can_run_actions ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', $missing_config_message );
+	$test_runs                      = deploy_and_test_tests_are_configured() ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
 	deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
 	deploy_and_test_reconcile_startup_lock( $test_runs, 'test' );
 	$deploy_status     = deploy_and_test_get_deploy_status( $runs );
@@ -29,8 +33,15 @@ function deploy_and_test_render_general_tab( $configured ) {
 			<p class="deploy-and-test-muted"><?php echo esc_html__( 'Trigger configured GitHub Actions deploy workflows without pushing code.', 'deploy-and-test' ); ?></p>
 
 			<div class="deploy-and-test-actions">
-				<?php deploy_and_test_action_form( 'deploy_preview', deploy_and_test_get_deploy_button_label( 'preview' ), 'button button-primary button-hero', ! $can_run_actions || $has_active_action, '', 'preview' ); ?>
-				<?php deploy_and_test_action_form( 'deploy_production', deploy_and_test_get_deploy_button_label( 'production' ), 'button button-secondary button-hero', ! $can_run_actions || $has_active_action, __( 'Are you sure you want to deploy production?', 'deploy-and-test' ), 'production' ); ?>
+				<?php if ( $preview_workflow_configured ) : ?>
+					<?php deploy_and_test_action_form( 'deploy_preview', deploy_and_test_get_deploy_button_label( 'preview' ), 'button button-primary button-hero', ! deploy_and_test_deploy_environment_is_configured( 'preview' ) || $has_active_action, '', 'preview' ); ?>
+				<?php endif; ?>
+				<?php if ( $production_workflow_configured ) : ?>
+					<?php deploy_and_test_action_form( 'deploy_production', deploy_and_test_get_deploy_button_label( 'production' ), 'button button-secondary button-hero', ! deploy_and_test_deploy_environment_is_configured( 'production' ) || $has_active_action, __( 'Are you sure you want to deploy production?', 'deploy-and-test' ), 'production' ); ?>
+				<?php endif; ?>
+				<?php if ( ! $has_deploy_workflow ) : ?>
+					<p class="deploy-and-test-muted" data-testid="deploy-workflows-empty-state"><?php echo esc_html__( 'No deployment workflows are configured.', 'deploy-and-test' ); ?></p>
+				<?php endif; ?>
 			</div>
 			<?php if ( $has_active_action ) : ?>
 				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Actions are locked while a deploy or test workflow is running.', 'deploy-and-test' ); ?></p>
@@ -160,6 +171,7 @@ function deploy_and_test_action_form( $action_type, $label, $class, $disabled = 
 		<button
 			type="submit"
 			class="<?php echo esc_attr( $class ); ?>"
+			<?php echo $environment ? 'data-testid="' . esc_attr( 'deploy-action-' . $environment ) . '"' : ''; ?>
 			<?php disabled( $disabled ); ?>
 			<?php echo $confirm_attribute ? 'onclick="' . esc_attr( $confirm_attribute ) . '"' : ''; ?>
 		>
@@ -170,10 +182,12 @@ function deploy_and_test_action_form( $action_type, $label, $class, $disabled = 
 }
 
 function deploy_and_test_render_status_panel( $runs, $can_run_actions ) {
-	$deploy_status               = deploy_and_test_get_deploy_status( $runs );
-	$preview_environment_url     = deploy_and_test_get_setting( 'preview_environment_url' );
-	$production_environment_url  = deploy_and_test_get_setting( 'production_environment_url' );
-	$show_environment_link_rows = $preview_environment_url || $production_environment_url;
+	$deploy_status                  = deploy_and_test_get_deploy_status( $runs );
+	$preview_workflow_configured    = (bool) deploy_and_test_get_setting( 'preview_workflow' );
+	$production_workflow_configured = (bool) deploy_and_test_get_setting( 'production_workflow' );
+	$preview_environment_url        = deploy_and_test_get_setting( 'preview_environment_url' );
+	$production_environment_url     = deploy_and_test_get_setting( 'production_environment_url' );
+	$show_environment_link_rows     = ( $preview_workflow_configured && $preview_environment_url ) || ( $production_workflow_configured && $production_environment_url );
 
 	?>
 	<section class="deploy-and-test-card">
@@ -193,8 +207,12 @@ function deploy_and_test_render_status_panel( $runs, $can_run_actions ) {
 			<p class="deploy-and-test-muted"><?php echo esc_html( $runs->get_error_message() ); ?></p>
 		<?php else : ?>
 			<div class="deploy-and-test-status-grid">
-				<?php deploy_and_test_render_environment_status_card( 'preview', 'Preview', deploy_and_test_get_setting( 'preview_target' ), $preview_environment_url, $show_environment_link_rows, $deploy_status ); ?>
-				<?php deploy_and_test_render_environment_status_card( 'production', 'Production', deploy_and_test_get_setting( 'production_target' ), $production_environment_url, $show_environment_link_rows, $deploy_status ); ?>
+				<?php if ( $preview_workflow_configured ) : ?>
+					<?php deploy_and_test_render_environment_status_card( 'preview', 'Preview', deploy_and_test_get_setting( 'preview_target' ), $preview_environment_url, $show_environment_link_rows, $deploy_status ); ?>
+				<?php endif; ?>
+				<?php if ( $production_workflow_configured ) : ?>
+					<?php deploy_and_test_render_environment_status_card( 'production', 'Production', deploy_and_test_get_setting( 'production_target' ), $production_environment_url, $show_environment_link_rows, $deploy_status ); ?>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 	</section>
@@ -213,7 +231,7 @@ function deploy_and_test_render_environment_status_card( $environment, $label, $
 	$safe_environment_url = esc_url( $environment_url, array( 'http', 'https' ) );
 
 	?>
-	<div class="deploy-and-test-status-environment">
+	<div class="deploy-and-test-status-environment" data-testid="deploy-status-<?php echo esc_attr( $environment ); ?>">
 		<?php if ( $show_environment_link_row ) : ?>
 			<p class="deploy-and-test-environment-link">
 				<?php if ( $safe_environment_url ) : ?>
@@ -498,14 +516,16 @@ function deploy_and_test_test_status_has_active_run( $test_status ) {
 
 function deploy_and_test_get_run_environment( $run ) {
 	$name                     = $run['name'] ?? '';
-	$preview_workflow_name    = deploy_and_test_workflow_label_from_file( deploy_and_test_get_setting( 'preview_workflow' ) );
-	$production_workflow_name = deploy_and_test_workflow_label_from_file( deploy_and_test_get_setting( 'production_workflow' ) );
+	$preview_workflow         = deploy_and_test_get_setting( 'preview_workflow' );
+	$production_workflow      = deploy_and_test_get_setting( 'production_workflow' );
+	$preview_workflow_name    = deploy_and_test_workflow_label_from_file( $preview_workflow );
+	$production_workflow_name = deploy_and_test_workflow_label_from_file( $production_workflow );
 
-	if ( $name === $preview_workflow_name || stripos( $name, 'preview' ) !== false ) {
+	if ( $preview_workflow && ( $name === $preview_workflow_name || stripos( $name, 'preview' ) !== false ) ) {
 		return 'preview';
 	}
 
-	if ( $name === $production_workflow_name || stripos( $name, 'production' ) !== false ) {
+	if ( $production_workflow && ( $name === $production_workflow_name || stripos( $name, 'production' ) !== false ) ) {
 		return 'production';
 	}
 

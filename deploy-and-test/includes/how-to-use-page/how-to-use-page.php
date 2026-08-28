@@ -176,6 +176,10 @@ Source ref: main</code></pre>
 			</p>
 
 			<p>
+				<?php echo esc_html__( 'Preview and Production workflow files are optional and independent. Leave either field empty to hide only that deploy action. Test actions remain independent of deploy workflow settings.', 'deploy-and-test' ); ?>
+			</p>
+
+			<p>
 				<?php echo wp_kses_post( __( 'The workflow filenames must match files in each repository\'s <code>.github/workflows</code> directory. Enabled test actions automatically appear as buttons in the General tab.', 'deploy-and-test' ) ); ?>
 			</p>
 
@@ -196,7 +200,7 @@ Enabled: yes</code></pre>
 
 		<div class="deploy-and-test-how-to-use-content">
 			<p>
-				<?php echo wp_kses_post( __( 'The deploy repository should contain one GitHub Actions workflow for preview and one for production, or equivalent workflow files configured in <strong>Connection > Deploy repository</strong>. The plugin triggers these workflows with <code>workflow_dispatch</code>.', 'deploy-and-test' ) ); ?>
+				<?php echo wp_kses_post( __( 'The deploy repository can contain a GitHub Actions workflow for Preview, Production, or both. Configure the available workflow files in <strong>Connection > Deploy repository</strong>. The plugin triggers each configured workflow independently with <code>workflow_dispatch</code>.', 'deploy-and-test' ) ); ?>
 			</p>
 
 			<pre><code>.github/workflows/deploy-preview.yml
@@ -253,7 +257,7 @@ jobs:
 		run: npm run deploy:production</code></pre>
 
 			<p>
-				<?php echo wp_kses_post( __( 'Recommended plugin settings: <code>Preview workflow file</code> should point to <code>deploy-preview.yml</code>, and <code>Production workflow file</code> should point to <code>deploy-production.yml</code>. Use names like <code>Deploy Preview</code> and <code>Deploy Production</code> so the status cards can classify recent runs correctly.', 'deploy-and-test' ) ); ?>
+				<?php echo wp_kses_post( __( 'Configure either or both deployment environments. <code>Preview workflow file</code> can point to <code>deploy-preview.yml</code>, and <code>Production workflow file</code> can point to <code>deploy-production.yml</code>. An empty field disables only its corresponding deploy action. Use names like <code>Deploy Preview</code> and <code>Deploy Production</code> so the status cards can classify recent runs correctly.', 'deploy-and-test' ) ); ?>
 			</p>
 
 			<p>

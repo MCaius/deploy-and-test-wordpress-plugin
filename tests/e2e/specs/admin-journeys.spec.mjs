@@ -108,6 +108,36 @@ test('Administrator can save and clear deploy environment URLs', async ({ page }
     await expect(page.getByTestId('production-environment-url')).toHaveValue('');
 });
 
+test('Administrator can enable deploy workflows independently', async ({ page }) => {
+    await loginAs(page, users.administrator);
+    await page.goto(`${pluginPage}&tab=connection`);
+
+    await page.getByTestId('production-workflow-file').fill('');
+    await page.getByTestId('save-connection-settings').click();
+    await page.getByTestId('tab-general').click();
+
+    await expect(page.getByTestId('deploy-action-preview')).toBeVisible();
+    await expect(page.getByTestId('deploy-action-production')).toHaveCount(0);
+
+    await page.getByTestId('tab-connection').click();
+    await page.getByTestId('preview-workflow-file').fill('');
+    await page.getByTestId('production-workflow-file').fill('deploy-production.yml');
+    await page.getByTestId('save-connection-settings').click();
+    await page.getByTestId('tab-general').click();
+
+    await expect(page.getByTestId('deploy-action-preview')).toHaveCount(0);
+    await expect(page.getByTestId('deploy-action-production')).toBeVisible();
+
+    await page.getByTestId('tab-connection').click();
+    await page.getByTestId('production-workflow-file').fill('');
+    await page.getByTestId('save-connection-settings').click();
+    await page.getByTestId('tab-general').click();
+
+    await expect(page.getByTestId('deploy-action-preview')).toHaveCount(0);
+    await expect(page.getByTestId('deploy-action-production')).toHaveCount(0);
+    await expect(page.getByTestId('deploy-workflows-empty-state')).toContainText('No deployment workflows are configured.');
+});
+
 test('Administrator sees validation feedback and invalid settings are not stored', async ({ page }) => {
     await loginAs(page, users.administrator);
     await page.goto(`${pluginPage}&tab=connection`);

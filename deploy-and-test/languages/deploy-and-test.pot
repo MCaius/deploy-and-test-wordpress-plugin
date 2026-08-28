@@ -26,6 +26,9 @@ msgstr ""
 msgid "Unknown deploy action."
 msgstr ""
 
+msgid "The requested deployment workflow is not configured."
+msgstr ""
+
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:49
 msgid "Testing repository and test action settings are not fully configured."
 msgstr ""
@@ -75,6 +78,9 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:228
 msgid "Deploy & Test is not fully configured."
+msgstr ""
+
+msgid "No deployment workflows are configured."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/actions.php:244
@@ -360,10 +366,10 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:171
 msgid ""
-"The deploy repository should contain one GitHub Actions workflow for preview "
-"and one for production, or equivalent workflow files configured in "
-"<strong>Connection > Deploy repository</strong>. The plugin triggers these "
-"workflows with <code>workflow_dispatch</code>."
+"The deploy repository can contain a GitHub Actions workflow for Preview, "
+"Production, or both. Configure the available workflow files in "
+"<strong>Connection > Deploy repository</strong>. The plugin triggers each "
+"configured workflow independently with <code>workflow_dispatch</code>."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:178
@@ -378,9 +384,10 @@ msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/how-to-use-page/how-to-use-page.php:228
 msgid ""
-"Recommended plugin settings: <code>Preview workflow file</code> should point "
-"to <code>deploy-preview.yml</code>, and <code>Production workflow file</"
-"code> should point to <code>deploy-production.yml</code>. Use names like "
+"Configure either or both deployment environments. <code>Preview workflow "
+"file</code> can point to <code>deploy-preview.yml</code>, and <code>Production "
+"workflow file</code> can point to <code>deploy-production.yml</code>. An empty "
+"field disables only its corresponding deploy action. Use names like "
 "<code>Deploy Preview</code> and <code>Deploy Production</code> so the status "
 "cards can classify recent runs correctly."
 msgstr ""
@@ -679,8 +686,8 @@ msgstr ""
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:114
 msgid ""
 "Add the deploy repository, source ref, target labels, and workflow filenames "
-"used by the deploy buttons. Example workflow filenames: <code>deploy-"
-"preview.yml</code> and <code>deploy-production.yml</code>."
+"used by the deploy buttons. Preview and Production workflow files are optional "
+"and independent; leave either field empty to hide that deploy action."
 msgstr ""
 
 #: wordpress-deploy-and-test-plugin/deploy-and-test/includes/admin/connection-tab.php:119
@@ -1292,4 +1299,7 @@ msgid "When an Administrator configures an environment URL, Deploy status shows 
 msgstr ""
 
 msgid "Deploy button labels are optional. Empty values use the default labels Deploy Preview and Deploy Production. Environment URLs are optional, must begin with http:// or https://, and appear as direct links in Deploy status."
+msgstr ""
+
+msgid "Preview and Production workflow files are optional and independent. Leave either field empty to hide only that deploy action. Test actions remain independent of deploy workflow settings."
 msgstr ""
