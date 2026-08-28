@@ -4,7 +4,7 @@ Tags: github-actions, deployment, testing, developer-tools
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.4
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,12 @@ Yes. Administrators can select Deploy and Tests, Deploy only, or Tests only in S
 No. Delete plugin data on uninstall is disabled by default and must be enabled explicitly in Settings.
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Added native plugin update discovery through stable GitHub Releases.
+* Added independently configurable Preview and Production workflows, deploy labels, and environment links.
+* Added settings for enabling Deploy and Tests together or independently without deleting saved configuration.
 
 = 1.0.4 =
 
