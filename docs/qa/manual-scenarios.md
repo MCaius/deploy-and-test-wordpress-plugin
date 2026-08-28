@@ -49,8 +49,8 @@ configuration is incomplete.
 1. Sign in as Administrator.
 2. Open every plugin tab.
 
-**Expected:** General, Connection, and Audit log are accessible. Configuration,
-cleanup, connection-test, and action controls are available as appropriate.
+**Expected:** General, Connection, Settings, and Audit log are accessible. Configuration,
+feature, cleanup, connection-test, and action controls are available as appropriate.
 
 ### QA-004 — Editor access
 
@@ -58,10 +58,10 @@ cleanup, connection-test, and action controls are available as appropriate.
 
 1. Sign in as `qa-editor`.
 2. Open Deploy & Test.
-3. Attempt to locate connection and cleanup settings.
+3. Attempt to locate Connection, Settings, and cleanup controls.
 
-**Expected:** The Editor can access operational deploy/test controls but cannot
-change connection or cleanup settings.
+**Expected:** The Editor can access enabled operational deploy/test controls but cannot
+change connection, feature, or cleanup settings.
 
 ### QA-005 — Subscriber denial
 
@@ -283,8 +283,8 @@ removed. The plugin starts with defaults.
 **Safety:** Use the separate disposable environment from QA-023, never the
 canonical environment that maps the repository's source directory.
 
-1. Save recognizable settings and audit data.
-2. Disable deletion of plugin data on uninstall.
+1. Confirm deletion of plugin data on uninstall is disabled by default.
+2. Save recognizable settings and audit data without enabling cleanup.
 3. Delete, reinstall, and activate the plugin.
 
 **Expected:** The saved settings and audit history remain available after
@@ -352,3 +352,20 @@ and test actions are unaffected.
 allow-listed HTTPS repository is offered. The update succeeds without losing
 settings. Unsafe or unavailable releases fail closed without affecting the
 installed plugin, and no GitHub App credentials or site data are sent.
+
+## Feature modes and Settings
+
+### QA-028 — Deploy-only, Tests-only, combined, and cleanup defaults
+
+**Layer:** Local plus mocked API
+
+1. Open Settings as an Administrator and confirm Deploy and Tests are enabled while `Delete plugin data on uninstall` is disabled.
+2. Save Deploy only, return to General, and inspect the network requests.
+3. Confirm test controls, status, summaries, polling, and test GitHub requests are absent.
+4. Confirm the saved test repository and actions still exist in Connection.
+5. Re-enable Tests, switch to Tests only, and repeat the checks for deploy controls, status, polling, and GitHub requests.
+6. Attempt to disable the final enabled feature in the interface and with a manually constructed request.
+7. Re-enable both features, reload in a new session, and verify combined mode and preserved configuration.
+8. Enable and then disable uninstall cleanup, saving and reloading after each change.
+
+**Expected:** Only enabled features appear and make status requests. Disabled workflow actions are rejected server-side before GitHub is contacted. At least one feature always remains enabled, all Connection values survive mode changes, settings changes are audited without secrets, and cleanup is disabled by default while explicit saved preferences persist.

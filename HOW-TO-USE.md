@@ -109,9 +109,21 @@ Preview and Production workflow files are optional and independent. Leave either
 
 Environment URLs are optional and must begin with `http://` or `https://`. When configured, they appear above the corresponding status card as `Open: <URL>`. These links are administrative shortcuts and do not affect workflow dispatching or GitHub status requests.
 
-Only WordPress Administrators can change connection settings, workflow filenames, test action definitions, cleanup settings, and audit-log access. WordPress Editors can trigger the configured deploy and test actions from the General tab, but they cannot change the plugin configuration. This permission split is intentional for teams that want trusted, non-technical WordPress users to run approved workflows without granting administrator or GitHub access.
+Only WordPress Administrators can change connection settings, workflow filenames, test action definitions, feature and cleanup settings, and audit-log access. WordPress Editors can trigger the enabled and configured deploy and test actions from the General tab, but they cannot change the plugin configuration. This permission split is intentional for teams that want trusted, non-technical WordPress users to run approved workflows without granting administrator or GitHub access.
 
-## 4. Configure Test Environments
+## 4. Choose Features in the Settings Tab
+
+Open `Deploy & Test -> Settings` and choose one of the supported operating modes:
+
+- **Deploy and Tests:** leave both features enabled.
+- **Deploy only:** enable Deploy and disable Tests.
+- **Tests only:** disable Deploy and enable Tests.
+
+Both features are enabled by default, and at least one must remain enabled. Disabling a feature hides its controls and status from General and stops its status polling and GitHub requests. Repository, workflow, target, environment, and test-action settings remain saved in Connection and return when the feature is re-enabled.
+
+The same Settings form contains `Delete plugin data on uninstall`. This option is disabled by default, so uninstalling the plugin preserves its data unless an Administrator explicitly enables cleanup. An existing explicitly saved cleanup preference is preserved during upgrades.
+
+## 5. Configure Test Environments
 
 Test environments appear next to the Tests panel in the General tab. The selected value is sent to GitHub Actions using the configured input name.
 
@@ -127,7 +139,7 @@ Label name: Production
 Env variable: prod
 ```
 
-## 5. Configure Test Action Buttons
+## 6. Configure Test Action Buttons
 
 Each enabled test action row becomes one button in WordPress.
 
@@ -153,7 +165,7 @@ This dispatches `tests.yml` with:
 
 The `target_env` value comes from the selected test environment.
 
-## 6. Deploy Workflow Example
+## 7. Deploy Workflow Example
 
 Deploy workflows must support `workflow_dispatch`. Deploy & Test sends the configured source ref when it dispatches the workflow.
 
@@ -214,7 +226,7 @@ Production workflow file: deploy-production.yml
 
 Names like `Deploy Preview` and `Deploy Production` help the status cards classify recent runs correctly.
 
-## 7. Test Workflow Example
+## 8. Test Workflow Example
 
 Use a stable `run-name` pattern so Deploy & Test can match a run to the expected summary artifact.
 
@@ -269,7 +281,7 @@ jobs:
           path: test-results/deploy-update-summary.json
 ```
 
-## 8. Test Summary Artifact Format
+## 9. Test Summary Artifact Format
 
 Every test run should upload a small JSON summary artifact with this predictable name:
 
@@ -318,7 +330,7 @@ Example JSON:
 
 Upload the summary with `if: always()` so WordPress can show results even when tests fail.
 
-## 9. Audit Log and Uninstall Cleanup
+## 10. Audit Log and Uninstall Cleanup
 
 The audit log is stored in the WordPress database in `wp_options` under:
 
@@ -328,4 +340,4 @@ deploy_and_test_audit_log
 
 Each record stores timestamp, user, action, status, and details. The plugin keeps the latest 100 entries.
 
-If `Delete plugin data on uninstall` is enabled, uninstalling the plugin removes stored settings, audit logs, temporary locks, and cached test summaries.
+`Delete plugin data on uninstall` is disabled by default. If an Administrator enables it in Settings, uninstalling the plugin removes stored settings, audit logs, temporary locks, and cached test summaries. If it remains disabled, that data is preserved.

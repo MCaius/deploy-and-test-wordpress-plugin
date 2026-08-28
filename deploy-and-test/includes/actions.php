@@ -30,6 +30,18 @@ function deploy_and_test_execute_action( $deploy_action ) {
 	$lock_context     = deploy_and_test_action_lock_context( $deploy_action );
 	$environment      = deploy_and_test_environment_from_action( $deploy_action );
 
+	if ( $environment && ! deploy_and_test_deploy_features_enabled() ) {
+		$result = new WP_Error( 'deploy_features_disabled', __( 'Deploy features are disabled in Settings.', 'deploy-and-test' ) );
+		deploy_and_test_add_audit_log( $deploy_action, 'blocked', $result->get_error_message() );
+		return $result;
+	}
+
+	if ( strpos( $deploy_action, 'test_' ) === 0 && ! deploy_and_test_test_features_enabled() ) {
+		$result = new WP_Error( 'test_features_disabled', __( 'Test features are disabled in Settings.', 'deploy-and-test' ) );
+		deploy_and_test_add_audit_log( $deploy_action, 'blocked', $result->get_error_message() );
+		return $result;
+	}
+
 	if ( $environment && ! deploy_and_test_deploy_environment_is_configured( $environment ) ) {
 		$result = new WP_Error( 'missing_deploy_config', __( 'The requested deployment workflow is not configured.', 'deploy-and-test' ) );
 		deploy_and_test_add_audit_log( $deploy_action, 'failed', $result->get_error_message() );
@@ -90,6 +102,10 @@ function deploy_and_test_action_success_message( $deploy_action ) {
 }
 
 function deploy_and_test_dispatch_test_action( $test_action_id ) {
+	if ( ! deploy_and_test_test_features_enabled() ) {
+		return new WP_Error( 'test_features_disabled', __( 'Test features are disabled in Settings.', 'deploy-and-test' ) );
+	}
+
 	if ( ! deploy_and_test_tests_are_configured() ) {
 		return new WP_Error( 'missing_test_config', __( 'Testing repository and test action settings are not fully configured.', 'deploy-and-test' ) );
 	}
@@ -414,6 +430,15 @@ function deploy_and_test_handle_status_ajax() {
 
 	check_ajax_referer( 'deploy_and_test_status', 'nonce' );
 
+	if ( ! deploy_and_test_deploy_features_enabled() ) {
+		wp_send_json_error(
+			array(
+				'message' => __( 'Deploy features are disabled in Settings.', 'deploy-and-test' ),
+			),
+			403
+		);
+	}
+
 	$configured    = deploy_and_test_is_configured();
 	$runs          = $configured ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', __( 'Deploy & Test is not fully configured.', 'deploy-and-test' ) );
 	deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
@@ -443,6 +468,15 @@ function deploy_and_test_handle_test_status_ajax() {
 
 	check_ajax_referer( 'deploy_and_test_status', 'nonce' );
 
+	if ( ! deploy_and_test_test_features_enabled() ) {
+		wp_send_json_error(
+			array(
+				'message' => __( 'Test features are disabled in Settings.', 'deploy-and-test' ),
+			),
+			403
+		);
+	}
+
 	$configured  = deploy_and_test_tests_are_configured();
 	$runs        = $configured ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
 	deploy_and_test_reconcile_startup_lock( $runs, 'test' );
@@ -471,6 +505,15 @@ function deploy_and_test_handle_test_summary_ajax() {
 	}
 
 	check_ajax_referer( 'deploy_and_test_status', 'nonce' );
+
+	if ( ! deploy_and_test_test_features_enabled() ) {
+		wp_send_json_error(
+			array(
+				'message' => __( 'Test features are disabled in Settings.', 'deploy-and-test' ),
+			),
+			403
+		);
+	}
 
 	$run_id = isset( $_POST['run_id'] ) ? absint( $_POST['run_id'] ) : 0;
 

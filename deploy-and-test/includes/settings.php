@@ -33,7 +33,9 @@ function deploy_and_test_default_settings() {
 		'test_environment_input'           => 'target_env',
 		'test_environments'                => array(),
 		'test_actions'                     => array(),
-		'delete_data_on_uninstall'         => true,
+		'enable_deploy_features'            => true,
+		'enable_test_features'              => true,
+		'delete_data_on_uninstall'         => false,
 		'delete_data_on_uninstall_touched' => false,
 	);
 }
@@ -45,19 +47,21 @@ function deploy_and_test_get_settings() {
 		$stored_settings = array();
 	}
 
-	$settings = array_merge( deploy_and_test_default_settings(), $stored_settings );
-
-	if ( empty( $settings['delete_data_on_uninstall_touched'] ) && ! array_key_exists( 'delete_data_on_uninstall', $stored_settings ) ) {
-		$settings['delete_data_on_uninstall'] = true;
-	}
-
-	return $settings;
+	return array_merge( deploy_and_test_default_settings(), $stored_settings );
 }
 
 function deploy_and_test_get_setting( $key ) {
 	$settings = deploy_and_test_get_settings();
 
 	return $settings[ $key ] ?? '';
+}
+
+function deploy_and_test_deploy_features_enabled() {
+	return ! empty( deploy_and_test_get_setting( 'enable_deploy_features' ) );
+}
+
+function deploy_and_test_test_features_enabled() {
+	return ! empty( deploy_and_test_get_setting( 'enable_test_features' ) );
 }
 
 function deploy_and_test_get_test_actions() {
@@ -103,11 +107,49 @@ function deploy_and_test_get_test_action( $test_action_id ) {
 }
 
 function deploy_and_test_tests_are_configured() {
-	return deploy_and_test_github_app_is_configured()
+	return deploy_and_test_test_features_enabled()
+		&& deploy_and_test_github_app_is_configured()
 		&& deploy_and_test_get_setting( 'owner' )
 		&& deploy_and_test_get_setting( 'test_repo' )
 		&& deploy_and_test_get_setting( 'test_ref' )
 		&& deploy_and_test_get_enabled_test_actions();
+}
+
+function deploy_and_test_handle_save_feature_settings() {
+	if ( ! current_user_can( deploy_and_test_settings_capability() ) ) {
+		wp_die( esc_html__( 'You do not have permission to update plugin settings.', 'deploy-and-test' ) );
+	}
+
+	check_admin_referer( 'deploy_and_test_save_feature_settings', 'deploy_and_test_nonce' );
+
+	$enable_deploy_features = ! empty( $_POST['enable_deploy_features'] );
+	$enable_test_features   = ! empty( $_POST['enable_test_features'] );
+
+	$validation = deploy_and_test_validate_feature_settings( $enable_deploy_features, $enable_test_features );
+
+	if ( is_wp_error( $validation ) ) {
+		$message = $validation->get_error_message();
+		deploy_and_test_add_audit_log( 'save_feature_settings', 'failed', $message );
+		deploy_and_test_redirect( 'error', $message, 'settings' );
+	}
+
+	$settings                                     = deploy_and_test_get_settings();
+	$settings['enable_deploy_features']           = $enable_deploy_features;
+	$settings['enable_test_features']             = $enable_test_features;
+	$settings['delete_data_on_uninstall']         = ! empty( $_POST['delete_data_on_uninstall'] );
+	$settings['delete_data_on_uninstall_touched'] = true;
+
+	update_option( DEPLOY_AND_TEST_SETTINGS_OPTION, $settings, false );
+	deploy_and_test_add_audit_log( 'save_feature_settings', 'success', __( 'Feature and cleanup settings were updated.', 'deploy-and-test' ) );
+	deploy_and_test_redirect( 'success', __( 'Settings saved.', 'deploy-and-test' ), 'settings' );
+}
+
+function deploy_and_test_validate_feature_settings( $enable_deploy_features, $enable_test_features ) {
+	if ( ! $enable_deploy_features && ! $enable_test_features ) {
+		return new WP_Error( 'no_features_enabled', __( 'Enable at least one feature: Deploy or Tests.', 'deploy-and-test' ) );
+	}
+
+	return true;
 }
 
 function deploy_and_test_handle_save_settings() {
@@ -137,6 +179,8 @@ function deploy_and_test_handle_save_settings() {
 		'test_environments'        => isset( $_POST['test_environments'] ) ? deploy_and_test_sanitize_test_environments( wp_unslash( $_POST['test_environments'] ) ) : array(),
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively by deploy_and_test_sanitize_test_actions().
 		'test_actions'                     => isset( $_POST['test_actions'] ) ? deploy_and_test_sanitize_test_actions( wp_unslash( $_POST['test_actions'] ) ) : array(),
+		'enable_deploy_features'            => ! empty( $current_settings['enable_deploy_features'] ),
+		'enable_test_features'              => ! empty( $current_settings['enable_test_features'] ),
 		'delete_data_on_uninstall'         => ! empty( $current_settings['delete_data_on_uninstall'] ),
 		'delete_data_on_uninstall_touched' => ! empty( $current_settings['delete_data_on_uninstall_touched'] ),
 	);
@@ -171,7 +215,7 @@ function deploy_and_test_handle_save_cleanup_settings() {
 
 	update_option( DEPLOY_AND_TEST_SETTINGS_OPTION, $settings, false );
 	deploy_and_test_add_audit_log( 'save_cleanup_settings', 'success', __( 'Uninstall cleanup setting was updated.', 'deploy-and-test' ) );
-	deploy_and_test_redirect( 'success', __( 'Cleanup setting saved.', 'deploy-and-test' ), 'general' );
+	deploy_and_test_redirect( 'success', __( 'Cleanup setting saved.', 'deploy-and-test' ), 'settings' );
 }
 
 function deploy_and_test_normalize_settings( $settings ) {
@@ -393,13 +437,26 @@ function deploy_and_test_deploy_environment_is_configured( $environment ) {
 		return false;
 	}
 
-	return deploy_and_test_deploy_repository_is_configured()
+	return deploy_and_test_deploy_features_enabled()
+		&& deploy_and_test_deploy_repository_is_configured()
 		&& deploy_and_test_get_setting( $environment . '_workflow' );
 }
 
 function deploy_and_test_is_configured() {
 	return deploy_and_test_deploy_environment_is_configured( 'preview' )
 		|| deploy_and_test_deploy_environment_is_configured( 'production' );
+}
+
+function deploy_and_test_enabled_features_are_configured() {
+	if ( deploy_and_test_deploy_features_enabled() && ! deploy_and_test_is_configured() ) {
+		return false;
+	}
+
+	if ( deploy_and_test_test_features_enabled() && ! deploy_and_test_tests_are_configured() ) {
+		return false;
+	}
+
+	return deploy_and_test_deploy_features_enabled() || deploy_and_test_test_features_enabled();
 }
 
 function deploy_and_test_redirect( $status, $message, $tab = 'general', $status_tab = '', $workflow_started = false ) {

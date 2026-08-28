@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deploy-and-test\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-18 15:23+0300\n"
-"PO-Revision-Date: 2026-06-17 16:45+0300\n"
+"POT-Creation-Date: 2026-08-28 00:00+0200\n"
+"PO-Revision-Date: 2026-08-28 00:00+0200\n"
 "Last-Translator: Codex <codex@openai.com>\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
@@ -1486,6 +1486,66 @@ msgstr "Etichetele butoanelor de deploy sunt optionale. Valorile goale folosesc 
 
 msgid "Preview and Production workflow files are optional and independent. Leave either field empty to hide only that deploy action. Test actions remain independent of deploy workflow settings."
 msgstr "Fisierele workflow Preview si Production sunt optionale si independente. Lasa oricare camp gol pentru a ascunde numai actiunea de deploy respectiva. Actiunile de test raman independente de setarile workflow-urilor de deploy."
+
+msgid "Settings"
+msgstr "Setari"
+
+msgid "Features"
+msgstr "Functionalitati"
+
+msgid "Choose which workflow features are available. At least one feature must remain enabled."
+msgstr "Alege functionalitatile workflow disponibile. Cel putin o functionalitate trebuie sa ramana activa."
+
+msgid "Enable deploy features"
+msgstr "Activeaza functionalitatile de deploy"
+
+msgid "Show deploy actions and status, and allow deploy polling and GitHub requests."
+msgstr "Afiseaza actiunile si statusul de deploy si permite polling-ul si requesturile GitHub pentru deploy."
+
+msgid "Enable test features"
+msgstr "Activeaza functionalitatile de test"
+
+msgid "Show test actions, environments, status, and summaries, and allow test polling and GitHub requests."
+msgstr "Afiseaza actiunile, environment-urile, statusul si sumarurile testelor si permite polling-ul si requesturile GitHub pentru teste."
+
+msgid "Data and cleanup"
+msgstr "Date si curatare"
+
+msgid "Enable at least one feature: Deploy or Tests."
+msgstr "Activeaza cel putin o functionalitate: Deploy sau Tests."
+
+msgid "You do not have permission to update plugin settings."
+msgstr "Nu ai permisiunea de a actualiza setarile pluginului."
+
+msgid "Feature and cleanup settings were updated."
+msgstr "Setarile functionalitatilor si de curatare au fost actualizate."
+
+msgid "Deploy features are disabled in Settings."
+msgstr "Functionalitatile de deploy sunt dezactivate in Setari."
+
+msgid "Test features are disabled in Settings."
+msgstr "Functionalitatile de test sunt dezactivate in Setari."
+
+msgid "Configure the enabled deploy and test features in Connection before using workflow actions."
+msgstr "Configureaza functionalitatile de deploy si test active in Connection inainte de a folosi actiunile workflow."
+
+msgid "Configure the deploy repository and workflows in Connection before using deploy actions."
+msgstr "Configureaza repository-ul si workflow-urile de deploy in Connection inainte de a folosi actiunile de deploy."
+
+msgid "Configure the testing repository and actions in Connection before using test actions."
+msgstr "Configureaza repository-ul si actiunile de testare in Connection inainte de a folosi actiunile de test."
+
+msgid "Administrators can choose <strong>Deploy and Tests</strong>, <strong>Deploy only</strong>, or <strong>Tests only</strong> in the Settings tab. Both features are enabled by default, and at least one must remain enabled."
+msgstr "Administratorii pot alege <strong>Deploy and Tests</strong>, <strong>Deploy only</strong> sau <strong>Tests only</strong> in tabul Setari. Ambele functionalitati sunt active implicit si cel putin una trebuie sa ramana activa."
+
+msgid "Disabling a feature hides its controls and status, stops its polling and GitHub status requests, and preserves its Connection configuration for later use."
+msgstr "Dezactivarea unei functionalitati ascunde controalele si statusul, opreste polling-ul si requesturile GitHub de status si pastreaza configuratia din Connection pentru utilizare ulterioara."
+
+msgid "WordPress Editors can trigger enabled and configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, feature and cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access."
+msgstr "Editorii WordPress pot porni actiunile de deploy si test active si configurate, dar numai Administratorii pot schimba configuratia pluginului, setarile workflow-urilor, functionalitatilor si curatarii sau accesul la audit log. Aceasta separare este destinata echipelor care doresc ca utilizatori WordPress de incredere, fara rol tehnic, sa ruleze workflow-uri aprobate fara acces de Administrator sau GitHub."
+
+msgid "Delete plugin data on uninstall is disabled by default. If an Administrator enables it in Settings, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries."
+msgstr "Delete plugin data on uninstall este dezactivata implicit. Daca un Administrator o activeaza in Setari, dezinstalarea pluginului elimina si setarile salvate, audit log-ul, lock-urile temporare si sumarurile de test din cache."
 
 #~ msgid "Buttons are prepared for a future test workflow implementation."
 #~ msgstr ""

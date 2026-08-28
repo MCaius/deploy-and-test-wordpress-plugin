@@ -8,27 +8,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function deploy_and_test_render_general_tab( $configured ) {
-	$can_run_actions                = $configured;
+	unset( $configured );
+	$deploy_features_enabled        = deploy_and_test_deploy_features_enabled();
+	$test_features_enabled          = deploy_and_test_test_features_enabled();
+	$can_run_actions                = $deploy_features_enabled && deploy_and_test_is_configured();
+	$can_run_tests                  = $test_features_enabled && deploy_and_test_tests_are_configured();
 	$preview_workflow_configured    = (bool) deploy_and_test_get_setting( 'preview_workflow' );
 	$production_workflow_configured = (bool) deploy_and_test_get_setting( 'production_workflow' );
 	$has_deploy_workflow            = $preview_workflow_configured || $production_workflow_configured;
 	$missing_config_message         = $has_deploy_workflow ? __( 'Deploy & Test is not fully configured.', 'deploy-and-test' ) : __( 'No deployment workflows are configured.', 'deploy-and-test' );
 	$runs                           = $can_run_actions ? deploy_and_test_github_get_recent_runs() : new WP_Error( 'missing_config', $missing_config_message );
-	$test_runs                      = deploy_and_test_tests_are_configured() ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
-	deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
-	deploy_and_test_reconcile_startup_lock( $test_runs, 'test' );
+	$test_runs                      = $can_run_tests ? deploy_and_test_github_get_recent_test_runs() : new WP_Error( 'missing_config', __( 'Testing repository is not fully configured.', 'deploy-and-test' ) );
+
+	if ( $deploy_features_enabled ) {
+		deploy_and_test_reconcile_startup_lock( $runs, 'deploy' );
+	}
+
+	if ( $test_features_enabled ) {
+		deploy_and_test_reconcile_startup_lock( $test_runs, 'test' );
+	}
+
 	$deploy_status     = deploy_and_test_get_deploy_status( $runs );
 	$test_status       = deploy_and_test_get_test_status( $test_runs );
 	$has_active_action = deploy_and_test_status_has_active_run( $deploy_status ) || deploy_and_test_test_status_has_active_run( $test_status );
-	$active_status_tab = isset( $_GET['deploy_and_test_status_tab'] ) ? sanitize_key( $_GET['deploy_and_test_status_tab'] ) : 'deploy';
+	$default_status_tab = $deploy_features_enabled ? 'deploy' : 'test';
+	$active_status_tab  = isset( $_GET['deploy_and_test_status_tab'] ) ? sanitize_key( $_GET['deploy_and_test_status_tab'] ) : $default_status_tab;
+	$available_status_tabs = array();
 
-	if ( ! in_array( $active_status_tab, array( 'deploy', 'test' ), true ) ) {
-		$active_status_tab = 'deploy';
+	if ( $deploy_features_enabled ) {
+		$available_status_tabs[] = 'deploy';
+	}
+
+	if ( $test_features_enabled ) {
+		$available_status_tabs[] = 'test';
+	}
+
+	if ( ! in_array( $active_status_tab, $available_status_tabs, true ) ) {
+		$active_status_tab = $default_status_tab;
 	}
 
 	?>
 	<div class="deploy-and-test-grid" id="deploy-and-test-controls" data-has-active-action="<?php echo esc_attr( $has_active_action ? '1' : '0' ); ?>">
-		<section class="deploy-and-test-card">
+		<?php if ( $deploy_features_enabled ) : ?>
+		<section class="deploy-and-test-card" data-testid="feature-deploy-controls">
 			<h2><?php echo esc_html__( 'Deploy', 'deploy-and-test' ); ?></h2>
 			<p class="deploy-and-test-muted"><?php echo esc_html__( 'Trigger configured GitHub Actions deploy workflows without pushing code.', 'deploy-and-test' ); ?></p>
 
@@ -47,8 +69,10 @@ function deploy_and_test_render_general_tab( $configured ) {
 				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Actions are locked while a deploy or test workflow is running.', 'deploy-and-test' ); ?></p>
 			<?php endif; ?>
 		</section>
+		<?php endif; ?>
 
-		<section class="deploy-and-test-card">
+		<?php if ( $test_features_enabled ) : ?>
+		<section class="deploy-and-test-card" data-testid="feature-test-controls">
 			<div class="deploy-and-test-tests-heading">
 				<h2><?php echo esc_html__( 'Tests', 'deploy-and-test' ); ?></h2>
 				<?php deploy_and_test_render_test_environment_select(); ?>
@@ -65,7 +89,7 @@ function deploy_and_test_render_general_tab( $configured ) {
 							'test_' . $test_action['id'],
 							$test_action['label'],
 							'button',
-							! deploy_and_test_tests_are_configured() || $has_active_action,
+							! $can_run_tests || $has_active_action,
 							'',
 							'',
 							array(
@@ -82,6 +106,7 @@ function deploy_and_test_render_general_tab( $configured ) {
 				<p class="deploy-and-test-lock-notice"><?php echo esc_html__( 'Test buttons are locked until the active workflow finishes.', 'deploy-and-test' ); ?></p>
 			<?php endif; ?>
 		</section>
+		<?php endif; ?>
 	</div>
 
 	<div
@@ -93,21 +118,29 @@ function deploy_and_test_render_general_tab( $configured ) {
 		data-has-active-action="<?php echo esc_attr( $has_active_action ? '1' : '0' ); ?>"
 	>
 		<div class="deploy-and-test-subtab-list" role="tablist" aria-label="<?php echo esc_attr__( 'Status panels', 'deploy-and-test' ); ?>">
+			<?php if ( $deploy_features_enabled ) : ?>
 			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'deploy' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="deploy" data-testid="status-tab-deploy">
 				<?php echo esc_html__( 'Deploy status', 'deploy-and-test' ); ?>
 			</button>
+			<?php endif; ?>
+			<?php if ( $test_features_enabled ) : ?>
 			<button type="button" class="deploy-and-test-subtab <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" role="tab" aria-selected="<?php echo esc_attr( $active_status_tab === 'test' ? 'true' : 'false' ); ?>" data-deploy-and-test-status-tab="test" data-testid="status-tab-test">
 				<?php echo esc_html__( 'Test status', 'deploy-and-test' ); ?>
 			</button>
+			<?php endif; ?>
 		</div>
 
+		<?php if ( $deploy_features_enabled ) : ?>
 		<div id="deploy-and-test-deploy-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'deploy' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="deploy" data-testid="status-panel-deploy" <?php echo $active_status_tab === 'deploy' ? '' : 'hidden'; ?>>
 			<?php deploy_and_test_render_status_panel( $runs, $can_run_actions ); ?>
 		</div>
+		<?php endif; ?>
 
+		<?php if ( $test_features_enabled ) : ?>
 		<div id="deploy-and-test-test-status" class="deploy-and-test-status-panel <?php echo esc_attr( $active_status_tab === 'test' ? 'is-active' : '' ); ?>" data-deploy-and-test-status-panel="test" data-testid="status-panel-test" <?php echo $active_status_tab === 'test' ? '' : 'hidden'; ?>>
-			<?php deploy_and_test_render_test_status_panel( $test_runs, deploy_and_test_tests_are_configured() ); ?>
+			<?php deploy_and_test_render_test_status_panel( $test_runs, $can_run_tests ); ?>
 		</div>
+		<?php endif; ?>
 	</div>
 	<?php
 }

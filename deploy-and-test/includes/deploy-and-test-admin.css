@@ -43,15 +43,8 @@
     margin-bottom: 18px;
 }
 
-.deploy-and-test-cleanup-settings {
-    margin: 14px 0 0;
-    padding: 12px 14px;
-    background: #ffffff;
-    border: 1px solid #dcdcde;
-    border-radius: 4px;
-}
-
 .deploy-and-test-toggle {
+    position: relative;
     display: inline-flex;
     gap: 10px;
     align-items: flex-start;
@@ -60,7 +53,14 @@
 
 .deploy-and-test-toggle input {
     position: absolute;
+    z-index: 1;
+    top: 1px;
+    left: 0;
+    width: 36px;
+    height: 20px;
+    margin: 0;
     opacity: 0;
+    cursor: pointer;
 }
 
 .deploy-and-test-toggle-control {
@@ -129,6 +129,10 @@
     grid-column: 1 / -1;
 }
 
+.deploy-and-test-grid > :only-child {
+    grid-column: 1 / -1;
+}
+
 .deploy-and-test-muted {
     color: #646970;
 }
@@ -176,6 +180,26 @@
 
 .deploy-and-test-settings-form {
     margin-top: 18px;
+}
+
+.deploy-and-test-feature-settings-form {
+    max-width: 800px;
+}
+
+.deploy-and-test-settings-section {
+    margin-bottom: 18px;
+}
+
+.deploy-and-test-settings-toggles {
+    display: grid;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.deploy-and-test-settings-error {
+    margin: 16px 0 0;
+    color: #b32d2e;
+    font-weight: 600;
 }
 
 .deploy-and-test-settings-form label {

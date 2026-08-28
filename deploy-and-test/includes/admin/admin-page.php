@@ -18,6 +18,7 @@ function deploy_and_test_render_admin_page() {
 
 	if ( $can_manage_settings ) {
 		$allowed_tabs[] = 'connection';
+		$allowed_tabs[] = 'settings';
 		$allowed_tabs[] = 'audit-log';
 	}
 
@@ -27,7 +28,14 @@ function deploy_and_test_render_admin_page() {
 
 	$message    = isset( $_GET['deploy_and_test_message'] ) ? sanitize_text_field( wp_unslash( $_GET['deploy_and_test_message'] ) ) : '';
 	$status     = isset( $_GET['deploy_and_test_status'] ) ? sanitize_key( $_GET['deploy_and_test_status'] ) : 'info';
-	$configured = deploy_and_test_is_configured();
+	$configured = deploy_and_test_enabled_features_are_configured();
+	if ( deploy_and_test_deploy_features_enabled() && deploy_and_test_test_features_enabled() ) {
+		$configuration_message = __( 'Configure the enabled deploy and test features in Connection before using workflow actions.', 'deploy-and-test' );
+	} elseif ( deploy_and_test_deploy_features_enabled() ) {
+		$configuration_message = __( 'Configure the deploy repository and workflows in Connection before using deploy actions.', 'deploy-and-test' );
+	} else {
+		$configuration_message = __( 'Configure the testing repository and actions in Connection before using test actions.', 'deploy-and-test' );
+	}
 
 	?>
 	<div class="wrap deploy-and-test-page">
@@ -41,28 +49,28 @@ function deploy_and_test_render_admin_page() {
 
 		<?php if ( ! $configured ) : ?>
 			<div class="notice notice-error" data-testid="configuration-notice">
-			<p><?php echo esc_html__( 'Configure GitHub App constants in wp-config.php and repository/workflow settings in Connection before using deploy actions.', 'deploy-and-test' ); ?></p>
+			<p><?php echo esc_html( $configuration_message ); ?></p>
 			</div>
 		<?php endif; ?>
 
 		<details class="deploy-and-test-howto">
 			<summary><span class="deploy-and-test-howto-title"><?php echo esc_html__( 'How to use', 'deploy-and-test' ); ?></span></summary>
 			<?php deploy_and_test_render_how_to_use_page(); ?>
-			<?php if ( $can_manage_settings ) : ?>
-				<?php deploy_and_test_render_cleanup_settings(); ?>
-			<?php endif; ?>
 		</details>
 
 		<nav class="nav-tab-wrapper deploy-and-test-tabs" aria-label="<?php echo esc_attr__( 'Deploy tabs', 'deploy-and-test' ); ?>" data-testid="primary-tabs">
 			<?php deploy_and_test_tab_link( 'general', __( 'General', 'deploy-and-test' ), $tab ); ?>
 			<?php if ( $can_manage_settings ) : ?>
 				<?php deploy_and_test_tab_link( 'connection', __( 'Connection', 'deploy-and-test' ), $tab ); ?>
+				<?php deploy_and_test_tab_link( 'settings', __( 'Settings', 'deploy-and-test' ), $tab ); ?>
 				<?php deploy_and_test_tab_link( 'audit-log', __( 'Audit log', 'deploy-and-test' ), $tab ); ?>
 			<?php endif; ?>
 		</nav>
 
 		<?php if ( $tab === 'connection' ) : ?>
 			<?php deploy_and_test_render_connection_tab(); ?>
+		<?php elseif ( $tab === 'settings' ) : ?>
+			<?php deploy_and_test_render_settings_tab(); ?>
 		<?php elseif ( $tab === 'audit-log' ) : ?>
 			<?php deploy_and_test_render_audit_log_tab(); ?>
 		<?php else : ?>
@@ -81,29 +89,6 @@ function deploy_and_test_render_how_to_use_page() {
 	}
 
 	echo '<p>' . esc_html__( 'Instructions will be added here.', 'deploy-and-test' ) . '</p>';
-}
-
-function deploy_and_test_render_cleanup_settings() {
-	$settings                 = deploy_and_test_get_settings();
-	$delete_data_on_uninstall = ! empty( $settings['delete_data_on_uninstall'] );
-
-	?>
-	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="deploy-and-test-cleanup-settings">
-		<input type="hidden" name="action" value="deploy_and_test_save_cleanup_settings">
-		<?php wp_nonce_field( 'deploy_and_test_save_cleanup_settings', 'deploy_and_test_nonce' ); ?>
-
-		<label class="deploy-and-test-toggle">
-			<input type="checkbox" name="delete_data_on_uninstall" value="1" onchange="this.form.submit();" <?php checked( $delete_data_on_uninstall ); ?>>
-			<span class="deploy-and-test-toggle-control" aria-hidden="true"></span>
-			<span>
-				<strong><?php echo esc_html__( 'Delete plugin data on uninstall', 'deploy-and-test' ); ?></strong>
-				<span class="deploy-and-test-toggle-description">
-					<?php echo esc_html__( 'When enabled, uninstalling the plugin removes Deploy & Test settings, audit logs, temporary locks, and cached test summaries from the database.', 'deploy-and-test' ); ?>
-				</span>
-			</span>
-		</label>
-	</form>
-	<?php
 }
 
 function deploy_and_test_tab_link( $slug, $label, $active_tab ) {

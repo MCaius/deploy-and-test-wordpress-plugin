@@ -43,7 +43,8 @@ Deploy & Test brings controlled deploy buttons, test suite triggers, status chec
 
 ## Features
 
-- WordPress admin page with Deploy, Tests, Connection, and Audit log tabs.
+- WordPress admin page with General, Connection, Settings, and Audit log tabs.
+- Deploy and test features can be enabled together or independently without deleting their saved configuration.
 - GitHub App authentication with short-lived installation tokens.
 - Native WordPress updates from verified stable GitHub Releases.
 - Configurable repository owner, repositories, refs, workflow filenames, deploy button labels, target labels, and optional environment URLs.
@@ -52,7 +53,7 @@ Deploy & Test brings controlled deploy buttons, test suite triggers, status chec
 - Recent workflow run status cards with optional direct environment links and polling while actions are active.
 - Test summary artifact display for compact JSON reports.
 - Audit log stored in WordPress options and limited to the latest 100 entries.
-- Optional uninstall cleanup for settings, audit logs, locks, and cached test summaries.
+- Optional uninstall cleanup for settings, audit logs, locks, and cached test summaries; cleanup is disabled by default.
 
 ## Architecture
 
@@ -94,6 +95,7 @@ Then configure the GitHub integration:
 1. Create and install a GitHub App with `Actions: Read and write`.
 2. Add the GitHub App constants to `wp-config.php`.
 3. Configure repository and workflow settings in `Deploy & Test -> Connection`.
+4. Choose Deploy and Tests, Deploy only, or Tests only in `Deploy & Test -> Settings`.
 
 For detailed setup instructions, GitHub App settings, workflow examples, and test summary format, see [HOW-TO-USE.md](HOW-TO-USE.md).
 
@@ -154,7 +156,7 @@ See [docs/development/testing.md](docs/development/testing.md) for local environ
 - The plugin does not push code.
 - The plugin triggers GitHub Actions workflow dispatches on configured refs.
 - WordPress Editors are allowed to trigger configured deploy and test actions. This is intentional for teams that want non-technical WordPress users to run approved workflows without granting WordPress administrator access or GitHub access.
-- Only WordPress Administrators can change plugin configuration, GitHub repository settings, workflow filenames, test actions, cleanup settings, or view the audit log.
+- Only WordPress Administrators can change plugin configuration, feature and cleanup settings, GitHub repository settings, workflow filenames, test actions, or view the audit log.
 - GitHub App private keys are read from `wp-config.php` constants, not stored in the database.
 - WordPress generates short-lived GitHub installation tokens server-side when actions run.
 - Update checks use GitHub's public Releases API without GitHub App credentials, installation tokens, site data, or telemetry.

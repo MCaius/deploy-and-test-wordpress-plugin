@@ -69,16 +69,16 @@ npm run env:test:stop
 ```
 
 Coverage includes GitHub release parsing and native update metadata, roles and permissions, nonce enforcement for privileged POST
-and AJAX handlers, settings and request-boundary validation, actions and locks,
+and AJAX handlers, feature defaults and operating modes, disabled-action rejection, settings and request-boundary validation, actions and locks,
 GitHub authentication and controlled API responses, credential-leakage checks,
 escaped admin output, status handling, audit logs, summary artifacts, and
 uninstall behavior.
 
 ## Playwright admin E2E suite
 
-The Playwright suite runs nine isolated WordPress admin journeys for
+The Playwright suite runs ten isolated WordPress admin journeys for
 Administrator, Editor, and Subscriber behavior. Test setup resets plugin state
-and creates the required local users. A controlled polling journey verifies that
+and creates the required local users. A feature-settings journey verifies Deploy-only and Tests-only visibility, preserved Connection configuration, cleanup defaults, and cross-session persistence. A controlled polling journey verifies that
 test completion restores the page with Test status selected. The security journey
 injects a controlled stored-content payload and confirms that settings and audit
 output escape it without executing JavaScript. The suite does not require GitHub
@@ -177,7 +177,7 @@ The reusable GitHub Actions release-gate workflow runs:
 - WordPress Plugin Check against the packaged plugin.
 - Clean installation and activation of the packaged ZIP.
 - Native update from an older packaged version with settings preservation.
-- The nine Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
+- The ten Playwright WordPress admin journeys, including feature-mode persistence, workflow-completion restoration, and the stored-content security boundary.
 
 The release workflow depends on the complete gate workflow. A tag must not
 publish a release when verification fails.

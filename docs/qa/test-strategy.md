@@ -54,16 +54,17 @@ consume GitHub rate limits, and cannot trigger real workflows accidentally.
 
 The PHPUnit integration suite covers permissions, settings validation, action
 locking and dispatch, GitHub authentication and controlled API responses,
-status matching, audit logs, summary artifacts, uninstall behavior, privileged
+status matching, feature modes, disabled-action rejection, audit logs, summary artifacts, uninstall behavior, privileged
 handler authorization and nonce enforcement, output escaping, malicious
 request boundaries, and credential leakage.
 
 ### 3. WordPress admin E2E
 
-Playwright runs nine browser journeys against the isolated E2E WordPress
+Playwright runs ten browser journeys against the isolated E2E WordPress
 environment. These journeys cover:
 
-- Administrator navigation across General, Connection, Audit log, and status panels.
+- Administrator navigation across General, Connection, Settings, Audit log, and status panels.
+- Deploy-only and Tests-only behavior, preserved Connection values, cleanup defaults, and cross-session settings persistence.
 - Automatic server-rendered action restoration with Test status preserved after test workflow completion.
 - Successful repository-setting persistence.
 - Validation feedback and rejection of malformed settings.
@@ -115,7 +116,7 @@ The reusable release-gate workflow verifies:
 - WordPress Plugin Check against the packaged plugin.
 - Installation and activation of the packaged ZIP in a clean WordPress environment.
 - Native update from a synthetic older package, including activation and settings preservation.
-- The nine Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
+- The ten Playwright WordPress admin journeys, including feature-mode persistence, workflow-completion restoration, and the stored-content security boundary.
 
 The release workflow must complete these gates before it can build and publish
 a GitHub release.
@@ -124,8 +125,8 @@ a GitHub release.
 
 | Role | Expected access |
 | --- | --- |
-| Administrator | View the plugin, configure connections and cleanup, test connections, and run actions. |
-| Editor | View the plugin and run configured deploy/test actions, but not change connection or cleanup settings. |
+| Administrator | View the plugin, configure connections, feature modes, and cleanup, test connections, and run enabled actions. |
+| Editor | View the plugin and run enabled deploy/test actions, but not change Connection, Settings, or cleanup preferences. |
 | Subscriber | No plugin page or action access. |
 
 ## Result states
