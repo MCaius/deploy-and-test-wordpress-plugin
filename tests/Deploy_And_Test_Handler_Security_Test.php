@@ -57,6 +57,8 @@ class Deploy_And_Test_Handler_Security_Test extends Deploy_And_Test_Test_Case {
 			'subscriber deploy action'               => array( 'deploy_and_test_handle_deploy_action', 'subscriber', 'deploy_and_test_action', 'permission to run deploy actions' ),
 			'unauthenticated settings save'          => array( 'deploy_and_test_handle_save_settings', '', 'deploy_and_test_save_settings', 'permission to update deploy settings' ),
 			'editor settings save'                   => array( 'deploy_and_test_handle_save_settings', 'editor', 'deploy_and_test_save_settings', 'permission to update deploy settings' ),
+			'unauthenticated feature settings save'  => array( 'deploy_and_test_handle_save_feature_settings', '', 'deploy_and_test_save_feature_settings', 'permission to update plugin settings' ),
+			'editor feature settings save'           => array( 'deploy_and_test_handle_save_feature_settings', 'editor', 'deploy_and_test_save_feature_settings', 'permission to update plugin settings' ),
 			'unauthenticated cleanup save'           => array( 'deploy_and_test_handle_save_cleanup_settings', '', 'deploy_and_test_save_cleanup_settings', 'permission to update deploy settings' ),
 			'editor cleanup save'                    => array( 'deploy_and_test_handle_save_cleanup_settings', 'editor', 'deploy_and_test_save_cleanup_settings', 'permission to update deploy settings' ),
 			'unauthenticated deploy connection test' => array( 'deploy_and_test_handle_test_connection', '', 'deploy_and_test_test_connection', 'permission to test the GitHub connection' ),
@@ -86,6 +88,7 @@ class Deploy_And_Test_Handler_Security_Test extends Deploy_And_Test_Test_Case {
 		return array(
 			'deploy action'           => array( 'deploy_and_test_handle_deploy_action', 'editor' ),
 			'settings save'           => array( 'deploy_and_test_handle_save_settings', 'administrator' ),
+			'feature settings save'   => array( 'deploy_and_test_handle_save_feature_settings', 'administrator' ),
 			'cleanup save'            => array( 'deploy_and_test_handle_save_cleanup_settings', 'administrator' ),
 			'deploy connection test'  => array( 'deploy_and_test_handle_test_connection', 'administrator' ),
 			'testing connection test' => array( 'deploy_and_test_handle_test_testing_connection', 'administrator' ),

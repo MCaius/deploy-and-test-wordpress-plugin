@@ -17,5 +17,6 @@ require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/assets.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/admin-page.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/general-tab.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/connection-tab.php';
+require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/settings-tab.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/audit-log-tab.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/hooks.php';

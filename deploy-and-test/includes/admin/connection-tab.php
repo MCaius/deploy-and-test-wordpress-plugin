@@ -94,7 +94,7 @@ function deploy_and_test_render_connection_tab() {
 				<div class="deploy-and-test-settings-grid">
 					<label>
 						<?php echo esc_html__( 'Owner or organization', 'deploy-and-test' ); ?>
-						<input type="text" name="owner" value="<?php echo esc_attr( $settings['owner'] ); ?>" placeholder="example-org">
+						<input type="text" name="owner" value="<?php echo esc_attr( $settings['owner'] ); ?>" placeholder="example-org" data-testid="connection-owner">
 					</label>
 				</div>
 
@@ -103,7 +103,7 @@ function deploy_and_test_render_connection_tab() {
 						<button type="button" class="deploy-and-test-subtab is-active" id="deploy-and-test-deploy-repo-tab" role="tab" aria-selected="true" aria-controls="deploy-and-test-deploy-repo-panel" data-deploy-and-test-subtab="deploy">
 							<?php echo esc_html__( 'Deploy repository', 'deploy-and-test' ); ?>
 						</button>
-						<button type="button" class="deploy-and-test-subtab" id="deploy-and-test-test-repo-tab" role="tab" aria-selected="false" aria-controls="deploy-and-test-test-repo-panel" data-deploy-and-test-subtab="test">
+						<button type="button" class="deploy-and-test-subtab" id="deploy-and-test-test-repo-tab" role="tab" aria-selected="false" aria-controls="deploy-and-test-test-repo-panel" data-deploy-and-test-subtab="test" data-testid="test-repository-tab">
 							<?php echo esc_html__( 'Test repository', 'deploy-and-test' ); ?>
 						</button>
 					</div>
@@ -185,7 +185,7 @@ function deploy_and_test_render_connection_tab() {
 						<div class="deploy-and-test-settings-grid">
 							<label>
 								<?php echo esc_html__( 'Repository', 'deploy-and-test' ); ?>
-								<input type="text" name="test_repo" value="<?php echo esc_attr( $settings['test_repo'] ); ?>" placeholder="example-tests">
+								<input type="text" name="test_repo" value="<?php echo esc_attr( $settings['test_repo'] ); ?>" placeholder="example-tests" data-testid="test-repository-name">
 							</label>
 
 							<label>

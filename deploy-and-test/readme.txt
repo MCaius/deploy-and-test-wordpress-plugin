@@ -16,7 +16,9 @@ Deploy & Test gives trusted WordPress users controlled buttons for triggering co
 
 GitHub App credentials remain server-side. The plugin generates short-lived installation tokens when an action runs, displays recent workflow status, loads compact test-summary artifacts, and records an audit trail in WordPress.
 
-Administrators configure the GitHub owner, repositories, refs, independently optional Preview and Production workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
+Administrators configure the GitHub owner, repositories, refs, independently optional Preview and Production workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Deploy and test features can be enabled together or independently from Settings without deleting their saved configuration. Editors can run the enabled, approved actions without receiving GitHub access or personal access tokens.
+
+The optional uninstall cleanup setting is disabled by default. Plugin data is preserved unless an Administrator explicitly enables cleanup in Settings.
 
 The first updater-enabled release must be installed manually on existing sites. Future stable GitHub Releases containing the verified `deploy-and-test.zip` asset can be installed through the standard WordPress Plugins and Updates screens.
 
@@ -26,6 +28,7 @@ The first updater-enabled release must be installed manually on existing sites. 
 2. Create a GitHub App with Actions read and write access and install it on the required repositories.
 3. Add the GitHub App ID, installation ID, and private key path to wp-config.php.
 4. Open Deploy & Test in WordPress and configure the deploy and testing repositories and workflows.
+5. Open Settings and choose Deploy and Tests, Deploy only, or Tests only.
 
 == Frequently Asked Questions ==
 
@@ -40,6 +43,14 @@ No. GitHub App credentials are read from constants configured in wp-config.php.
 = Do update checks use the configured GitHub App? =
 
 No. Update discovery uses the public GitHub Releases API without sending GitHub App credentials, installation tokens, site data, or telemetry.
+
+= Can deploy and test features be used independently? =
+
+Yes. Administrators can select Deploy and Tests, Deploy only, or Tests only in Settings. Disabled features keep their saved Connection configuration and do not poll or make status requests.
+
+= Does uninstall remove plugin data by default? =
+
+No. Delete plugin data on uninstall is disabled by default and must be enabled explicitly in Settings.
 
 == Changelog ==
 

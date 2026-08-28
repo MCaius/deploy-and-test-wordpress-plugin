@@ -15,6 +15,7 @@ test('Administrator can navigate plugin tabs and status panels', async ({ page }
     await expect(page.getByRole('heading', { name: 'Deploy & Test', level: 1 })).toBeVisible();
     await expect(page.getByTestId('tab-general')).toBeVisible();
     await expect(page.getByTestId('tab-connection')).toBeVisible();
+    await expect(page.getByTestId('tab-settings')).toBeVisible();
     await expect(page.getByTestId('tab-audit-log')).toBeVisible();
 
     await page.getByTestId('status-tab-test').click();
@@ -28,6 +29,64 @@ test('Administrator can navigate plugin tabs and status panels', async ({ page }
     await page.getByTestId('tab-audit-log').click();
     await expect(page).toHaveURL(/tab=audit-log/);
     await expect(page.getByRole('heading', { name: 'Audit log' })).toBeVisible();
+});
+
+test('Administrator can switch feature modes without losing configuration', async ({ page }) => {
+    await loginAs(page, users.administrator);
+    await page.goto(`${pluginPage}&tab=connection`);
+
+    await page.getByTestId('connection-owner').fill('e2e-sandbox');
+    await page.getByTestId('test-repository-tab').click();
+    await page.getByTestId('test-repository-name').fill('test-repository-sandbox');
+    await page.getByTestId('save-connection-settings').click();
+
+    await page.getByTestId('tab-settings').click();
+    const deployToggle = page.getByRole('checkbox', { name: /Enable deploy features/ });
+    const testToggle = page.getByRole('checkbox', { name: /Enable test features/ });
+    const cleanupToggle = page.getByRole('checkbox', { name: /Delete plugin data on uninstall/ });
+    const deployToggleLabel = page.getByText('Enable deploy features', { exact: true });
+    const testToggleLabel = page.getByText('Enable test features', { exact: true });
+    const cleanupToggleLabel = page.getByText('Delete plugin data on uninstall', { exact: true });
+
+    await expect(deployToggle).toBeChecked();
+    await expect(testToggle).toBeChecked();
+    await expect(cleanupToggle).not.toBeChecked();
+
+    await testToggleLabel.click();
+    await cleanupToggleLabel.click();
+    await page.getByTestId('save-feature-settings').click();
+    await expect(page.getByTestId('admin-feedback-notice')).toContainText('Settings saved.');
+
+    await page.reload();
+    await expect(deployToggle).toBeChecked();
+    await expect(testToggle).not.toBeChecked();
+    await expect(cleanupToggle).toBeChecked();
+
+    await page.getByTestId('tab-general').click();
+    await expect(page.getByTestId('feature-deploy-controls')).toBeVisible();
+    await expect(page.getByTestId('feature-test-controls')).toHaveCount(0);
+    await expect(page.getByTestId('status-tab-test')).toHaveCount(0);
+
+    await page.getByTestId('tab-connection').click();
+    await page.getByTestId('test-repository-tab').click();
+    await expect(page.getByTestId('test-repository-name')).toHaveValue('test-repository-sandbox');
+
+    await page.getByTestId('tab-settings').click();
+    await testToggleLabel.click();
+    await deployToggleLabel.click();
+    await cleanupToggleLabel.click();
+    await page.getByTestId('save-feature-settings').click();
+
+    await page.getByTestId('tab-general').click();
+    await expect(page.getByTestId('feature-deploy-controls')).toHaveCount(0);
+    await expect(page.getByTestId('feature-test-controls')).toBeVisible();
+    await expect(page.getByTestId('status-tab-deploy')).toHaveCount(0);
+    await expect(page.getByTestId('status-tab-test')).toBeVisible();
+
+    await page.getByTestId('tab-settings').click();
+    await testToggleLabel.click();
+    await expect(testToggle).toBeChecked();
+    await expect(page.getByTestId('feature-settings-validation')).toBeVisible();
 });
 
 test('Completed test workflow restores the page with Test status selected', async ({ page }) => {
@@ -160,6 +219,7 @@ test('Editor can open approved actions but cannot access settings or audit tabs'
     await expect(page.getByRole('button', { name: 'Deploy Preview' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Deploy Production' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Connection', exact: true })).toHaveCount(0);
+    await expect(page.getByRole('link', { name: 'Settings', exact: true })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Audit log', exact: true })).toHaveCount(0);
 
     await page.goto(`${pluginPage}&tab=connection`);

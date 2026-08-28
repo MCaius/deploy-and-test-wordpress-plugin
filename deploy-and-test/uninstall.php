@@ -10,7 +10,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 $settings_option          = 'deploy_and_test_settings';
 $audit_option             = 'deploy_and_test_audit_log';
 $settings                 = get_option( $settings_option, array() );
-$delete_data_on_uninstall = true;
+$delete_data_on_uninstall = false;
 
 if ( is_array( $settings ) && array_key_exists( 'delete_data_on_uninstall', $settings ) ) {
 	$delete_data_on_uninstall = ! empty( $settings['delete_data_on_uninstall'] );

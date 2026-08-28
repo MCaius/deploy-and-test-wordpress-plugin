@@ -10,6 +10,13 @@
 - Independent Preview and Production workflow configuration, including per-environment controls and status cards.
 - Native WordPress update discovery for stable GitHub Releases containing the verified `deploy-and-test.zip` asset, with strict repository validation and cached failure handling.
 - Packaged-plugin update verification and release-version synchronization checks.
+- Administrator-only Settings tab with independent Deploy and Tests feature controls.
+- Regression coverage for feature defaults, operating modes, preserved configuration, disabled-action rejection, and cross-session settings behavior.
+
+### Changed
+
+- Disabled features no longer render controls or status UI, poll status, perform unnecessary GitHub requests, or accept manually constructed workflow actions.
+- Moved uninstall cleanup from How to use to Settings and changed its unsaved default to disabled while preserving explicitly saved preferences.
 
 ## 1.0.4 - 2026-08-10
 

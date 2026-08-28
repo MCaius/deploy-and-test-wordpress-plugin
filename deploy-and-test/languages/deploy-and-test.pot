@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deploy-and-test\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-18 15:23+0300\n"
+"POT-Creation-Date: 2026-08-28 00:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1302,4 +1302,64 @@ msgid "Deploy button labels are optional. Empty values use the default labels De
 msgstr ""
 
 msgid "Preview and Production workflow files are optional and independent. Leave either field empty to hide only that deploy action. Test actions remain independent of deploy workflow settings."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid "Choose which workflow features are available. At least one feature must remain enabled."
+msgstr ""
+
+msgid "Enable deploy features"
+msgstr ""
+
+msgid "Show deploy actions and status, and allow deploy polling and GitHub requests."
+msgstr ""
+
+msgid "Enable test features"
+msgstr ""
+
+msgid "Show test actions, environments, status, and summaries, and allow test polling and GitHub requests."
+msgstr ""
+
+msgid "Data and cleanup"
+msgstr ""
+
+msgid "Enable at least one feature: Deploy or Tests."
+msgstr ""
+
+msgid "You do not have permission to update plugin settings."
+msgstr ""
+
+msgid "Feature and cleanup settings were updated."
+msgstr ""
+
+msgid "Deploy features are disabled in Settings."
+msgstr ""
+
+msgid "Test features are disabled in Settings."
+msgstr ""
+
+msgid "Configure the enabled deploy and test features in Connection before using workflow actions."
+msgstr ""
+
+msgid "Configure the deploy repository and workflows in Connection before using deploy actions."
+msgstr ""
+
+msgid "Configure the testing repository and actions in Connection before using test actions."
+msgstr ""
+
+msgid "Administrators can choose <strong>Deploy and Tests</strong>, <strong>Deploy only</strong>, or <strong>Tests only</strong> in the Settings tab. Both features are enabled by default, and at least one must remain enabled."
+msgstr ""
+
+msgid "Disabling a feature hides its controls and status, stops its polling and GitHub status requests, and preserves its Connection configuration for later use."
+msgstr ""
+
+msgid "WordPress Editors can trigger enabled and configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, feature and cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access."
+msgstr ""
+
+msgid "Delete plugin data on uninstall is disabled by default. If an Administrator enables it in Settings, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries."
 msgstr ""

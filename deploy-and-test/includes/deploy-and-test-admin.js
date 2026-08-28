@@ -228,7 +228,7 @@
             });
         });
 
-        if (shouldOpenTestStatus) {
+        if (shouldOpenTestStatus && testStatusContainer) {
             activateStatusTab('test');
         }
     }
@@ -466,6 +466,42 @@
         });
     }
 
+    function setupFeatureSettingsValidation() {
+        const form = document.querySelector('.deploy-and-test-feature-settings-form');
+
+        if (!form) {
+            return;
+        }
+
+        const toggles = Array.from(form.querySelectorAll('[data-deploy-and-test-feature-toggle]'));
+        const message = form.querySelector('[data-testid="feature-settings-validation"]');
+
+        function hasEnabledFeature() {
+            return toggles.some((toggle) => toggle.checked);
+        }
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener('change', () => {
+                if (hasEnabledFeature()) {
+                    message.hidden = true;
+                    return;
+                }
+
+                toggle.checked = true;
+                message.hidden = false;
+            });
+        });
+
+        form.addEventListener('submit', (event) => {
+            if (hasEnabledFeature()) {
+                return;
+            }
+
+            event.preventDefault();
+            message.hidden = false;
+        });
+    }
+
     document.querySelectorAll('.deploy-and-test-action-form').forEach((form) => {
         form.addEventListener('submit', () => {
             setButtonsDisabled(true, true);
@@ -477,6 +513,7 @@
     setupTestEnvironmentSelect();
     setupSubtabs();
     setupEnvironmentUrlValidation();
+    setupFeatureSettingsValidation();
     setupStatusTabs();
     syncActionButtons();
     if (testStatusContainer) {

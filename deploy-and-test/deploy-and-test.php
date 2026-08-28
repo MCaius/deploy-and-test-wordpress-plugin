@@ -36,11 +36,19 @@ register_activation_hook(
 		}
 
 		if ( ! array_key_exists( 'delete_data_on_uninstall', $settings ) ) {
-			$settings['delete_data_on_uninstall'] = true;
+			$settings['delete_data_on_uninstall'] = false;
 		}
 
 		if ( ! array_key_exists( 'delete_data_on_uninstall_touched', $settings ) ) {
 			$settings['delete_data_on_uninstall_touched'] = false;
+		}
+
+		if ( ! array_key_exists( 'enable_deploy_features', $settings ) ) {
+			$settings['enable_deploy_features'] = true;
+		}
+
+		if ( ! array_key_exists( 'enable_test_features', $settings ) ) {
+			$settings['enable_test_features'] = true;
 		}
 
 		update_option( 'deploy_and_test_settings', $settings, false );

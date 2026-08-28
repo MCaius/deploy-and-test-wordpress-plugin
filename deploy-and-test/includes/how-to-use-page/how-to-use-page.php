@@ -16,6 +16,14 @@ $deploy_and_test_can_manage_settings = current_user_can( deploy_and_test_setting
 
 		<div class="deploy-and-test-how-to-use-content">
 			<p>
+				<?php echo wp_kses_post( __( 'Administrators can choose <strong>Deploy and Tests</strong>, <strong>Deploy only</strong>, or <strong>Tests only</strong> in the Settings tab. Both features are enabled by default, and at least one must remain enabled.', 'deploy-and-test' ) ); ?>
+			</p>
+
+			<p>
+				<?php echo esc_html__( 'Disabling a feature hides its controls and status, stops its polling and GitHub status requests, and preserves its Connection configuration for later use.', 'deploy-and-test' ); ?>
+			</p>
+
+			<p>
 				<?php echo wp_kses_post( __( 'Use the configured Preview and Production deploy buttons to trigger deploy workflows from WordPress. Their default labels are <strong>Deploy Preview</strong> and <strong>Deploy Production</strong>. Use the <strong>Tests</strong> box to run the configured test actions against the selected test environment.', 'deploy-and-test' ) ); ?>
 			</p>
 
@@ -36,7 +44,7 @@ $deploy_and_test_can_manage_settings = current_user_can( deploy_and_test_setting
 			</p>
 
 			<p>
-				<?php echo esc_html__( 'WordPress Editors can trigger the configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access.', 'deploy-and-test' ); ?>
+				<?php echo esc_html__( 'WordPress Editors can trigger enabled and configured deploy and test actions, but only Administrators can change plugin configuration, workflow settings, feature and cleanup settings, or audit-log access. This is intended for teams that want trusted non-technical WordPress users to run approved workflows without granting administrator or GitHub access.', 'deploy-and-test' ); ?>
 			</p>
 		</div>
 	</details>
@@ -418,7 +426,7 @@ Test action input values: all, api, ui, seo, performance</code></pre>
 			</p>
 
 			<p>
-				<?php echo esc_html__( 'If Delete plugin data on uninstall is enabled, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries.', 'deploy-and-test' ); ?>
+				<?php echo esc_html__( 'Delete plugin data on uninstall is disabled by default. If an Administrator enables it in Settings, uninstalling the plugin also removes the stored settings, audit log, temporary locks, and cached test summaries.', 'deploy-and-test' ); ?>
 			</p>
 		</div>
 	</details>
