@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Deploy & Test
  * Description: Trigger GitHub Actions deploy workflows from the WordPress admin using a GitHub App.
- * Version: 1.0.4
+ * Version: 1.1.0
  * Author: MCaius
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'DEPLOY_AND_TEST_PLUGIN_FILE', __FILE__ );
 define( 'DEPLOY_AND_TEST_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DEPLOY_AND_TEST_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'DEPLOY_AND_TEST_VERSION', '1.0.4' );
+define( 'DEPLOY_AND_TEST_VERSION', '1.1.0' );
 
 add_action(
 	'plugins_loaded',
