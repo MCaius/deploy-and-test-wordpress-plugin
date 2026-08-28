@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/constants.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/settings.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/audit-log.php';
+require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/updater.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/github.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/actions.php';
 require_once DEPLOY_AND_TEST_PLUGIN_DIR . 'includes/admin/assets.php';

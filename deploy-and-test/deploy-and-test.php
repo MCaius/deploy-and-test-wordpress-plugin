@@ -6,6 +6,7 @@
  * Author: MCaius
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI: https://github.com/MCaius/deploy-and-test-wordpress-plugin
  * Text Domain: deploy-and-test
  */
 
@@ -16,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'DEPLOY_AND_TEST_PLUGIN_FILE', __FILE__ );
 define( 'DEPLOY_AND_TEST_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DEPLOY_AND_TEST_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DEPLOY_AND_TEST_VERSION', '1.0.4' );
 
 add_action(
 	'plugins_loaded',

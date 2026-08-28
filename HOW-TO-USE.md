@@ -2,6 +2,12 @@
 
 This guide explains how to connect Deploy & Test to GitHub Actions using a GitHub App, configure deploy and test workflows, and expose automated test results inside WordPress.
 
+## Updating Deploy & Test
+
+The first release containing the native GitHub updater must be installed manually on existing sites. Future stable releases containing the verified `deploy-and-test.zip` asset appear in the standard WordPress Plugins and Updates screens and can be installed with **Update now**.
+
+Update discovery uses GitHub's public Releases API. It does not use the configured GitHub App, send private keys or installation tokens, or modify deploy/test workflows. Drafts, prereleases, malformed releases, missing assets, and package URLs outside `MCaius/deploy-and-test-wordpress-plugin` are ignored. If GitHub is unavailable, the installed plugin continues to work normally.
+
 ## 1. Create a GitHub App
 
 Create the GitHub App from the account or organization that owns the repositories used by the deploy flow.

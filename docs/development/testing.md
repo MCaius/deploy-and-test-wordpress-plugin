@@ -29,6 +29,7 @@ explicit.
 | PHPUnit integration | `.wp-env.test.json` | `http://localhost:8892` |
 | Playwright admin E2E | `.wp-env.e2e.json` | `http://localhost:8893` |
 | Packaged ZIP smoke test | `.wp-env.package.json` | `http://localhost:8890` |
+| Packaged native update | `.wp-env.update.json` | `http://localhost:8891` |
 
 All configurations enable `WP_DEBUG` and `WP_DEBUG_LOG` and disable
 `WP_DEBUG_DISPLAY`.
@@ -67,7 +68,7 @@ npm run test:php
 npm run env:test:stop
 ```
 
-Coverage includes roles and permissions, nonce enforcement for privileged POST
+Coverage includes GitHub release parsing and native update metadata, roles and permissions, nonce enforcement for privileged POST
 and AJAX handlers, settings and request-boundary validation, actions and locks,
 GitHub authentication and controlled API responses, credential-leakage checks,
 escaped admin output, status handling, audit logs, summary artifacts, and
@@ -75,7 +76,7 @@ uninstall behavior.
 
 ## Playwright admin E2E suite
 
-The Playwright suite runs seven isolated WordPress admin journeys for
+The Playwright suite runs nine isolated WordPress admin journeys for
 Administrator, Editor, and Subscriber behavior. Test setup resets plugin state
 and creates the required local users. A controlled polling journey verifies that
 test completion restores the page with Test status selected. The security journey
@@ -138,6 +139,23 @@ npx wp-env --config=.wp-env.package.json run cli wp eval 'if ( ! defined( "DEPLO
 npx wp-env --config=.wp-env.package.json stop
 ```
 
+## Packaged native update test
+
+Build the current ZIP, create a synthetic older updater-enabled package, and
+run the update in a disposable WordPress environment:
+
+```bash
+npm run build:zip
+npm run prepare:update-test
+npm run env:update:start -- --update
+npx wp-env --config=.wp-env.update.json run cli wp plugin install /var/www/html/wp-content/deploy-and-test-update-fixtures/deploy-and-test-old.zip --activate
+npx wp-env --config=.wp-env.update.json run cli wp eval-file /var/www/html/wp-content/deploy-and-test-update-fixtures/package-update-smoke.php
+npm run env:update:stop
+```
+
+The test confirms that WordPress replaces the older package with the current
+ZIP, keeps the plugin active, and preserves saved Deploy & Test settings.
+
 ## Live GitHub sandbox
 
 The live layer uses only the dedicated QA organization, GitHub App, deploy
@@ -158,7 +176,8 @@ The reusable GitHub Actions release-gate workflow runs:
 - PHPUnit on latest WordPress with PHP 7.4, 8.0, 8.2, and 8.3.
 - WordPress Plugin Check against the packaged plugin.
 - Clean installation and activation of the packaged ZIP.
-- The seven Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
+- Native update from an older packaged version with settings preservation.
+- The nine Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
 
 The release workflow depends on the complete gate workflow. A tag must not
 publish a release when verification fails.
@@ -176,6 +195,8 @@ npm run env:e2e:start -- --update
 npm run test:e2e
 npm run env:e2e:stop
 npm run build:zip
+npm run prepare:update-test
+npm run verify:release-version
 git diff --check
 ```
 

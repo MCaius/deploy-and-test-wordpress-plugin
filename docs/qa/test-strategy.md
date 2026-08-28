@@ -47,6 +47,7 @@ This layer should cover:
 - Network timeouts and malformed response bodies.
 - Run-status selection and concurrent-action blocking.
 - Artifact selection, size limits, missing artifacts, and malformed summaries.
+- Stable GitHub release parsing, allow-listed package URLs, cached failures, and native update metadata.
 
 Mocks are the default for automated tests because they are repeatable, do not
 consume GitHub rate limits, and cannot trigger real workflows accidentally.
@@ -59,7 +60,7 @@ request boundaries, and credential leakage.
 
 ### 3. WordPress admin E2E
 
-Playwright runs seven browser journeys against the isolated E2E WordPress
+Playwright runs nine browser journeys against the isolated E2E WordPress
 environment. These journeys cover:
 
 - Administrator navigation across General, Connection, Audit log, and status panels.
@@ -113,7 +114,8 @@ The reusable release-gate workflow verifies:
 - Latest WordPress on PHP 7.4, 8.0, 8.2, and 8.3.
 - WordPress Plugin Check against the packaged plugin.
 - Installation and activation of the packaged ZIP in a clean WordPress environment.
-- The seven Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
+- Native update from a synthetic older package, including activation and settings preservation.
+- The nine Playwright WordPress admin journeys, including workflow-completion restoration and the stored-content security boundary.
 
 The release workflow must complete these gates before it can build and publish
 a GitHub release.
