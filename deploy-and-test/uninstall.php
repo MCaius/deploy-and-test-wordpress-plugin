@@ -22,6 +22,7 @@ if ( ! $delete_data_on_uninstall ) {
 
 delete_option( $settings_option );
 delete_option( $audit_option );
+delete_site_transient( 'deploy_and_test_github_release_update' );
 
 global $wpdb;
 

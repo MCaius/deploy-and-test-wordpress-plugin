@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build:zip": "node scripts/build-zip.mjs",
+    "prepare:update-test": "node scripts/prepare-update-test.mjs",
+    "verify:release-version": "node scripts/verify-release-version.mjs",
     "env:start": "wp-env start",
     "env:stop": "wp-env stop",
     "env:status": "wp-env status",
@@ -15,9 +17,13 @@
     "env:e2e:start": "wp-env --config=.wp-env.e2e.json start",
     "env:e2e:stop": "wp-env --config=.wp-env.e2e.json stop",
     "env:e2e:status": "wp-env --config=.wp-env.e2e.json status",
+    "env:update:start": "wp-env --config=.wp-env.update.json start",
+    "env:update:stop": "wp-env --config=.wp-env.update.json stop",
     "test:php": "wp-env --config=.wp-env.test.json run cli php wp-content/plugins/deploy-and-test/vendor/bin/phpunit -c wp-content/plugins/deploy-and-test/phpunit.xml.dist --do-not-cache-result",
     "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "plugin-check:install": "wp-env --config=.wp-env.package.json run cli wp plugin install plugin-check --activate",
+    "plugin-check": "wp-env --config=.wp-env.package.json run cli wp plugin check deploy-and-test --require=./wp-content/plugins/plugin-check/cli.php --ignore-codes=plugin_updater_detected"
   },
   "devDependencies": {
     "@playwright/test": "1.62.1",

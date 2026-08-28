@@ -45,6 +45,7 @@ Deploy & Test brings controlled deploy buttons, test suite triggers, status chec
 
 - WordPress admin page with Deploy, Tests, Connection, and Audit log tabs.
 - GitHub App authentication with short-lived installation tokens.
+- Native WordPress updates from verified stable GitHub Releases.
 - Configurable repository owner, repositories, refs, workflow filenames, deploy button labels, target labels, and optional environment URLs.
 - Independently configurable Preview and Production deploy actions.
 - Configurable test action buttons and test environments.
@@ -86,6 +87,8 @@ Install it from WordPress:
 2. Select the downloaded `deploy-and-test.zip` file and choose `Install Now`.
 3. Activate `Deploy & Test`.
 
+The first release containing the GitHub updater must be installed manually on existing sites. After that, newer stable GitHub Releases containing the verified `deploy-and-test.zip` asset appear in the standard WordPress Plugins and Updates screens. Drafts, prereleases, missing assets, and packages outside the allow-listed repository are ignored.
+
 Then configure the GitHub integration:
 
 1. Create and install a GitHub App with `Actions: Read and write`.
@@ -108,7 +111,7 @@ This creates:
 dist/deploy-and-test.zip
 ```
 
-Upload that zip manually in WordPress:
+For the first installation, upload that zip manually in WordPress:
 
 ```text
 Plugins -> Add New Plugin -> Upload Plugin
@@ -154,6 +157,7 @@ See [docs/development/testing.md](docs/development/testing.md) for local environ
 - Only WordPress Administrators can change plugin configuration, GitHub repository settings, workflow filenames, test actions, cleanup settings, or view the audit log.
 - GitHub App private keys are read from `wp-config.php` constants, not stored in the database.
 - WordPress generates short-lived GitHub installation tokens server-side when actions run.
+- Update checks use GitHub's public Releases API without GitHub App credentials, installation tokens, site data, or telemetry.
 - Admin POST/AJAX handlers use capability checks and nonces.
 - Audit logs are stored in `wp_options` under `deploy_and_test_audit_log`.
 

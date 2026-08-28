@@ -328,3 +328,27 @@ settings.
 workflow buttons and status cards are not displayed, the both-empty state is
 explained clearly, no GitHub request is made for an unconfigured environment,
 and test actions are unaffected.
+
+## Native plugin updates
+
+### QA-027 — GitHub release discovery and WordPress update
+
+**Layer:** Disposable local package plus controlled release
+
+1. Install the previous updater-enabled Deploy & Test version on a disposable
+   WordPress site and save recognizable settings.
+2. Publish a newer stable GitHub Release whose tag matches the plugin version
+   and whose assets contain the verified `deploy-and-test.zip` package.
+3. Refresh the WordPress Updates screen and confirm that the new version is
+   offered for Deploy & Test.
+4. Install it using the standard **Update now** action.
+5. Confirm that the plugin remains active, reports the expected version, and
+   preserves the saved settings.
+6. Repeat discovery with a draft, prerelease, malformed tag, missing expected
+   ZIP, and an asset URL outside the allow-listed repository.
+7. Simulate an unavailable or malformed GitHub API response.
+
+**Expected:** Only a newer stable release with the exact package from the
+allow-listed HTTPS repository is offered. The update succeeds without losing
+settings. Unsafe or unavailable releases fail closed without affecting the
+installed plugin, and no GitHub App credentials or site data are sent.

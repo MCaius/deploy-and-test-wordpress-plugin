@@ -8,6 +8,8 @@
 - Optional Preview and Production environment links in the deploy status area.
 - Regression coverage for deploy labels, environment URL validation, settings persistence, and safe link rendering.
 - Independent Preview and Production workflow configuration, including per-environment controls and status cards.
+- Native WordPress update discovery for stable GitHub Releases containing the verified `deploy-and-test.zip` asset, with strict repository validation and cached failure handling.
+- Packaged-plugin update verification and release-version synchronization checks.
 
 ## 1.0.4 - 2026-08-10
 

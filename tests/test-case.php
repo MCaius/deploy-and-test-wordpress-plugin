@@ -15,6 +15,7 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 		delete_option( deploy_and_test_deploy_lock_key( 'global' ) );
 		delete_option( deploy_and_test_deploy_lock_key( 'preview' ) );
 		delete_option( deploy_and_test_deploy_lock_key( 'production' ) );
+		delete_site_transient( DEPLOY_AND_TEST_GITHUB_RELEASE_CACHE_KEY );
 
 		$this->github_response_callback = null;
 		$this->installation_token_response_callback = null;
@@ -23,6 +24,7 @@ abstract class Deploy_And_Test_Test_Case extends WP_UnitTestCase {
 
 	public function tear_down() {
 		remove_filter( 'pre_http_request', array( $this, 'filter_github_http_request' ), 10 );
+		delete_site_transient( DEPLOY_AND_TEST_GITHUB_RELEASE_CACHE_KEY );
 		unset( $_POST['test_environment'] );
 		unset( $_POST['deploy_action'], $_POST['deploy_and_test_nonce'] );
 		unset( $_REQUEST['deploy_and_test_nonce'] );

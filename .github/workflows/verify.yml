@@ -129,9 +129,10 @@ jobs:
           unzip -q dist/deploy-and-test.zip -d dist/package
 
       - name: Run Plugin Check against packaged plugin
-        uses: WordPress/plugin-check-action@18573eb38f13543484a1f095672dae3849a4fbb0 # v1.1.6
+        uses: WordPress/plugin-check-action@98a1788320d0add90df2d8183934ecccbc4e05d2 # v1.1.7
         with:
           build-dir: ./dist/package/deploy-and-test
+          ignore-codes: plugin_updater_detected
 
   packaged-install:
     name: Packaged plugin install and activation
@@ -204,3 +205,38 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+
+  packaged-update:
+    name: Packaged native plugin update
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Prepare current and older plugin packages
+        run: |
+          npm run build:zip
+          npm run prepare:update-test
+
+      - name: Start disposable update environment
+        run: npm run env:update:start -- --update
+
+      - name: Install older package and perform native update
+        run: |
+          npx wp-env --config=.wp-env.update.json run cli wp plugin install /var/www/html/wp-content/deploy-and-test-update-fixtures/deploy-and-test-old.zip --activate
+          npx wp-env --config=.wp-env.update.json run cli wp eval-file /var/www/html/wp-content/deploy-and-test-update-fixtures/package-update-smoke.php
+          npx wp-env --config=.wp-env.update.json run cli wp eval '$plugin = get_plugin_data( WP_PLUGIN_DIR . "/deploy-and-test/deploy-and-test.php" ); if ( ! defined( "DEPLOY_AND_TEST_VERSION" ) || DEPLOY_AND_TEST_VERSION !== $plugin["Version"] ) { exit( 1 ); } echo "Updated package version is synchronized.\n";'
+
+      - name: Stop disposable update environment
+        if: always()
+        run: npm run env:update:stop

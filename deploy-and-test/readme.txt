@@ -18,6 +18,8 @@ GitHub App credentials remain server-side. The plugin generates short-lived inst
 
 Administrators configure the GitHub owner, repositories, refs, independently optional Preview and Production workflow files, deploy button labels, target labels, optional environment URLs, test actions, and optional test environments. Editors can run the approved actions without receiving GitHub access or personal access tokens.
 
+The first updater-enabled release must be installed manually on existing sites. Future stable GitHub Releases containing the verified `deploy-and-test.zip` asset can be installed through the standard WordPress Plugins and Updates screens.
+
 == Installation ==
 
 1. Upload and activate the Deploy & Test plugin.
@@ -34,6 +36,10 @@ No. It dispatches GitHub Actions workflows that are configured in your repositor
 = Are GitHub credentials stored in the WordPress database? =
 
 No. GitHub App credentials are read from constants configured in wp-config.php.
+
+= Do update checks use the configured GitHub App? =
+
+No. Update discovery uses the public GitHub Releases API without sending GitHub App credentials, installation tokens, site data, or telemetry.
 
 == Changelog ==
 
